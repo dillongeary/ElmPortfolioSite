@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@1&family=Honk&family=Montserrat:wght@300&family=Roboto+Mono:wght@100;200;300;400;500;600;700&family=Single+Day&family=Sixtyfour&display=swap');
 
 body {
-    background-image: url("assets/images/background.png");
+    background-image: url("../images/background.png");
     background-repeat: no-repeat;
-    background-color: #2a202d;
+    background-size: 100vw 100vh;
+    background-color: #342937;
     color:#fcfbfc;
     overflow-x: hidden;
 }
@@ -47,12 +48,10 @@ p{
 
 #title{
     height: 100vh;
-    padding: 0;
-    padding-left: 10vw;
     display: flex;
     justify-content: center;
     margin: 0;
-    padding: 10vw;
+    padding: 5vw 0vw 15vw 10vw;
     div {
         margin: auto 0;
         line-height:1em;
