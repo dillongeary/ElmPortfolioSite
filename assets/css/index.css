@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@1&family=Honk&family=Montserrat:wght@300&family=Roboto+Mono:wght@100;200;300;400;500;600;700&family=Single+Day&family=Sixtyfour&display=swap');
+
+body {
+    background-image: url("assets/images/background.png");
+    background-repeat: no-repeat;
+    background-color: #2a202d;
+    color:#fcfbfc;
+    overflow-x: hidden;
+}
+
+.element{
+    box-sizing: border-box;
+    width: 100vw;
+    padding: 0 10vw;
+    margin-bottom: 10vw;
+}
+
+h1{
+    font-family: "Roboto Mono", monospace;
+    font-size: 8em;
+}
+
+h2{
+    font-family: "Roboto Mono", monospace;
+    font-size: 6em;
+}
+
+h2::before {
+    content: ">";
+    margin-right: 0.3em;
+}
+
+p{
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.5em;
+}
+
+#name{
+    font-size: 16em;
+    color:#86698e;
+}
+
+
+#greeting{
+    margin-left:0.5em;
+}
+
+#title{
+    height: 100vh;
+    padding: 0;
+    padding-left: 10vw;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 10vw;
+    div {
+        margin: auto 0;
+        line-height:1em;
+        width: 100%;
+    }
+}
+
+.social-links{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 6em;
+}
+
+.social-links svg{
+    height: 8em;
+    color:#fcfbfc;
+    transition: 0.5s;
+}
+
+.social-links svg:hover{
+    color: #86698e;
+    scale: 1.5
+        
+}
+
+/*.social-links a {*/
+/*    display: flex;*/
+/*    flex-direction: row;*/
+/*    justify-contents: center;*/
+/*    text-decoration: none;*/
+/*    .text {*/
+/*        color: white;*/
+/*        font-family: "Roboto Mono", monospace;*/
+/*        text-decoration: none;*/
+/*        font-size: 2em;*/
+/*        width: 0;*/
+/*        overflow: hidden;*/
+/*        white-space: nowrap;*/
+/*        margin: auto;*/
+/*    }*/
+/*}*/
+
+/*.typewriter-container {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    width: max-content;*/
+/*}*/
+
+/*.social-links a:hover .typewriter-container {*/
+/*    animation:*/
+/*        typing 2s steps(100,end)*/
+/*}*/
+
+/*.social-links a:hover #text-linkedin{*/
+/*        border-right: .15em solid white;*/
+/*        animation:*/
+/*            typing 2s steps(15,end),*/
+/*            blink-caret 1s step-end infinite;*/
+/*        width: 100%;*/
+/*        margin-left: 1em;*/
+/*}*/
+
+/*.social-links a:hover #text-github{*/
+/*    border-right: .15em solid white;*/
+/*    animation:*/
+/*            typing 2s steps(14,end),*/
+/*            blink-caret 1s step-end infinite;*/
+/*    width: 100%;*/
+/*    margin-left: 1em;*/
+/*}*/
+
+/*.social-links a:hover #text-instagram{*/
+/*    border-right: .15em solid white;*/
+/*    animation:*/
+/*            typing 2s steps(15,end),*/
+/*            blink-caret 1s step-end infinite;*/
+/*    width: 100%;*/
+/*    margin-left: 1em;*/
+/*}*/
+
+/*!* The typing effect *!*/
+/*@keyframes typing {*/
+/*    from { width: 0 }*/
+/*  to { width: 100% }*/
+/*}*/
+
+/*!* The typewriter cursor effect *!*/
+/*@keyframes blink-caret {*/
+/*    from, to { border-color: transparent }*/
+/*    50% { border-color: white; }*/
+/*}*/
