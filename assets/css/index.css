@@ -1,9 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@1&family=Honk&family=Montserrat:wght@300&family=Roboto+Mono:wght@100;200;300;400;500;600;700&family=Single+Day&family=Sixtyfour&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Montserrat&family=Oswald:wght@500&family=PT+Serif:ital@1&family=Roboto+Mono:ital,wght@0,400;0,500;0,600;0,700;1,300&display=swap');
 body {
-    background-image: url("../images/background.png");
-    background-repeat: no-repeat;
-    background-size: 100vw 100vh;
     background-color: #342937;
     color:#fcfbfc;
     overflow-x: hidden;
@@ -13,12 +9,12 @@ body {
     box-sizing: border-box;
     width: 100vw;
     padding: 0 10vw;
-    margin-bottom: 10vw;
+    margin-bottom: 15vh;
 }
 
 h1{
     font-family: "Roboto Mono", monospace;
-    font-size: 8em;
+    font-size: min(9vw,8em);
 }
 
 h2{
@@ -37,7 +33,7 @@ p{
 }
 
 #name{
-    font-size: 16em;
+    font-size: min(18vw,16em);
     color:#86698e;
 }
 
@@ -52,6 +48,10 @@ p{
     justify-content: center;
     margin: 0;
     padding: 5vw 0vw 15vw 10vw;
+    background-image: url("../images/background.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center bottom;
     div {
         margin: auto 0;
         line-height:1em;
@@ -77,6 +77,64 @@ p{
     scale: 1.5
         
 }
+
+
+.projects-table{
+    display:flex;
+    flex-direction: column;
+    gap: 5vw;
+}
+
+.project-body {
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+    align-items: center;
+}
+
+.project img {
+    width: 35em;
+    border-radius: 2em;
+}
+
+.project h3 {
+    font-family: "Roboto Mono", monospace;
+    font-size: 3em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.25em;
+}
+
+.right {
+    text-align:right;
+    left-margin: auto;
+}
+
+.project h3 svg{
+    font-family: "Roboto Mono", monospace;
+    height: 1.2em;
+}
+
+.techstack {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    div {
+        font-family: "Roboto Mono", monospace;
+        font-style: italic;
+    }
+}
+
+.desc-link {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1em;
+    color: #ded7e0;
+    a {
+        color:#86698e;
+    }
+}
+
 
 /*.social-links a {*/
 /*    display: flex;*/
