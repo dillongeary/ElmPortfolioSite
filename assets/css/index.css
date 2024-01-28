@@ -10,7 +10,7 @@ body {
     width: 100vw;
     max-width: 1920px;
     padding: 0 min(192px, 10vw);
-    margin: 0 auto 15vh;
+    margin: 0 auto 20vh;
 }
 
 h1{
@@ -134,7 +134,7 @@ p{
     }
 }
 
-.link {
+.cv-link {
     color:#86698e;
 }
 
