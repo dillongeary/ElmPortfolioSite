@@ -134,6 +134,10 @@ p{
     }
 }
 
+.link {
+    color:#86698e;
+}
+
 @media (max-width: 1080px) {
     .project .image {
         display: none;
