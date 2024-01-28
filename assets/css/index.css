@@ -84,7 +84,7 @@ p{
 .projects-table{
     display:flex;
     flex-direction: column;
-    gap: 5vw;
+    gap: min(100px,5vw);
 }
 
 .project-body {
@@ -97,6 +97,7 @@ p{
 .project img {
     width: 35em;
     border-radius: 2em;
+    border: 1em solid #514353
 }
 
 .project h3 {
