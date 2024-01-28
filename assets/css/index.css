@@ -8,8 +8,9 @@ body {
 .element{
     box-sizing: border-box;
     width: 100vw;
-    padding: 0 10vw;
-    margin-bottom: 15vh;
+    max-width: 1920px;
+    padding: 0 min(192px, 10vw);
+    margin: 0 auto 15vh;
 }
 
 h1{
@@ -19,7 +20,7 @@ h1{
 
 h2{
     font-family: "Roboto Mono", monospace;
-    font-size: 6em;
+    font-size: min(12vw,6em);
 }
 
 h2::before {
@@ -29,7 +30,7 @@ h2::before {
 
 p{
     font-family: "Roboto Mono", monospace;
-    font-size: 1.5em;
+    font-size: min(3vw,1.5em);
 }
 
 #name{
@@ -52,6 +53,7 @@ p{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center bottom;
+    max-width: none;
     div {
         margin: auto 0;
         line-height:1em;
@@ -67,7 +69,7 @@ p{
 }
 
 .social-links svg{
-    height: 8em;
+    height: min(12vw,8em);
     color:#fcfbfc;
     transition: 0.5s;
 }
@@ -99,16 +101,11 @@ p{
 
 .project h3 {
     font-family: "Roboto Mono", monospace;
-    font-size: 3em;
+    font-size: min(5.5vw,3em);
     display: flex;
     align-items: center;
     gap: 0.5em;
     margin-bottom: 0.25em;
-}
-
-.right {
-    text-align:right;
-    left-margin: auto;
 }
 
 .project h3 svg{
@@ -123,6 +120,7 @@ p{
     div {
         font-family: "Roboto Mono", monospace;
         font-style: italic;
+        font-size: min(1.9vw, 1em)
     }
 }
 
@@ -135,6 +133,11 @@ p{
     }
 }
 
+@media (max-width: 1080px) {
+    .project .image {
+        display: none;
+    }
+}
 
 /*.social-links a {*/
 /*    display: flex;*/
