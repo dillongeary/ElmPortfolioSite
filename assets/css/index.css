@@ -90,7 +90,7 @@ p{
 .project-body {
     display: flex;
     flex-direction: row;
-    gap: 2em;
+    gap: 4em;
     align-items: center;
 }
 
@@ -127,7 +127,7 @@ p{
 
 .desc-link {
     font-family: "Roboto Mono", monospace;
-    font-size: 1em;
+    font-size: 1.2em;
     color: #ded7e0;
     a {
         color:#86698e;
