@@ -21,6 +21,7 @@ h1{
 h2{
     font-family: "Roboto Mono", monospace;
     font-size: min(12vw,6em);
+    margin-bottom: 2.5vw;
 }
 
 h2::before {
@@ -80,11 +81,11 @@ p{
         
 }
 
-
 .projects-table{
     display:flex;
     flex-direction: column;
     gap: min(100px,5vw);
+    margin-top: 2.5vw;
 }
 
 .project-body {
@@ -107,6 +108,7 @@ p{
     align-items: center;
     gap: 0.5em;
     margin-bottom: 0.25em;
+    margin-top: 0;
 }
 
 .project h3 svg{
