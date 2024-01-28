@@ -132,11 +132,13 @@ p{
     font-size: 1.2em;
     color: #ded7e0;
     a {
+        font-weight: bold;
         color:#86698e;
     }
 }
 
 .cv-link {
+    font-weight: bold;
     color:#86698e;
 }
 
