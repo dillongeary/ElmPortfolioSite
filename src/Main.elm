@@ -69,14 +69,22 @@ update msg model =
         GetViewportClicked -> (model, Task.perform GotViewport getViewport)
 
 
-getViewportData : Cmd Msg
-getViewportData = Task.attempt getViewport
-
-
 -- VIEW
 
 flexRow = [ style "display" "flex", style "flex-direction" "row", style "justify-content" "center", style "min-height" "100vh"]
 flexCol = [ style "display" "flex", style "flex-direction" "column", style "flex" "1", style "padding" "5rem", style "box-sizing" "border-box"]
+
+getSceneHeight : Maybe Viewport -> String
+getSceneHeight maybeViewport =
+    case maybeViewport of
+        Just viewport -> String.fromFloat viewport.scene.height
+        Nothing -> ""
+
+getViewportY : Maybe Viewport -> String
+getViewportY maybeViewport =
+    case maybeViewport of
+        Just viewport -> String.fromFloat viewport.viewport.y
+        Nothing -> ""
 
 
 view : Model -> Html Msg
@@ -84,8 +92,8 @@ view model =
   div flexRow
     [ div (flexCol ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
       [ h1 [] [ text "Title" ]
-      , div [] [ text (String.fromFloat model.viewport.scene.height) ]
-      , div [] [ text (String.fromFloat model.viewport.viewport.y) ]
+      , div [] [ text (getSceneHeight model.viewport) ]
+      , div [] [ text (getViewportY model.viewport) ]
       ]
     , div (flexCol ++ [style "align-items" "flex-start"])
       (List.map (\_ -> div [ style "margin" "5rem 0"] [ text "Row" ]) (List.range 0 100))
