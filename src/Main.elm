@@ -1,27 +1,26 @@
 module Main exposing (..)
 
--- Press buttons to increment and decrement a counter.
---
--- Read how it works:
---   https://guide.elm-lang.org/architecture/buttons.html
---
-
-
-import Browser
-import Html exposing (..)
-import Html.Events exposing (..)
-import Html.Attributes exposing (..)
-import Browser.Dom exposing (..)
+import Browser exposing (document)
+import Html exposing (Html, div, text, h1)
+import Html.Attributes exposing (style)
+import Browser.Dom exposing (getViewport, Viewport)
 import Platform.Cmd exposing (none)
-import Task
+import Task exposing (perform)
+import Time exposing (every)
 
+import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox)
+import Types exposing (Msg(..), Model)
 
 
 -- MAIN
 
 
-main =
-  Browser.document { init = init, update = update, view = (viewToDocument view), subscriptions = (\_ -> Sub.none) }
+main = document
+    { init = init
+    , update = update
+    , view = (viewToDocument view)
+    , subscriptions = subscriptions
+    }
 
 
 -- DOCUMENT
@@ -39,15 +38,12 @@ viewToDocument v m = { title = "Webpage", body = [ v m ] }
 -- MODEL
 
 
-type alias Model =
-    { viewport : Maybe Viewport
-    }
-
-
 init : () -> (Model, Cmd Msg)
 init _ =
     (
     { viewport = Nothing
+    , darkmode = True
+    , positions = Nothing
     }
     , none
     )
@@ -56,45 +52,68 @@ init _ =
 -- UPDATE
 
 
-type Msg
-  = GotViewport Viewport
-  | GetViewportClicked
-
-
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
         GotViewport viewport -> ({model | viewport = Just viewport}, none)
+        GetUpdate -> (model, perform GotViewport getViewport)
 
-        GetViewportClicked -> (model, Task.perform GotViewport getViewport)
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions _ = every 50 (\_ -> GetUpdate)
 
 
 -- VIEW
 
-flexRow = [ style "display" "flex", style "flex-direction" "row", style "justify-content" "center", style "min-height" "100vh"]
-flexCol = [ style "display" "flex", style "flex-direction" "column", style "flex" "1", style "padding" "5rem", style "box-sizing" "border-box"]
+
+column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
+contentBox = style "minHeight" "calc(100vh - 20rem)"
+
 
 getSceneHeight : Maybe Viewport -> String
 getSceneHeight maybeViewport =
     case maybeViewport of
-        Just viewport -> String.fromFloat viewport.scene.height
-        Nothing -> ""
+        Just viewport -> String.fromFloat (viewport.scene.height)
+        Nothing -> "Error"
 
 getViewportY : Maybe Viewport -> String
 getViewportY maybeViewport =
     case maybeViewport of
-        Just viewport -> String.fromFloat viewport.viewport.y
-        Nothing -> ""
+        Just viewport -> String.fromFloat (viewport.viewport.y)
+        Nothing -> "Error"
 
 
 view : Model -> Html Msg
 view model =
-  div flexRow
-    [ div (flexCol ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
+  flexRow [ style "justify-content" "center", style "min-height" "100vh", style "margin" "0 10rem" ]
+    [ flexCol (column ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
       [ h1 [] [ text "Title" ]
       , div [] [ text (getSceneHeight model.viewport) ]
       , div [] [ text (getViewportY model.viewport) ]
       ]
-    , div (flexCol ++ [style "align-items" "flex-start"])
-      (List.map (\_ -> div [ style "margin" "5rem 0"] [ text "Row" ]) (List.range 0 100))
+    , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
+      [ div [contentBox]
+        [ h1 [] [ text "Career" ]
+        , timeLine
+          [ timeLineBox False ("Ampere Analysis","2024 - Current","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis.")
+          , timeLineBox True ("Ampere Analysis","2024 - Current","Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis.")
+          ]
+        ]
+      , div [contentBox]
+        [ h1 [] [ text "Projects" ]
+        , div [] lorem
+        ]
+      , div [contentBox]
+        [ h1 [] [ text "Education" ]
+        , div [] lorem
+        ]
+      ]
+    ]
+
+lorem : List (Html Msg)
+lorem = [ div [] [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis." ]
+    , div [] [ text "Duis id ultricies urna, id venenatis turpis. Praesent feugiat, felis non vestibulum tempor, erat metus sodales velit, ac sollicitudin enim lectus rutrum lorem. Curabitur a lorem mauris. Nunc condimentum sodales ex. Fusce tincidunt massa nisl, hendrerit placerat lacus pellentesque a. Proin imperdiet vitae turpis vel mattis. Nulla fringilla nisl tortor, vitae dignissim erat mollis vel. Vestibulum condimentum ligula quis rutrum vehicula. Quisque maximus facilisis neque. Sed viverra odio elit, ac accumsan magna condimentum vitae. Integer vitae turpis eget leo ornare laoreet." ]
     ]
