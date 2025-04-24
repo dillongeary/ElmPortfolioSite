@@ -16,7 +16,7 @@ type alias Model =
     }
 
 
-type CurrentSection
+type PageSection
   = Career
   | Projects
   | Education
@@ -26,6 +26,8 @@ type Msg
   = GotViewport Viewport
   | GotPositions (Result Error (List Element))
   | GetUpdate
+  | GoTo PageSection
+  | NoOp
 
 
 type ProjectStatus

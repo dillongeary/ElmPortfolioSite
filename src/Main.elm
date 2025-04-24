@@ -1,15 +1,20 @@
 module Main exposing (..)
 
 import Browser exposing (document)
-import Html exposing (Html, div, text, h1)
-import Html.Attributes exposing (style, id)
-import Browser.Dom exposing (getViewport, Viewport, getElement)
+import Browser.Dom exposing (getViewport, Viewport, getElement, setViewport)
+
+import Html exposing (Html, div, text, h1, a)
+import Html.Attributes exposing (style, id, classList)
+import Html.Events exposing (onClick)
+
 import Platform.Cmd exposing (none)
+
 import Task exposing (perform, sequence, attempt)
+
 import Time exposing (every)
 
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
-import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, CurrentSection(..))
+import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..))
 import ColorScheme exposing (getColor, Color(..))
 import Paragraphs exposing (ampereDesc, blockellDesc)
 
@@ -66,6 +71,17 @@ update msg model =
                      then attempt GotPositions (sequence [ getElement "HProject", getElement "HEducation" ] )
                      else perform GotViewport getViewport
                      )
+        GoTo section -> ( model
+                        , case section of
+                            Career -> perform (\_ -> NoOp) (setViewport 0 0)
+                            Projects -> case model.positions of
+                              Nothing -> none
+                              Just (i,_) -> perform (\_ -> NoOp) (setViewport 0 (toFloat (i - 181)))
+                            Education -> case model.positions of
+                              Nothing -> none
+                              Just (_,i) -> perform (\_ -> NoOp) (setViewport 0 (toFloat (i - 181)))
+                        )
+        NoOp -> ( model, none )
 
 
 -- SUBSCRIPTIONS
@@ -78,7 +94,7 @@ subscriptions _ = every 50 (\_ -> GetUpdate)
 -- VIEW
 
 
-getCurrentSection : Model -> String
+getCurrentSection : Model -> PageSection
 getCurrentSection model =
   let
     currentYScroll =
@@ -91,20 +107,38 @@ getCurrentSection model =
         Just i -> i
   in
   case ((currentYScroll+181) >= projectsPosition, ((currentYScroll+181) >= educationPosition)) of
-    (False, False) -> "Career"
-    (True, False) -> "Projects"
-    (True, True) -> "Education"
-    _ -> ""
+    (False, False) -> Career
+    (True, False) -> Projects
+    (True, True) -> Education
+    _ -> Education
 
 column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
 contentBox = style "minHeight" "calc(100vh - 20rem)"
 
 view : Model -> Html Msg
-view model =
+view model = let currentSection = getCurrentSection model
+  in
   flexRow [ style "justify-content" "center", style "min-height" "100vh", style "padding" "0 10rem", style "color" (getColor Text), style "background-color" (getColor Background) ]
     [ flexCol (column ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
       [ h1 [] [ text "Title" ]
-      , div [] [ text (getCurrentSection model) ]
+      , a [ onClick (GoTo Career)
+          , classList
+            [ ("activePageLink", currentSection == Career)
+            , ("pageLink", True)
+            ]
+          ] [text "Career"]
+      , a [ onClick (GoTo Projects)
+          , classList
+            [ ("activePageLink", currentSection == Projects)
+            , ("pageLink", True)
+            ]
+          ] [text "Projects"]
+      , a [ onClick (GoTo Education)
+          , classList
+            [ ("activePageLink", currentSection == Education)
+            , ("pageLink", True)
+            ]
+          ] [text "Education"]
       ]
     , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
       [ div [contentBox]
