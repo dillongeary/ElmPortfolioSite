@@ -6,19 +6,23 @@ import List exposing (map)
 import Svg exposing (svg, circle, line)
 import Svg.Attributes exposing (width, height, viewBox, cx, cy, r, fill, x1, x2, y1, y2, stroke, strokeWidth, strokeLinecap)
 
-import Types exposing (Model, Msg, ProjectStatus(..), Skills(..))
+import Types exposing (Model, Msg, ProjectStatus(..), Skills(..), ContentShorthand(..))
 import ColorScheme exposing (getColor, Color(..))
+
 
 flexRow : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 flexRow a c = div ([ style "display" "flex", style "flex-direction" "row" ] ++ a) c
 
+
 flexCol : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 flexCol a c = div ([ style "display" "flex", style "flex-direction" "column" ] ++ a) c
+
 
 timeLine : List (Html Msg) -> Html Msg
 timeLine c = flexCol [style "gap" "1rem"] c
 
-timeLineBox: Bool -> String -> String -> String -> List Skills -> String -> Html Msg
+
+timeLineBox: Bool -> String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
 timeLineBox last role company date skills desc =
   flexRow []
     [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ]
@@ -39,13 +43,13 @@ timeLineBox last role company date skills desc =
         , div [ ] [ text company ]
         , div [ style "margin-bottom" "1rem" ] [ text date ]
         , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)
-        , text desc
+        , handleCS desc
         ]
       ]
     ]
 
 
-projectBox: String -> ProjectStatus -> String -> List Skills -> String -> Html Msg
+projectBox: String -> ProjectStatus -> String -> List Skills -> ContentShorthand -> Html Msg
 projectBox title status date skills desc =
   flexRow []
     [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ]
@@ -67,10 +71,24 @@ projectBox title status date skills desc =
           ]
         , div [ style "margin-bottom" "1rem" ] [ text date ]
         , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)
-        , text desc
+        , handleCS desc
         ]
       ]
     ]
+
+
+statusSkillBox: Color -> String -> Html Msg
+statusSkillBox backgroundColor textContent =
+  span
+    [ style "padding" "0.2rem 0.4rem"
+    , style "background-color" (getColor backgroundColor)
+    , style "color" (getColor Background)
+    , style "font-size" "0.9rem"
+    , style "font-weight" "bold"
+    , style "border-radius" "0.2rem"
+    ]
+    [ text textContent ]
+
 
 statusBox: ProjectStatus -> Html Msg
 statusBox status =
@@ -80,6 +98,7 @@ statusBox status =
                                              Complete -> (Blue, "Complete")
 
   in statusSkillBox backgroundColor textContent
+
 
 skillsBox: Skills -> Html Msg
 skillsBox skill =
@@ -102,14 +121,7 @@ skillsBox skill =
   in statusSkillBox backgroundColor textContent
 
 
-statusSkillBox: Color -> String -> Html Msg
-statusSkillBox backgroundColor textContent =
-  span
-    [ style "padding" "0.2rem 0.4rem"
-    , style "background-color" (getColor backgroundColor)
-    , style "color" (getColor Background)
-    , style "font-size" "0.9rem"
-    , style "font-weight" "bold"
-    , style "border-radius" "0.2rem"
-    ]
-    [ text textContent ]
+handleCS : ContentShorthand -> Html Msg
+handleCS cs = case cs of
+    Text_ s -> text s
+    Html_ c -> c

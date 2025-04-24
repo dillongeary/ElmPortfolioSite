@@ -1,5 +1,6 @@
 module ColorScheme exposing (..)
 
+
 type Color
   = RoseWater
   | Flamingo
@@ -19,8 +20,10 @@ type Color
   | Overlay
   | Background
 
+
 getColor : Color -> String
 getColor = getDarkmodeColor
+
 
 getDarkmodeColor : Color -> String
 getDarkmodeColor name = case name of

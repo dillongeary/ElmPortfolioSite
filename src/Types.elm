@@ -1,16 +1,30 @@
 module Types exposing (..)
 
-import Browser.Dom exposing (Viewport)
+import Browser.Dom exposing (Error, Viewport, Element)
+import Html exposing (Html)
+
+
+type ContentShorthand
+  = Text_ String
+  | Html_ (Html Msg)
 
 
 type alias Model =
-    { viewport : Maybe Viewport
+    { viewport : Maybe Int
     , darkmode : Bool
-    , positions : Maybe (Int, Int, Int)
+    , positions : Maybe (Int, Int)
     }
+
+
+type CurrentSection
+  = Career
+  | Projects
+  | Education
+
 
 type Msg
   = GotViewport Viewport
+  | GotPositions (Result Error (List Element))
   | GetUpdate
 
 

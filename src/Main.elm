@@ -2,16 +2,16 @@ module Main exposing (..)
 
 import Browser exposing (document)
 import Html exposing (Html, div, text, h1)
-import Html.Attributes exposing (style)
-import Browser.Dom exposing (getViewport, Viewport)
+import Html.Attributes exposing (style, id)
+import Browser.Dom exposing (getViewport, Viewport, getElement)
 import Platform.Cmd exposing (none)
-import Task exposing (perform)
+import Task exposing (perform, sequence, attempt)
 import Time exposing (every)
 
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
-import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..))
+import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, CurrentSection(..))
 import ColorScheme exposing (getColor, Color(..))
-import Paragraphs exposing (ampereDesc)
+import Paragraphs exposing (ampereDesc, blockellDesc)
 
 
 -- MAIN
@@ -57,8 +57,15 @@ init _ =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        GotViewport viewport -> ({model | viewport = Just viewport}, none)
-        GetUpdate -> (model, perform GotViewport getViewport)
+        GotViewport viewport -> ({ model | viewport = Just (round viewport.viewport.y) }, none)
+        GotPositions result -> case result of
+            Ok [eProject, eEducation] -> ({ model | positions = Just (round eProject.element.y, round eEducation.element.y) }, none)
+            _ -> (model, none)
+        GetUpdate -> ( model
+                     , if model.positions == Nothing
+                     then attempt GotPositions (sequence [ getElement "HProject", getElement "HEducation" ] )
+                     else perform GotViewport getViewport
+                     )
 
 
 -- SUBSCRIPTIONS
@@ -71,34 +78,37 @@ subscriptions _ = every 50 (\_ -> GetUpdate)
 -- VIEW
 
 
+getCurrentSection : Model -> String
+getCurrentSection model =
+  let
+    currentYScroll =
+      case model.viewport of
+        Nothing -> 0
+        Just i -> i
+    (projectsPosition, educationPosition) =
+      case model.positions of
+        Nothing -> (100,100)
+        Just i -> i
+  in
+  case ((currentYScroll+181) >= projectsPosition, ((currentYScroll+181) >= educationPosition)) of
+    (False, False) -> "Career"
+    (True, False) -> "Projects"
+    (True, True) -> "Education"
+    _ -> ""
+
 column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
 contentBox = style "minHeight" "calc(100vh - 20rem)"
-
-
-getSceneHeight : Maybe Viewport -> String
-getSceneHeight maybeViewport =
-    case maybeViewport of
-        Just viewport -> String.fromFloat (viewport.scene.height)
-        Nothing -> "Error"
-
-getViewportY : Maybe Viewport -> String
-getViewportY maybeViewport =
-    case maybeViewport of
-        Just viewport -> String.fromFloat (viewport.viewport.y)
-        Nothing -> "Error"
-
 
 view : Model -> Html Msg
 view model =
   flexRow [ style "justify-content" "center", style "min-height" "100vh", style "padding" "0 10rem", style "color" (getColor Text), style "background-color" (getColor Background) ]
     [ flexCol (column ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
       [ h1 [] [ text "Title" ]
-      , div [] [ text (getSceneHeight model.viewport) ]
-      , div [] [ text (getViewportY model.viewport) ]
+      , div [] [ text (getCurrentSection model) ]
       ]
     , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
       [ div [contentBox]
-        [ h1 [] [ text "Career" ]
+        [ h1 [id "HCareer"] [ text "Career" ]
         , timeLine
           [ timeLineBox
               False
@@ -117,18 +127,18 @@ view model =
           ]
         ]
       , div [contentBox]
-        [ h1 [] [ text "Projects" ]
+        [ h1 [id "HProject"] [ text "Projects" ]
         , timeLine
           [ projectBox
               "A Block-Based Visual Programming Language"
               Paused
               "2023 - 2024"
               [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
-              "A block-based visual programming language that takes inspiration for syntax and semantics from Haskell and other functional programming languages. This project involved the design of a block-based functional programming language and the development of a web-based IDE created in Blockly, to create a tool which aids the teaching of functional languages in education."
+              blockellDesc
           ]
         ]
       , div [contentBox]
-        [ h1 [] [ text "Education" ]
+        [ h1 [id "HEducation"] [ text "Education" ]
         , div [] lorem
         ]
       ]
