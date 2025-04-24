@@ -2,7 +2,9 @@ module HtmlComponents exposing (..)
 
 import Html exposing (Html, div, Attribute, text, h3, span)
 import Html.Attributes exposing (style)
-import List exposing (map)
+
+import List exposing (map, length)
+
 import Svg exposing (svg, circle, line)
 import Svg.Attributes exposing (width, height, viewBox, cx, cy, r, fill, x1, x2, y1, y2, stroke, strokeWidth, strokeLinecap)
 
@@ -39,12 +41,16 @@ timeLineBox last role company date skills desc =
       ]
     , div [  ]
       [ flexCol []
+        (
         [ h3 [ style "margin" "0" ] [ text role ]
         , div [ ] [ text company ]
         , div [ style "margin-bottom" "1rem" ] [ text date ]
-        , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)
-        , handleCS desc
-        ]
+        ] ++ (
+          if (length skills) > 0
+          then [flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)]
+          else []
+        ) ++ [ handleCS desc ]
+        )
       ]
     ]
 

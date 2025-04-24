@@ -9,14 +9,14 @@ import Html.Events exposing (onClick)
 
 import Platform.Cmd exposing (none)
 
-import Task exposing (perform, sequence, attempt)
+import Task exposing (perform, sequence, attempt, succeed, andThen)
 
 import Time exposing (every)
 
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
 import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..))
-import ColorScheme exposing (getColor, Color(..))
-import Paragraphs exposing (ampereDesc, blockellDesc)
+import ColorScheme exposing (getGetColor, Color(..))
+import Paragraphs exposing (ampereDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc)
 
 
 -- MAIN
@@ -106,39 +106,35 @@ getCurrentSection model =
         Nothing -> (100,100)
         Just i -> i
   in
-  case ((currentYScroll+181) >= projectsPosition, ((currentYScroll+181) >= educationPosition)) of
+  case ((currentYScroll+381) >= projectsPosition, ((currentYScroll+381) >= educationPosition)) of
     (False, False) -> Career
     (True, False) -> Projects
     (True, True) -> Education
     _ -> Education
 
-column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
-contentBox = style "minHeight" "calc(100vh - 20rem)"
+
 
 view : Model -> Html Msg
 view model = let currentSection = getCurrentSection model
+                 getColor = getGetColor model
+                 column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
+                 pageLink = [ style "color" (getColor Overlay), style "text-decoration" "underline", style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
+                 activePageLink = [ style "color" (getColor Teal), style "cursor" "pointer", style "font-size" "2.5em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
+                 contentBox = style "minHeight" "calc(100vh - 20rem)"
   in
-  flexRow [ style "justify-content" "center", style "min-height" "100vh", style "padding" "0 10rem", style "color" (getColor Text), style "background-color" (getColor Background) ]
+  div [style "color" (getColor Text), style "background-color" (getColor Background), style "font-family" "sans-serif"] [
+  flexRow [ style "justify-content" "center", style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"]
     [ flexCol (column ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
-      [ h1 [] [ text "Title" ]
-      , a [ onClick (GoTo Career)
-          , classList
-            [ ("activePageLink", currentSection == Career)
-            , ("pageLink", True)
-            ]
-          ] [text "Career"]
-      , a [ onClick (GoTo Projects)
-          , classList
-            [ ("activePageLink", currentSection == Projects)
-            , ("pageLink", True)
-            ]
-          ] [text "Projects"]
-      , a [ onClick (GoTo Education)
-          , classList
-            [ ("activePageLink", currentSection == Education)
-            , ("pageLink", True)
-            ]
-          ] [text "Education"]
+      [ h1 [ style "font-size" "5rem"] [ text "Dillon Geary" ]
+      , a ([ onClick (GoTo Career)
+          ] ++ if (currentSection == Career) then activePageLink else pageLink
+          ) [text "Career"]
+      , a ([ onClick (GoTo Projects)
+          ] ++ if (currentSection == Projects) then activePageLink else pageLink
+          ) [text "Projects"]
+      , a ([ onClick (GoTo Education)
+          ] ++ if (currentSection == Education) then activePageLink else pageLink
+          ) [text "Education"]
       ]
     , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
       [ div [contentBox]
@@ -149,15 +145,15 @@ view model = let currentSection = getCurrentSection model
               "Web Developer"
               "Ampere Analysis"
               "2024 - Current"
-              [ WebDevelopment, React, Django]
+              [ WebDevelopment, React, Django, UI, Database, API]
               ampereDesc
           , timeLineBox
               True
-              "Web Developer"
-              "Ampere Analysis"
-              "2024 - Current"
-              [ WebDevelopment, React, Django]
-              ampereDesc
+              "Software Engineer - Intern"
+              "University of Southampton"
+              "2023"
+              [ AppDevelopment, Kotlin, Research, UI]
+              internshipDesc
           ]
         ]
       , div [contentBox]
@@ -166,16 +162,38 @@ view model = let currentSection = getCurrentSection model
           [ projectBox
               "A Block-Based Visual Programming Language"
               Paused
-              "2023 - 2024"
+              "2022 - 2024"
               [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
               blockellDesc
+          , projectBox
+              "Web-Based Medical Data Dashboard"
+              Complete
+              "2023"
+              [ WebDevelopment, React, UI, API ]
+              activePointsDesc
           ]
         ]
       , div [contentBox]
         [ h1 [id "HEducation"] [ text "Education" ]
-        , div [] lorem
+        , timeLine
+          [ timeLineBox
+              False
+              "University of Southampton"
+              "First Clast MEng Computer Science"
+              "2020 - 2024"
+              []
+              sotonDesc
+          , timeLineBox
+              True
+              "The King John School and Sixth Form"
+              ""
+              "2013 - 2020"
+              []
+              sotonDesc
+          ]
         ]
       ]
+    ]
     ]
 
 lorem : List (Html Msg)
