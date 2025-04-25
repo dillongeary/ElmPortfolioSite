@@ -5679,6 +5679,7 @@ var $elm$core$Task$attempt = F2(
 	});
 var $elm$browser$Browser$Dom$getElement = _Browser_getElement;
 var $elm$browser$Browser$Dom$getViewport = _Browser_withWindow(_Browser_getViewport);
+var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Basics$round = _Basics_round;
 var $elm$browser$Browser$Dom$setViewport = _Browser_setViewport;
 var $author$project$Main$update = F2(
@@ -5769,75 +5770,51 @@ var $author$project$Main$update = F2(
 								}
 						}
 					}());
+			case 'ChangeLightDarkMode':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{darkmode: !model.darkmode}),
+					$elm$core$Platform$Cmd$none);
 			default:
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
 	});
+var $author$project$Types$API = {$: 'API'};
+var $author$project$Types$AppDevelopment = {$: 'AppDevelopment'};
 var $author$project$ColorScheme$Background = {$: 'Background'};
+var $author$project$ColorScheme$BackgroundAccent = {$: 'BackgroundAccent'};
 var $author$project$Types$Career = {$: 'Career'};
+var $author$project$Types$ChangeLightDarkMode = {$: 'ChangeLightDarkMode'};
+var $author$project$Types$Complete = {$: 'Complete'};
+var $author$project$Types$Database = {$: 'Database'};
 var $author$project$Types$Django = {$: 'Django'};
 var $author$project$Types$Education = {$: 'Education'};
+var $author$project$ColorScheme$Flamingo = {$: 'Flamingo'};
 var $author$project$Types$GoTo = function (a) {
 	return {$: 'GoTo', a: a};
 };
 var $author$project$Types$Haskell = {$: 'Haskell'};
+var $author$project$Types$Kotlin = {$: 'Kotlin'};
+var $author$project$ColorScheme$Overlay = {$: 'Overlay'};
 var $author$project$Types$Paused = {$: 'Paused'};
 var $author$project$Types$ProgrammingLanguages = {$: 'ProgrammingLanguages'};
 var $author$project$Types$Projects = {$: 'Projects'};
 var $author$project$Types$React = {$: 'React'};
 var $author$project$Types$Research = {$: 'Research'};
 var $author$project$ColorScheme$Text = {$: 'Text'};
+var $author$project$Types$UI = {$: 'UI'};
 var $author$project$Types$WebDevelopment = {$: 'WebDevelopment'};
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $author$project$Types$Text_ = function (a) {
 	return {$: 'Text_', a: a};
 };
-var $author$project$Paragraphs$ampereDesc = $author$project$Types$Text_('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis.');
+var $author$project$Paragraphs$activePointsDesc = $author$project$Types$Text_('A dashboard that displays visualisations of healthcare data, collected from Garmin and FitBit smart-watch devices. Created in React, this dashboard connects to a Postgres database for real-time data updates and to a Python ML script for AI-enhanced features.');
+var $author$project$Paragraphs$ampereDesc = $author$project$Types$Text_('Working in a small, agile team, responsible for maintaining and enhancing the company website. Playing a key role in the redesign and rewrite of our client-facing platform to improve user experience and performance. Serving as a primary point of contact for the UK office, addressing bug fixes, implementing feature improvements, and incorporating colleague feedback to drive continuous enhancements to our web services.');
 var $author$project$Paragraphs$blockellDesc = $author$project$Types$Text_('A block-based visual programming language that takes inspiration for syntax and semantics from Haskell and other functional programming languages. This project involved the design of a block-based functional programming language and the development of a web-based IDE created in Blockly, to create a tool which aids the teaching of functional languages in education.');
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
-var $elm$core$Tuple$second = function (_v0) {
-	var y = _v0.b;
-	return y;
-};
-var $elm$html$Html$Attributes$classList = function (classes) {
-	return $elm$html$Html$Attributes$class(
-		A2(
-			$elm$core$String$join,
-			' ',
-			A2(
-				$elm$core$List$map,
-				$elm$core$Tuple$first,
-				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
-};
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $author$project$Main$column = _List_fromArray(
-	[
-		A2($elm$html$Html$Attributes$style, 'flex', '1'),
-		A2($elm$html$Html$Attributes$style, 'padding', '10rem 5rem'),
-		A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
-	]);
-var $author$project$Main$contentBox = A2($elm$html$Html$Attributes$style, 'minHeight', 'calc(100vh - 20rem)');
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $author$project$HtmlComponents$flexCol = F2(
 	function (a, c) {
 		return A2(
@@ -5864,6 +5841,45 @@ var $author$project$HtmlComponents$flexRow = F2(
 				a),
 			c);
 	});
+var $elm$core$Basics$ge = _Utils_ge;
+var $author$project$Main$getCurrentSection = function (model) {
+	var currentYScroll = function () {
+		var _v3 = model.viewport;
+		if (_v3.$ === 'Nothing') {
+			return 0;
+		} else {
+			var i = _v3.a;
+			return i;
+		}
+	}();
+	var _v0 = function () {
+		var _v1 = model.positions;
+		if (_v1.$ === 'Nothing') {
+			return _Utils_Tuple2(100, 100);
+		} else {
+			var i = _v1.a;
+			return i;
+		}
+	}();
+	var projectsPosition = _v0.a;
+	var educationPosition = _v0.b;
+	var _v2 = _Utils_Tuple2(
+		_Utils_cmp(currentYScroll + 381, projectsPosition) > -1,
+		_Utils_cmp(currentYScroll + 381, educationPosition) > -1);
+	if (!_v2.a) {
+		if (!_v2.b) {
+			return $author$project$Types$Career;
+		} else {
+			return $author$project$Types$Education;
+		}
+	} else {
+		if (!_v2.b) {
+			return $author$project$Types$Projects;
+		} else {
+			return $author$project$Types$Education;
+		}
+	}
+};
 var $author$project$ColorScheme$getDarkmodeColor = function (name) {
 	switch (name.$) {
 		case 'RoseWater':
@@ -5898,52 +5914,102 @@ var $author$project$ColorScheme$getDarkmodeColor = function (name) {
 			return '#c6d0f5';
 		case 'Overlay':
 			return '#737994';
-		default:
+		case 'Background':
 			return '#303446';
+		default:
+			return '#232634';
 	}
 };
-var $author$project$ColorScheme$getColor = $author$project$ColorScheme$getDarkmodeColor;
-var $elm$core$Basics$ge = _Utils_ge;
-var $author$project$Main$getCurrentSection = function (model) {
-	var currentYScroll = function () {
-		var _v3 = model.viewport;
-		if (_v3.$ === 'Nothing') {
-			return 0;
-		} else {
-			var i = _v3.a;
-			return i;
-		}
-	}();
-	var _v0 = function () {
-		var _v1 = model.positions;
-		if (_v1.$ === 'Nothing') {
-			return _Utils_Tuple2(100, 100);
-		} else {
-			var i = _v1.a;
-			return i;
-		}
-	}();
-	var projectsPosition = _v0.a;
-	var educationPosition = _v0.b;
-	var _v2 = _Utils_Tuple2(
-		_Utils_cmp(currentYScroll + 181, projectsPosition) > -1,
-		_Utils_cmp(currentYScroll + 181, educationPosition) > -1);
-	if (!_v2.a) {
-		if (!_v2.b) {
-			return $author$project$Types$Career;
-		} else {
-			return $author$project$Types$Education;
-		}
+var $author$project$ColorScheme$getLightmodeColor = function (name) {
+	switch (name.$) {
+		case 'RoseWater':
+			return '#dc8a78';
+		case 'Flamingo':
+			return '#dd7878';
+		case 'Pink':
+			return '#ea76cb';
+		case 'Mauve':
+			return '#8839ef';
+		case 'Red':
+			return '#d20f39';
+		case 'Maroon':
+			return '#e64553';
+		case 'Peach':
+			return '#fe640b';
+		case 'Yellow':
+			return '#df8e1d';
+		case 'Green':
+			return '#40a02b';
+		case 'Teal':
+			return '#179299';
+		case 'Sky':
+			return '#04a5e5';
+		case 'Sapphire':
+			return '#209fb5';
+		case 'Blue':
+			return '#1e66f5';
+		case 'Lavender':
+			return '#7287fd';
+		case 'Text':
+			return '#4c4f69';
+		case 'Overlay':
+			return '#9ca0b0';
+		case 'Background':
+			return '#eff1f5';
+		default:
+			return '#dce0e8';
+	}
+};
+var $author$project$ColorScheme$getGetColor = function (model) {
+	var _v0 = model.darkmode;
+	if (_v0) {
+		return $author$project$ColorScheme$getDarkmodeColor;
 	} else {
-		if (!_v2.b) {
-			return $author$project$Types$Projects;
-		} else {
-			return $author$project$Types$Education;
-		}
+		return $author$project$ColorScheme$getLightmodeColor;
 	}
 };
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$href = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'href',
+		_VirtualDom_noJavaScriptUri(url));
+};
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
+var $author$project$Paragraphs$internshipDesc = $author$project$Types$Text_('Liased with digital forensic experts to evaluate existing case evidence capture and storage techniques, and provided a bespoke client-first solution that explored modern improvements to these techniques. Collaborated within a small agile team to produce and test solutions in a tight deadline, focusing on security and encryption on data, as well as mobile app design and development.');
+var $author$project$Types$Html_ = function (a) {
+	return {$: 'Html_', a: a};
+};
+var $elm$html$Html$br = _VirtualDom_node('br');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Paragraphs$kingJohnDesc = $author$project$Types$Html_(
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Achieved 3 A-Levels in Further Maths, Physics and Maths, with Grades of A* and A. Achieved a BTEC Level 3 National Extended Certificate in Computing, with a Grade of Distinction*')
+				])),
+			A2($elm$html$Html$br, _List_Nil, _List_Nil),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Activities include representing the school alongside peers in nationwide mathematics competitions for four years in a row, and assisted teaching staff and faculty members as a Prefect')
+				]))
+		]));
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -5961,27 +6027,24 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $author$project$ColorScheme$Overlay = {$: 'Overlay'};
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
 var $elm$svg$Svg$circle = $elm$svg$Svg$trustedNode('circle');
 var $elm$svg$Svg$Attributes$cx = _VirtualDom_attribute('cx');
 var $elm$svg$Svg$Attributes$cy = _VirtualDom_attribute('cy');
 var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var $author$project$ColorScheme$getColor = $author$project$ColorScheme$getDarkmodeColor;
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$HtmlComponents$handleCS = function (cs) {
 	if (cs.$ === 'Text_') {
 		var s = cs.a;
 		return $elm$html$Html$text(s);
 	} else {
 		var c = cs.a;
-		return c;
+		return A2($elm$html$Html$div, _List_Nil, c);
 	}
 };
 var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$svg$Svg$Attributes$r = _VirtualDom_attribute('r');
-var $author$project$ColorScheme$Flamingo = {$: 'Flamingo'};
 var $author$project$ColorScheme$Green = {$: 'Green'};
 var $author$project$ColorScheme$Lavender = {$: 'Lavender'};
 var $author$project$ColorScheme$Mauve = {$: 'Mauve'};
@@ -6008,7 +6071,8 @@ var $author$project$HtmlComponents$statusSkillBox = F2(
 					$author$project$ColorScheme$getColor($author$project$ColorScheme$Background)),
 					A2($elm$html$Html$Attributes$style, 'font-size', '0.9rem'),
 					A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
-					A2($elm$html$Html$Attributes$style, 'border-radius', '0.2rem')
+					A2($elm$html$Html$Attributes$style, 'border-radius', '0.2rem'),
+					A2($elm$html$Html$Attributes$style, 'box-shadow', '0 2px #00000020')
 				]),
 			_List_fromArray(
 				[
@@ -6045,7 +6109,7 @@ var $author$project$HtmlComponents$skillsBox = function (skill) {
 			case 'ProgrammingLanguages':
 				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'Programming Langauges');
 			default:
-				return _Utils_Tuple2($author$project$ColorScheme$Pink, 'Research Project');
+				return _Utils_Tuple2($author$project$ColorScheme$Pink, 'Research');
 		}
 	}();
 	var backgroundColor = _v0.a;
@@ -6136,7 +6200,7 @@ var $author$project$HtmlComponents$projectBox = F5(
 											$author$project$HtmlComponents$flexRow,
 											_List_fromArray(
 												[
-													A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+													A2($elm$html$Html$Attributes$style, 'gap', '1em'),
 													A2($elm$html$Html$Attributes$style, 'align-items', 'center')
 												]),
 											_List_fromArray(
@@ -6173,7 +6237,25 @@ var $author$project$HtmlComponents$projectBox = F5(
 						]))
 				]));
 	});
-var $author$project$Paragraphs$sotonDesc = $author$project$Types$Text_('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis.');
+var $author$project$Paragraphs$sotonDesc = $author$project$Types$Html_(
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Modules including Software Engineering Group Project, Advanced Programming Language Concepts, Machine Learning Technologies, Advanced Databases, and Automated Software Verification')
+				])),
+			A2($elm$html$Html$br, _List_Nil, _List_Nil),
+			A2(
+			$elm$html$Html$div,
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text('Activities include President and Founder of the Programming Language Society, Marketing Officer for the Electronics and Computer Science Society, and University Ambassador and ECS Student Representative')
+				]))
+		]));
 var $author$project$HtmlComponents$timeLine = function (c) {
 	return A2(
 		$author$project$HtmlComponents$flexCol,
@@ -6314,204 +6396,333 @@ var $author$project$HtmlComponents$timeLineBox = F6(
 				]));
 	});
 var $author$project$Main$view = function (model) {
+	var getColor = $author$project$ColorScheme$getGetColor(model);
+	var pageLink = _List_fromArray(
+		[
+			A2(
+			$elm$html$Html$Attributes$style,
+			'color',
+			getColor($author$project$ColorScheme$Overlay)),
+			A2($elm$html$Html$Attributes$style, 'text-decoration', 'underline'),
+			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
+		]);
 	var currentSection = $author$project$Main$getCurrentSection(model);
+	var contentBox = A2($elm$html$Html$Attributes$style, 'minHeight', 'calc(100vh - 20rem)');
+	var column = _List_fromArray(
+		[
+			A2($elm$html$Html$Attributes$style, 'flex', '1'),
+			A2($elm$html$Html$Attributes$style, 'padding', '10rem 5rem'),
+			A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
+		]);
+	var activePageLink = _List_fromArray(
+		[
+			A2(
+			$elm$html$Html$Attributes$style,
+			'color',
+			getColor($author$project$ColorScheme$Flamingo)),
+			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+			A2($elm$html$Html$Attributes$style, 'font-size', '2.5em'),
+			A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
+			A2($elm$html$Html$Attributes$style, 'font-style', 'italic'),
+			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
+		]);
 	return A2(
-		$author$project$HtmlComponents$flexRow,
+		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
-				A2($elm$html$Html$Attributes$style, 'min-height', '100vh'),
-				A2($elm$html$Html$Attributes$style, 'min-width', '1600px'),
 				A2(
 				$elm$html$Html$Attributes$style,
 				'color',
-				$author$project$ColorScheme$getColor($author$project$ColorScheme$Text)),
+				getColor($author$project$ColorScheme$Text)),
 				A2(
 				$elm$html$Html$Attributes$style,
 				'background-color',
-				$author$project$ColorScheme$getColor($author$project$ColorScheme$Background))
+				getColor($author$project$ColorScheme$Background)),
+				A2($elm$html$Html$Attributes$style, 'font-family', 'sans-serif')
 			]),
 		_List_fromArray(
 			[
 				A2(
-				$author$project$HtmlComponents$flexCol,
-				_Utils_ap(
-					$author$project$Main$column,
-					_List_fromArray(
-						[
-							A2($elm$html$Html$Attributes$style, 'align-items', 'flex-end'),
-							A2($elm$html$Html$Attributes$style, 'height', '100vh'),
-							A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
-							A2($elm$html$Html$Attributes$style, 'position', 'sticky'),
-							A2($elm$html$Html$Attributes$style, 'top', '0')
-						])),
+				$author$project$HtmlComponents$flexRow,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+						A2($elm$html$Html$Attributes$style, 'min-height', '100vh'),
+						A2($elm$html$Html$Attributes$style, 'max-width', '1600px'),
+						A2($elm$html$Html$Attributes$style, 'margin', 'auto')
+					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$h1,
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Title')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Types$GoTo($author$project$Types$Career)),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2(
-										'activePageLink',
-										_Utils_eq(currentSection, $author$project$Types$Career)),
-										_Utils_Tuple2('pageLink', true)
-									]))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Career')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Types$GoTo($author$project$Types$Projects)),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2(
-										'activePageLink',
-										_Utils_eq(currentSection, $author$project$Types$Projects)),
-										_Utils_Tuple2('pageLink', true)
-									]))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Projects')
-							])),
-						A2(
-						$elm$html$Html$a,
-						_List_fromArray(
-							[
-								$elm$html$Html$Events$onClick(
-								$author$project$Types$GoTo($author$project$Types$Education)),
-								$elm$html$Html$Attributes$classList(
-								_List_fromArray(
-									[
-										_Utils_Tuple2(
-										'activePageLink',
-										_Utils_eq(currentSection, $author$project$Types$Education)),
-										_Utils_Tuple2('pageLink', true)
-									]))
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Education')
-							]))
-					])),
-				A2(
-				$author$project$HtmlComponents$flexCol,
-				_Utils_ap(
-					$author$project$Main$column,
-					_List_fromArray(
-						[
-							A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
-							A2($elm$html$Html$Attributes$style, 'gap', '10rem')
-						])),
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[$author$project$Main$contentBox]),
+						$author$project$HtmlComponents$flexCol,
+						_Utils_ap(
+							column,
+							_List_fromArray(
+								[
+									A2($elm$html$Html$Attributes$style, 'align-items', 'flex-end'),
+									A2($elm$html$Html$Attributes$style, 'height', '100vh'),
+									A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+									A2($elm$html$Html$Attributes$style, 'position', 'sticky'),
+									A2($elm$html$Html$Attributes$style, 'top', '0')
+								])),
 						_List_fromArray(
 							[
 								A2(
 								$elm$html$Html$h1,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$id('HCareer')
+										A2($elm$html$Html$Attributes$style, 'font-size', '5rem')
 									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Dillon Geary')
+									])),
+								A2(
+								$elm$html$Html$a,
+								_Utils_ap(
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick(
+											$author$project$Types$GoTo($author$project$Types$Career))
+										]),
+									_Utils_eq(currentSection, $author$project$Types$Career) ? activePageLink : pageLink),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Career')
 									])),
-								$author$project$HtmlComponents$timeLine(
-								_List_fromArray(
-									[
-										A6(
-										$author$project$HtmlComponents$timeLineBox,
-										false,
-										'Web Developer',
-										'Ampere Analysis',
-										'2024 - Current',
-										_List_fromArray(
-											[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django]),
-										$author$project$Paragraphs$ampereDesc),
-										A6(
-										$author$project$HtmlComponents$timeLineBox,
-										true,
-										'Web Developer',
-										'Ampere Analysis',
-										'2024 - Current',
-										_List_fromArray(
-											[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django]),
-										$author$project$Paragraphs$ampereDesc)
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[$author$project$Main$contentBox]),
-						_List_fromArray(
-							[
 								A2(
-								$elm$html$Html$h1,
-								_List_fromArray(
-									[
-										$elm$html$Html$Attributes$id('HProject')
-									]),
+								$elm$html$Html$a,
+								_Utils_ap(
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick(
+											$author$project$Types$GoTo($author$project$Types$Projects))
+										]),
+									_Utils_eq(currentSection, $author$project$Types$Projects) ? activePageLink : pageLink),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Projects')
 									])),
-								$author$project$HtmlComponents$timeLine(
+								A2(
+								$elm$html$Html$a,
+								_Utils_ap(
+									_List_fromArray(
+										[
+											$elm$html$Html$Events$onClick(
+											$author$project$Types$GoTo($author$project$Types$Education))
+										]),
+									_Utils_eq(currentSection, $author$project$Types$Education) ? activePageLink : pageLink),
 								_List_fromArray(
 									[
-										A5(
-										$author$project$HtmlComponents$projectBox,
-										'A Block-Based Visual Programming Language',
-										$author$project$Types$Paused,
-										'2023 - 2024',
+										$elm$html$Html$text('Education')
+									]))
+							])),
+						A2(
+						$author$project$HtmlComponents$flexCol,
+						_Utils_ap(
+							column,
+							_List_fromArray(
+								[
+									A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
+									A2($elm$html$Html$Attributes$style, 'gap', '10rem')
+								])),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[contentBox]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h1,
 										_List_fromArray(
-											[$author$project$Types$ProgrammingLanguages, $author$project$Types$Haskell, $author$project$Types$WebDevelopment, $author$project$Types$Research]),
-										$author$project$Paragraphs$blockellDesc)
+											[
+												$elm$html$Html$Attributes$id('HCareer')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Career')
+											])),
+										$author$project$HtmlComponents$timeLine(
+										_List_fromArray(
+											[
+												A6(
+												$author$project$HtmlComponents$timeLineBox,
+												false,
+												'Web Developer',
+												'Ampere Analysis',
+												'2024 - Current',
+												_List_fromArray(
+													[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django, $author$project$Types$UI, $author$project$Types$Database, $author$project$Types$API]),
+												$author$project$Paragraphs$ampereDesc),
+												A6(
+												$author$project$HtmlComponents$timeLineBox,
+												true,
+												'Software Engineer - Intern',
+												'University of Southampton',
+												'2023',
+												_List_fromArray(
+													[$author$project$Types$AppDevelopment, $author$project$Types$Kotlin, $author$project$Types$Research, $author$project$Types$UI]),
+												$author$project$Paragraphs$internshipDesc)
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[contentBox]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h1,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$id('HProject')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Projects')
+											])),
+										$author$project$HtmlComponents$timeLine(
+										_List_fromArray(
+											[
+												A5(
+												$author$project$HtmlComponents$projectBox,
+												'A Block-Based Visual Programming Language',
+												$author$project$Types$Paused,
+												'2022 - 2024',
+												_List_fromArray(
+													[$author$project$Types$ProgrammingLanguages, $author$project$Types$Haskell, $author$project$Types$WebDevelopment, $author$project$Types$Research]),
+												$author$project$Paragraphs$blockellDesc),
+												A5(
+												$author$project$HtmlComponents$projectBox,
+												'Web-Based Medical Data Dashboard',
+												$author$project$Types$Complete,
+												'2023',
+												_List_fromArray(
+													[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$UI, $author$project$Types$API]),
+												$author$project$Paragraphs$activePointsDesc)
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[contentBox]),
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$h1,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$id('HEducation')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Education')
+											])),
+										$author$project$HtmlComponents$timeLine(
+										_List_fromArray(
+											[
+												A6($author$project$HtmlComponents$timeLineBox, false, 'University of Southampton', 'First Class MEng Computer Science', '2020 - 2024', _List_Nil, $author$project$Paragraphs$sotonDesc),
+												A6($author$project$HtmlComponents$timeLineBox, true, 'The King John School and Sixth Form', '', '2013 - 2020', _List_Nil, $author$project$Paragraphs$kingJohnDesc)
+											]))
 									]))
 							])),
 						A2(
 						$elm$html$Html$div,
 						_List_fromArray(
-							[$author$project$Main$contentBox]),
+							[
+								A2($elm$html$Html$Attributes$style, 'position', 'fixed'),
+								A2($elm$html$Html$Attributes$style, 'top', '0'),
+								A2($elm$html$Html$Attributes$style, 'right', '0'),
+								A2($elm$html$Html$Attributes$style, 'margin', '1.5rem 2rem'),
+								A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+								$elm$html$Html$Events$onClick($author$project$Types$ChangeLightDarkMode)
+							]),
 						_List_fromArray(
 							[
+								$elm$html$Html$text(
+								model.darkmode ? 'Lightmode' : 'Darkmode')
+							]))
+					])),
+				A2(
+				$author$project$HtmlComponents$flexRow,
+				_List_fromArray(
+					[
+						A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+						A2($elm$html$Html$Attributes$style, 'gap', '10rem'),
+						A2($elm$html$Html$Attributes$style, 'width', '100vw'),
+						A2(
+						$elm$html$Html$Attributes$style,
+						'background-color',
+						getColor($author$project$ColorScheme$BackgroundAccent)),
+						A2($elm$html$Html$Attributes$style, 'padding', '0.5rem'),
+						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Built and powered by '),
 								A2(
-								$elm$html$Html$h1,
+								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$id('HEducation')
+										$elm$html$Html$Attributes$href('https://elm-lang.org/'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'color',
+										getColor($author$project$ColorScheme$Overlay))
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Education')
-									])),
-								$author$project$HtmlComponents$timeLine(
+										$elm$html$Html$text('Elm')
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Theme by '),
+								A2(
+								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										A6($author$project$HtmlComponents$timeLineBox, false, 'University of Southampton', 'First Clast MEng Computer Science', '2020 - 2024', _List_Nil, $author$project$Paragraphs$sotonDesc),
-										A6($author$project$HtmlComponents$timeLineBox, true, 'The King John School and Sixth Form', '', '2013 - 2020', _List_Nil, $author$project$Paragraphs$sotonDesc)
+										$elm$html$Html$Attributes$href('https://catppuccin.com/'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'color',
+										getColor($author$project$ColorScheme$Overlay))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Catppuccin')
+									]))
+							])),
+						A2(
+						$elm$html$Html$div,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Source code found on '),
+								A2(
+								$elm$html$Html$a,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$href('https://github.com/dillongeary/dillongeary.github.io'),
+										A2(
+										$elm$html$Html$Attributes$style,
+										'color',
+										getColor($author$project$ColorScheme$Overlay))
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('GitHub')
 									]))
 							]))
 					]))
