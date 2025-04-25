@@ -13,6 +13,7 @@ type alias Model =
     { viewport : Maybe Int
     , darkmode : Bool
     , positions : Maybe (Int, Int)
+    , desktop : Bool
     }
 
 
