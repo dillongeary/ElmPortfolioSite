@@ -70,7 +70,7 @@ projectBox title status date skills desc =
     , div []
       [ flexCol []
         [ h3 [ style "margin" "0" ]
-          [ flexRow [ style "gap" "0.5rem", style "align-items" "center"]
+          [ flexRow [ style "gap" "1em", style "align-items" "center"]
             [ text title
             , statusBox status
             ]
@@ -92,6 +92,7 @@ statusSkillBox backgroundColor textContent =
     , style "font-size" "0.9rem"
     , style "font-weight" "bold"
     , style "border-radius" "0.2rem"
+    , style "box-shadow" "0 2px #00000020"
     ]
     [ text textContent ]
 
@@ -122,7 +123,7 @@ skillsBox skill =
                                              Database -> (Flamingo, "Databases")
                                              API -> (Flamingo, "APIs")
                                              ProgrammingLanguages -> (Flamingo,"Programming Langauges")
-                                             Research -> (Pink, "Research Project")
+                                             Research -> (Pink, "Research")
 
   in statusSkillBox backgroundColor textContent
 
@@ -130,4 +131,4 @@ skillsBox skill =
 handleCS : ContentShorthand -> Html Msg
 handleCS cs = case cs of
     Text_ s -> text s
-    Html_ c -> c
+    Html_ c -> div [] c

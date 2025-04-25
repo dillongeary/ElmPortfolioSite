@@ -1,6 +1,8 @@
 module Paragraphs exposing (..)
 
 import Types exposing (ContentShorthand(..))
+import Html exposing (text, div, br, ul, li)
+import Html.Attributes exposing (style)
 
 
 ampereDesc : ContentShorthand
@@ -16,6 +18,20 @@ activePointsDesc : ContentShorthand
 activePointsDesc = Text_ "A dashboard that displays visualisations of healthcare data, collected from Garmin and FitBit smart-watch devices. Created in React, this dashboard connects to a Postgres database for real-time data updates and to a Python ML script for AI-enhanced features."
 
 sotonDesc : ContentShorthand
-sotonDesc = Text_ "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis."
+sotonDesc = Html_
+  [ div [] [ text "Modules including Software Engineering Group Project, Advanced Programming Language Concepts, Machine Learning Technologies, Advanced Databases, and Automated Software Verification"]
+  , br [] []
+  , div []
+    [ text "Activities include President and Founder of the Programming Language Society, Marketing Officer for the Electronics and Computer Science Society, and University Ambassador and ECS Student Representative"
+    ]
+  ]
 
 
+kingJohnDesc : ContentShorthand
+kingJohnDesc = Html_
+  [ div [] [ text "Achieved 3 A-Levels in Further Maths, Physics and Maths, with Grades of A* and A. Achieved a BTEC Level 3 National Extended Certificate in Computing, with a Grade of Distinction*"]
+  , br [] []
+  --, div [] [ text "Achieved 9 GCSE, including Maths, Physics, Computer Science and Media Studies, with Grades of level 9 to 6" ]
+  --, br [] []
+  , div [] [ text "Activities include representing the school alongside peers in nationwide mathematics competitions for four years in a row, and assisted teaching staff and faculty members as a Prefect" ]
+  ]

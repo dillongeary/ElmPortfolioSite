@@ -16,7 +16,7 @@ import Time exposing (every)
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
 import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..))
 import ColorScheme exposing (getGetColor, Color(..))
-import Paragraphs exposing (ampereDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc)
+import Paragraphs exposing (ampereDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc, kingJohnDesc)
 
 
 -- MAIN
@@ -81,6 +81,7 @@ update msg model =
                               Nothing -> none
                               Just (_,i) -> perform (\_ -> NoOp) (setViewport 0 (toFloat (i - 181)))
                         )
+        ChangeLightDarkMode -> ({model | darkmode = not model.darkmode}, none)
         NoOp -> ( model, none )
 
 
@@ -119,7 +120,7 @@ view model = let currentSection = getCurrentSection model
                  getColor = getGetColor model
                  column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
                  pageLink = [ style "color" (getColor Overlay), style "text-decoration" "underline", style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
-                 activePageLink = [ style "color" (getColor Teal), style "cursor" "pointer", style "font-size" "2.5em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
+                 activePageLink = [ style "color" (getColor Flamingo), style "cursor" "pointer", style "font-size" "2.5em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
                  contentBox = style "minHeight" "calc(100vh - 20rem)"
   in
   div [style "color" (getColor Text), style "background-color" (getColor Background), style "font-family" "sans-serif"] [
@@ -179,7 +180,7 @@ view model = let currentSection = getCurrentSection model
           [ timeLineBox
               False
               "University of Southampton"
-              "First Clast MEng Computer Science"
+              "First Class MEng Computer Science"
               "2020 - 2024"
               []
               sotonDesc
@@ -189,10 +190,19 @@ view model = let currentSection = getCurrentSection model
               ""
               "2013 - 2020"
               []
-              sotonDesc
+              kingJohnDesc
           ]
         ]
       ]
+    , div
+      [ style "position" "fixed"
+      , style "top" "0"
+      , style "right" "0"
+      , style "margin" "1.5rem 2rem"
+      , style "cursor" "pointer"
+      , onClick ChangeLightDarkMode
+      ]
+      [ text (if model.darkmode then "Lightmode" else "Darkmode") ]
     ]
     ]
 

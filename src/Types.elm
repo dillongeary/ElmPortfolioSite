@@ -6,7 +6,7 @@ import Html exposing (Html)
 
 type ContentShorthand
   = Text_ String
-  | Html_ (Html Msg)
+  | Html_ (List (Html Msg))
 
 
 type alias Model =
@@ -27,6 +27,7 @@ type Msg
   | GotPositions (Result Error (List Element))
   | GetUpdate
   | GoTo PageSection
+  | ChangeLightDarkMode
   | NoOp
 
 
