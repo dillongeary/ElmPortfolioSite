@@ -51,6 +51,7 @@ init _ =
     { viewport = Nothing
     , darkmode = True
     , positions = Nothing
+    , desktop = True
     }
     , none
     )
@@ -62,9 +63,9 @@ init _ =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        GotViewport viewport -> ({ model | viewport = Just (round viewport.viewport.y) }, none)
+        GotViewport viewport -> ({ model | viewport = Just (round viewport.viewport.y), desktop = viewport.viewport.width > 1600 }, none)
         GotPositions result -> case result of
-            Ok [eProject, eEducation] -> ({ model | positions = Just (round eProject.element.y, round eEducation.element.y) }, none)
+            Ok [eProject, eEducation] -> ({ model | positions = Just (round eProject.element.y, round eEducation.element.y)}, none)
             _ -> (model, none)
         GetUpdate -> ( model
                      , if model.positions == Nothing
@@ -121,22 +122,42 @@ view model = let currentSection = getCurrentSection model
                  column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
                  pageLink = [ style "color" (getColor Overlay), style "text-decoration" "underline", style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
                  activePageLink = [ style "color" (getColor Flamingo), style "cursor" "pointer", style "font-size" "2.5em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
-                 contentBox = style "minHeight" "calc(100vh - 20rem)"
+                 contentBox = style "minHeight" (if model.desktop then "calc(100vh - 20rem)" else "0")
+                 pageDir = if model.desktop then "row" else "column"
+                 headingAlign = if model.desktop then "flex-end" else "center"
+                 headingBlock = if model.desktop then "sticky" else "static"
   in
   div [style "color" (getColor Text), style "background-color" (getColor Background), style "font-family" "sans-serif"] [
-  flexRow [ style "justify-content" "center", style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"]
-    [ flexCol (column ++ [style "align-items" "flex-end", style "height" "100vh", style "justify-content" "center", style "position" "sticky", style "top" "0"])
-      [ h1 [ style "font-size" "5rem"] [ text "Dillon Geary" ]
-      , a ([ onClick (GoTo Career)
-          ] ++ if (currentSection == Career) then activePageLink else pageLink
-          ) [text "Career"]
-      , a ([ onClick (GoTo Projects)
-          ] ++ if (currentSection == Projects) then activePageLink else pageLink
-          ) [text "Projects"]
-      , a ([ onClick (GoTo Education)
-          ] ++ if (currentSection == Education) then activePageLink else pageLink
-          ) [text "Education"]
-      ]
+  div [ style "display" "flex", style "flex-direction" pageDir, style "justify-content" "center", style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"]
+    [ flexCol (column ++ [style "align-items" headingAlign, style "height" "100vh", style "justify-content" "center", style "position" headingBlock, style "top" "0"])
+      (
+        [
+         h1 [ style "font-size" "5rem"] [ text "Dillon Geary" ]
+        ] ++ (
+        if model.desktop
+        then
+          [ a
+            (
+              [ onClick (GoTo Career)
+              ] ++ if (currentSection == Career) then activePageLink else pageLink
+            )
+            [ text "Career" ]
+          , a
+            (
+              [ onClick (GoTo Projects)
+              ] ++ if (currentSection == Projects) then activePageLink else pageLink
+            )
+            [ text "Projects" ]
+          , a
+            (
+              [ onClick (GoTo Education)
+              ] ++ if (currentSection == Education) then activePageLink else pageLink
+            )
+            [ text "Education" ]
+          ]
+        else []
+        )
+      )
     , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
       [ div [contentBox]
         [ h1 [id "HCareer"] [ text "Career" ]
