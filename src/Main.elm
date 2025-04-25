@@ -4,7 +4,7 @@ import Browser exposing (document)
 import Browser.Dom exposing (getViewport, Viewport, getElement, setViewport)
 
 import Html exposing (Html, div, text, h1, a)
-import Html.Attributes exposing (style, id, classList)
+import Html.Attributes exposing (style, id, classList, href)
 import Html.Events exposing (onClick)
 
 import Platform.Cmd exposing (none)
@@ -204,9 +204,16 @@ view model = let currentSection = getCurrentSection model
       ]
       [ text (if model.darkmode then "Lightmode" else "Darkmode") ]
     ]
-    ]
-
-lorem : List (Html Msg)
-lorem = [ div [] [ text "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent vel lorem ornare, iaculis mauris ut, vestibulum nunc. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec odio nunc, venenatis at lectus eu, placerat sagittis est. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet sem eget erat bibendum ullamcorper. Sed gravida lacinia nunc a hendrerit. Fusce nec imperdiet purus, eget iaculis neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin volutpat suscipit iaculis." ]
-    , div [] [ text "Duis id ultricies urna, id venenatis turpis. Praesent feugiat, felis non vestibulum tempor, erat metus sodales velit, ac sollicitudin enim lectus rutrum lorem. Curabitur a lorem mauris. Nunc condimentum sodales ex. Fusce tincidunt massa nisl, hendrerit placerat lacus pellentesque a. Proin imperdiet vitae turpis vel mattis. Nulla fringilla nisl tortor, vitae dignissim erat mollis vel. Vestibulum condimentum ligula quis rutrum vehicula. Quisque maximus facilisis neque. Sed viverra odio elit, ac accumsan magna condimentum vitae. Integer vitae turpis eget leo ornare laoreet." ]
+    , flexRow
+      [ style "justify-content" "center"
+      , style "gap" "10rem"
+      , style "width" "100vw"
+      , style "background-color" (getColor BackgroundAccent)
+      , style "padding" "0.5rem"
+      , style "box-sizing" "border-box"
+      ]
+      [ div [] [text "Built and powered by ", a [href "https://elm-lang.org/", style "color" (getColor Overlay)] [text "Elm"]]
+      , div [] [text "Theme by ", a [href "https://catppuccin.com/", style "color" (getColor Overlay)] [ text "Catppuccin"]]
+      , div [] [text "Source code found on ", a [href "https://github.com/dillongeary/dillongeary.github.io", style "color" (getColor Overlay)] [ text "GitHub"]]
+      ]
     ]

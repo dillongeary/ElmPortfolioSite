@@ -21,6 +21,7 @@ type Color
   | Text
   | Overlay
   | Background
+  | BackgroundAccent
 
 
 getGetColor : Model -> (Color -> String)
@@ -52,6 +53,7 @@ getDarkmodeColor name = case name of
   Text -> "#c6d0f5"
   Overlay -> "#737994"
   Background -> "#303446"
+  BackgroundAccent -> "#232634"
 
 getLightmodeColor : Color -> String
 getLightmodeColor name = case name of
@@ -72,3 +74,4 @@ getLightmodeColor name = case name of
   Text -> "#4c4f69"
   Overlay -> "#9ca0b0"
   Background -> "#eff1f5"
+  BackgroundAccent -> "#dce0e8"
