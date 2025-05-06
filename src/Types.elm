@@ -9,11 +9,17 @@ type ContentShorthand
   | Html_ (List (Html Msg))
 
 
+type ScreenMode
+  = Mobile
+  | Tablet
+  | Desktop
+
+
 type alias Model =
     { viewport : Maybe Int
     , darkmode : Bool
     , positions : Maybe (Int, Int)
-    , desktop : Bool
+    , screen : ScreenMode
     }
 
 

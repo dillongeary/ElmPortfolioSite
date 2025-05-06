@@ -5220,11 +5220,12 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
+var $author$project$Types$Desktop = {$: 'Desktop'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{darkmode: true, desktop: true, positions: $elm$core$Maybe$Nothing, viewport: $elm$core$Maybe$Nothing},
+		{darkmode: true, positions: $elm$core$Maybe$Nothing, screen: $author$project$Types$Desktop, viewport: $elm$core$Maybe$Nothing},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Types$GetUpdate = {$: 'GetUpdate'};
@@ -5657,7 +5658,9 @@ var $author$project$Types$GotPositions = function (a) {
 var $author$project$Types$GotViewport = function (a) {
 	return {$: 'GotViewport', a: a};
 };
+var $author$project$Types$Mobile = {$: 'Mobile'};
 var $author$project$Types$NoOp = {$: 'NoOp'};
+var $author$project$Types$Tablet = {$: 'Tablet'};
 var $elm$core$Task$onError = _Scheduler_onError;
 var $elm$core$Task$attempt = F2(
 	function (resultToMessage, task) {
@@ -5691,7 +5694,7 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							desktop: viewport.viewport.width > 1600,
+							screen: (viewport.viewport.width > 1600) ? $author$project$Types$Desktop : ((viewport.viewport.width > 1200) ? $author$project$Types$Tablet : $author$project$Types$Mobile),
 							viewport: $elm$core$Maybe$Just(
 								$elm$core$Basics$round(viewport.viewport.y))
 						}),
@@ -6397,9 +6400,8 @@ var $author$project$HtmlComponents$timeLineBox = F6(
 				]));
 	});
 var $author$project$Main$view = function (model) {
-	var pageDir = model.desktop ? 'row' : 'column';
-	var headingBlock = model.desktop ? 'sticky' : 'static';
-	var headingAlign = model.desktop ? 'flex-end' : 'center';
+	var headingBlock = _Utils_eq(model.screen, $author$project$Types$Mobile) ? 'static' : 'sticky';
+	var headingAlign = _Utils_eq(model.screen, $author$project$Types$Mobile) ? 'center' : 'flex-end';
 	var getColor = $author$project$ColorScheme$getGetColor(model);
 	var pageLink = _List_fromArray(
 		[
@@ -6407,7 +6409,6 @@ var $author$project$Main$view = function (model) {
 			$elm$html$Html$Attributes$style,
 			'color',
 			getColor($author$project$ColorScheme$Overlay)),
-			A2($elm$html$Html$Attributes$style, 'text-decoration', 'underline'),
 			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
 			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
 		]);
@@ -6415,11 +6416,13 @@ var $author$project$Main$view = function (model) {
 	var contentBox = A2(
 		$elm$html$Html$Attributes$style,
 		'minHeight',
-		model.desktop ? 'calc(100vh - 20rem)' : '0');
+		_Utils_eq(model.screen, $author$project$Types$Mobile) ? '0' : 'calc(100vh - 20rem)');
 	var column = _List_fromArray(
 		[
-			A2($elm$html$Html$Attributes$style, 'flex', '1'),
-			A2($elm$html$Html$Attributes$style, 'padding', '10rem 5rem'),
+			A2(
+			$elm$html$Html$Attributes$style,
+			'padding',
+			_Utils_eq(model.screen, $author$project$Types$Mobile) ? '5rem' : '10rem 5rem'),
 			A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
 		]);
 	var activePageLink = _List_fromArray(
@@ -6428,8 +6431,7 @@ var $author$project$Main$view = function (model) {
 			$elm$html$Html$Attributes$style,
 			'color',
 			getColor($author$project$ColorScheme$Flamingo)),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '2.5em'),
+			A2($elm$html$Html$Attributes$style, 'font-size', '3em'),
 			A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
 			A2($elm$html$Html$Attributes$style, 'font-style', 'italic'),
 			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
@@ -6452,29 +6454,43 @@ var $author$project$Main$view = function (model) {
 			[
 				A2(
 				$elm$html$Html$div,
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-						A2($elm$html$Html$Attributes$style, 'flex-direction', pageDir),
-						A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
-						A2($elm$html$Html$Attributes$style, 'min-height', '100vh'),
-						A2($elm$html$Html$Attributes$style, 'max-width', '1600px'),
-						A2($elm$html$Html$Attributes$style, 'margin', 'auto')
-					]),
+				_Utils_ap(
+					_Utils_eq(model.screen, $author$project$Types$Mobile) ? _List_Nil : _List_fromArray(
+						[
+							A2($elm$html$Html$Attributes$style, 'display', 'flex'),
+							A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
+							A2($elm$html$Html$Attributes$style, 'justify-content', 'center')
+						]),
+					_List_fromArray(
+						[
+							A2($elm$html$Html$Attributes$style, 'min-height', '100vh'),
+							A2($elm$html$Html$Attributes$style, 'max-width', '1600px'),
+							A2($elm$html$Html$Attributes$style, 'margin', 'auto')
+						])),
 				_List_fromArray(
 					[
 						A2(
 						$author$project$HtmlComponents$flexCol,
 						_Utils_ap(
 							column,
-							_List_fromArray(
-								[
-									A2($elm$html$Html$Attributes$style, 'align-items', headingAlign),
-									A2($elm$html$Html$Attributes$style, 'height', '100vh'),
-									A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
-									A2($elm$html$Html$Attributes$style, 'position', headingBlock),
-									A2($elm$html$Html$Attributes$style, 'top', '0')
-								])),
+							_Utils_ap(
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'flex', '1'),
+										A2($elm$html$Html$Attributes$style, 'align-items', headingAlign),
+										A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+										A2($elm$html$Html$Attributes$style, 'position', headingBlock),
+										A2($elm$html$Html$Attributes$style, 'top', '0')
+									]),
+								_Utils_ap(
+									_Utils_eq(model.screen, $author$project$Types$Tablet) ? _List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'padding-right', '0')
+										]) : _List_Nil,
+									_Utils_eq(model.screen, $author$project$Types$Mobile) ? _List_Nil : _List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'height', '100vh')
+										])))),
 						_Utils_ap(
 							_List_fromArray(
 								[
@@ -6482,14 +6498,17 @@ var $author$project$Main$view = function (model) {
 									$elm$html$Html$h1,
 									_List_fromArray(
 										[
-											A2($elm$html$Html$Attributes$style, 'font-size', '5rem')
+											A2(
+											$elm$html$Html$Attributes$style,
+											'font-size',
+											_Utils_eq(model.screen, $author$project$Types$Desktop) ? '5rem' : '4rem')
 										]),
 									_List_fromArray(
 										[
 											$elm$html$Html$text('Dillon Geary')
 										]))
 								]),
-							model.desktop ? _List_fromArray(
+							_Utils_eq(model.screen, $author$project$Types$Mobile) ? _List_Nil : _List_fromArray(
 								[
 									A2(
 									$elm$html$Html$a,
@@ -6530,16 +6549,21 @@ var $author$project$Main$view = function (model) {
 										[
 											$elm$html$Html$text('Education')
 										]))
-								]) : _List_Nil)),
+								]))),
 						A2(
 						$author$project$HtmlComponents$flexCol,
 						_Utils_ap(
 							column,
-							_List_fromArray(
-								[
-									A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
-									A2($elm$html$Html$Attributes$style, 'gap', '10rem')
-								])),
+							_Utils_ap(
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
+										A2($elm$html$Html$Attributes$style, 'gap', '10rem')
+									]),
+								_Utils_eq(model.screen, $author$project$Types$Mobile) ? _List_Nil : _List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'width', '800px')
+									]))),
 						_List_fromArray(
 							[
 								A2(
@@ -6663,9 +6687,8 @@ var $author$project$Main$view = function (model) {
 				$author$project$HtmlComponents$flexRow,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+						A2($elm$html$Html$Attributes$style, 'justify-content', 'space-evenly'),
 						A2($elm$html$Html$Attributes$style, 'gap', '10rem'),
-						A2($elm$html$Html$Attributes$style, 'width', '100vw'),
 						A2(
 						$elm$html$Html$Attributes$style,
 						'background-color',
@@ -6722,7 +6745,7 @@ var $author$project$Main$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Source code found on '),
+								$elm$html$Html$text('Source code on '),
 								A2(
 								$elm$html$Html$a,
 								_List_fromArray(

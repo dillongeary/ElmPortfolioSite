@@ -14,7 +14,7 @@ import Task exposing (perform, sequence, attempt, succeed, andThen)
 import Time exposing (every)
 
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
-import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..))
+import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..), ScreenMode(..))
 import ColorScheme exposing (getGetColor, Color(..))
 import Paragraphs exposing (ampereDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc, kingJohnDesc)
 
@@ -51,7 +51,7 @@ init _ =
     { viewport = Nothing
     , darkmode = True
     , positions = Nothing
-    , desktop = True
+    , screen = Desktop
     }
     , none
     )
@@ -63,7 +63,7 @@ init _ =
 update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
-        GotViewport viewport -> ({ model | viewport = Just (round viewport.viewport.y), desktop = viewport.viewport.width > 1600 }, none)
+        GotViewport viewport -> ({ model | viewport = Just (round viewport.viewport.y), screen = if viewport.viewport.width > 1600 then Desktop else if viewport.viewport.width > 1200 then Tablet else Mobile }, none)
         GotPositions result -> case result of
             Ok [eProject, eEducation] -> ({ model | positions = Just (round eProject.element.y, round eEducation.element.y)}, none)
             _ -> (model, none)
@@ -119,23 +119,23 @@ getCurrentSection model =
 view : Model -> Html Msg
 view model = let currentSection = getCurrentSection model
                  getColor = getGetColor model
-                 column = [ style "flex" "1", style "padding" "10rem 5rem", style "box-sizing" "border-box" ]
-                 pageLink = [ style "color" (getColor Overlay), style "text-decoration" "underline", style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
-                 activePageLink = [ style "color" (getColor Flamingo), style "cursor" "pointer", style "font-size" "2.5em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
-                 contentBox = style "minHeight" (if model.desktop then "calc(100vh - 20rem)" else "0")
-                 pageDir = if model.desktop then "row" else "column"
-                 headingAlign = if model.desktop then "flex-end" else "center"
-                 headingBlock = if model.desktop then "sticky" else "static"
+                 column = [style "padding" (if model.screen == Mobile then "5rem" else "10rem 5rem"), style "box-sizing" "border-box" ]
+                 pageLink = [ style "color" (getColor Overlay), style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
+                 activePageLink = [ style "color" (getColor Flamingo), style "font-size" "3em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
+                 contentBox = style "minHeight" (if model.screen == Mobile then "0" else "calc(100vh - 20rem)")
+                 headingAlign = if model.screen == Mobile then "center" else "flex-end"
+                 headingBlock = if model.screen == Mobile then "static" else "sticky"
   in
   div [style "color" (getColor Text), style "background-color" (getColor Background), style "font-family" "sans-serif"] [
-  div [ style "display" "flex", style "flex-direction" pageDir, style "justify-content" "center", style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"]
-    [ flexCol (column ++ [style "align-items" headingAlign, style "height" "100vh", style "justify-content" "center", style "position" headingBlock, style "top" "0"])
+  div ((if model.screen == Mobile then [] else [ style "display" "flex", style "flex-direction" "row", style "justify-content" "center"]) ++ [style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"])
+    [ flexCol (column ++ [style "flex" "1", style "align-items" headingAlign, style "justify-content" "center", style "position" headingBlock, style "top" "0"] ++ (if model.screen == Tablet then [style "padding-right" "0"] else []) ++ (if model.screen == Mobile then [] else [style "height" "100vh"]))
       (
         [
-         h1 [ style "font-size" "5rem"] [ text "Dillon Geary" ]
+         h1 [ style "font-size" (if model.screen == Desktop then "5rem" else "4rem")] [ text "Dillon Geary" ]
         ] ++ (
-        if model.desktop
-        then
+        if model.screen == Mobile
+        then []
+        else
           [ a
             (
               [ onClick (GoTo Career)
@@ -155,10 +155,9 @@ view model = let currentSection = getCurrentSection model
             )
             [ text "Education" ]
           ]
-        else []
         )
       )
-    , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"])
+    , flexCol (column ++ [style "align-items" "flex-start", style "gap" "10rem"] ++ (if model.screen == Mobile then [] else [style "width" "800px"]))
       [ div [contentBox]
         [ h1 [id "HCareer"] [ text "Career" ]
         , timeLine
@@ -226,15 +225,14 @@ view model = let currentSection = getCurrentSection model
       [ text (if model.darkmode then "Lightmode" else "Darkmode") ]
     ]
     , flexRow
-      [ style "justify-content" "center"
+      [ style "justify-content" "space-evenly"
       , style "gap" "10rem"
-      , style "width" "100vw"
       , style "background-color" (getColor BackgroundAccent)
       , style "padding" "0.5rem"
       , style "box-sizing" "border-box"
       ]
       [ div [] [text "Built and powered by ", a [href "https://elm-lang.org/", style "color" (getColor Overlay)] [text "Elm"]]
       , div [] [text "Theme by ", a [href "https://catppuccin.com/", style "color" (getColor Overlay)] [ text "Catppuccin"]]
-      , div [] [text "Source code found on ", a [href "https://github.com/dillongeary/dillongeary.github.io", style "color" (getColor Overlay)] [ text "GitHub"]]
+      , div [] [text "Source code on ", a [href "https://github.com/dillongeary/dillongeary.github.io", style "color" (getColor Overlay)] [ text "GitHub"]]
       ]
     ]
