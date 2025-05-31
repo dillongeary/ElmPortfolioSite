@@ -13,33 +13,33 @@ import ColorScheme exposing (getColor, Color(..))
 
 
 flexRow : List (Attribute Msg) -> List (Html Msg) -> Html Msg
-flexRow a c = div ([ style "display" "flex", style "flex-direction" "row" ] ++ a) c
+flexRow a c = div ([ style "display" "flex", style "flex-direction" "row"] ++ a) c
 
 
 flexCol : List (Attribute Msg) -> List (Html Msg) -> Html Msg
 flexCol a c = div ([ style "display" "flex", style "flex-direction" "column" ] ++ a) c
 
 
-timeLine : List (Html Msg) -> Html Msg
-timeLine c = flexCol [style "gap" "1rem"] c
+timeLine : Bool -> List (Html Msg) -> Html Msg
+timeLine b c = flexCol [style "gap" (if b then "1rem" else "2.5rem")] c
 
 
-timeLineBox: Bool -> String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
-timeLineBox last role company date skills desc =
-  flexRow []
-    [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ]
-      [ svg
-        [ width "40"
-        , height "100%"
-        , viewBox "0 0 100% 100%"
-        , fill "currentColor"
-        ]
-        (
-        [ circle [ cx "50%", cy "11", r "6"] [] ] ++ (if last then [] else [ line [ x1 "50%", x2 "50%", y1 "38", y2 "100%", stroke "currentColor", strokeWidth "2", strokeLinecap "round"] []
-        ])
-        )
-      ]
-    , div [  ]
+timeLineBox: Bool -> Bool -> String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
+timeLineBox last showTimeline role company date skills desc =
+  flexRow [] (
+    (
+    if showTimeline then [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ] [ svg
+            [ width "40"
+            , height "100%"
+            , viewBox "0 0 100% 100%"
+            , fill "currentColor"
+            ]
+            (
+            [ circle [ cx "50%", cy "11", r "6"] [] ] ++ (if last then [] else [ line [ x1 "50%", x2 "50%", y1 "38", y2 "100%", stroke "currentColor", strokeWidth "2", strokeLinecap "round"] []
+            ])
+            )
+          ]] else []
+    ) ++ [ div [  ]
       [ flexCol []
         (
         [ h3 [ style "margin" "0" ] [ text role ]
@@ -47,40 +47,38 @@ timeLineBox last role company date skills desc =
         , div [ style "margin-bottom" "1rem" ] [ text date ]
         ] ++ (
           if (length skills) > 0
-          then [flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)]
+          then [flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)]
           else []
         ) ++ [ handleCS desc ]
         )
       ]
-    ]
+    ])
 
 
-projectBox: String -> ProjectStatus -> String -> List Skills -> ContentShorthand -> Html Msg
-projectBox title status date skills desc =
-  flexRow []
-    [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ]
-      [ svg
-        [ width "40"
-        , height "100%"
-        , viewBox "0 0 100% 100%"
-        , fill "currentColor"
-        ]
-        [ circle [ cx "50%", cy "11", r "6"] [] ]
-      ]
-    , div []
+projectBox: Bool -> String -> ProjectStatus -> String -> List Skills -> ContentShorthand -> Html Msg
+projectBox showTimeline title status date skills desc =
+  flexRow [] (
+    (if showTimeline then [div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ] [ svg
+            [ width "40"
+            , height "100%"
+            , viewBox "0 0 100% 100%"
+            , fill "currentColor"
+            ]
+            [ circle [ cx "50%", cy "11", r "6"] [] ]
+          ]] else [] ) ++ [  div []
       [ flexCol []
         [ h3 [ style "margin" "0" ]
           [ flexRow [ style "gap" "1em", style "align-items" "center"]
             [ text title
-            , statusBox status
+            --, statusBox status
             ]
           ]
         , div [ style "margin-bottom" "1rem" ] [ text date ]
-        , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem" ] (map (\skill -> skillsBox skill) skills)
+        , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)
         , handleCS desc
         ]
       ]
-    ]
+    ])
 
 
 statusSkillBox: Color -> String -> Html Msg

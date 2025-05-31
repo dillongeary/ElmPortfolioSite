@@ -13,6 +13,7 @@ type ScreenMode
   = Mobile
   | Tablet
   | Desktop
+  | BigMobile
 
 
 type alias Model =
@@ -32,7 +33,8 @@ type PageSection
 type Msg
   = GotViewport Viewport
   | GotPositions (Result Error (List Element))
-  | GetUpdate
+  | GetPositionUpdate
+  | GetViewportUpdate
   | GoTo PageSection
   | ChangeLightDarkMode
   | NoOp
