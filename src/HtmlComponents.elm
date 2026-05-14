@@ -44,12 +44,13 @@ timeLineBox last showTimeline role company date skills desc =
             [ h3 [ style "margin" "0" ] [ text role ]
             , div [ ] [ text company ]
             , div [] [ text date ]
-            , div [ style "margin" "0.7rem 0" ] [ handleCS desc ]
             ] ++ (
               if (length skills) > 0
-              then [flexRow [style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)]
+              then [flexRow [style "gap" "0.5rem", style "flex-wrap" "wrap", style "margin" "0.7rem 0" ] (map (\skill -> skillsBox skill) skills)]
               else []
-            )
+            ) ++ [
+                div [ ] [ handleCS desc ]
+            ]
         )
 
     ])
@@ -73,8 +74,8 @@ projectBox showTimeline title status date skills desc =
             --, statusBox status
             ]
           ]
-        , div [ style "margin-bottom" "1rem" ] [ text date ]
-        , flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)
+        , div [] [ text date ]
+        , flexRow [ style "margin" "0.7rem 0", style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)
         , handleCS desc
         ]
       ]

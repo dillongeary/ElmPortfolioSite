@@ -6218,10 +6218,7 @@ var $author$project$HtmlComponents$projectBox = F6(
 											])),
 										A2(
 										$elm$html$Html$div,
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'margin-bottom', '1rem')
-											]),
+										_List_Nil,
 										_List_fromArray(
 											[
 												$elm$html$Html$text(date)
@@ -6230,7 +6227,7 @@ var $author$project$HtmlComponents$projectBox = F6(
 										$author$project$HtmlComponents$flexRow,
 										_List_fromArray(
 											[
-												A2($elm$html$Html$Attributes$style, 'margin-bottom', '1rem'),
+												A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0'),
 												A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
 												A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
 											]),
@@ -6376,34 +6373,36 @@ var $author$project$HtmlComponents$timeLineBox = F7(
 									_List_fromArray(
 										[
 											$elm$html$Html$text(date)
-										])),
-									A2(
-									$elm$html$Html$div,
-									_List_fromArray(
-										[
-											A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0')
-										]),
-									_List_fromArray(
-										[
-											$author$project$HtmlComponents$handleCS(desc)
 										]))
 								]),
-							($elm$core$List$length(skills) > 0) ? _List_fromArray(
-								[
-									A2(
-									$author$project$HtmlComponents$flexRow,
-									_List_fromArray(
-										[
-											A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-											A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
-										]),
-									A2(
-										$elm$core$List$map,
-										function (skill) {
-											return $author$project$HtmlComponents$skillsBox(skill);
-										},
-										skills))
-								]) : _List_Nil))
+							_Utils_ap(
+								($elm$core$List$length(skills) > 0) ? _List_fromArray(
+									[
+										A2(
+										$author$project$HtmlComponents$flexRow,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+												A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap'),
+												A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0')
+											]),
+										A2(
+											$elm$core$List$map,
+											function (skill) {
+												return $author$project$HtmlComponents$skillsBox(skill);
+											},
+											skills))
+									]) : _List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$div,
+										_List_Nil,
+										_List_fromArray(
+											[
+												$author$project$HtmlComponents$handleCS(desc)
+											]))
+									]))))
 					])));
 	});
 var $author$project$Main$view = function (model) {
