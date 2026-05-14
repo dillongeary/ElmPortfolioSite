@@ -39,7 +39,7 @@ type alias DocumentType =
     }
 
 viewToDocument : (Model -> Html Msg) -> Model -> DocumentType
-viewToDocument v m = { title = "Webpage", body = [ v m ] }
+viewToDocument v m = { title = "Dillon Geary · Web Developer", body = [ v m ] }
 
 
 -- MODEL
