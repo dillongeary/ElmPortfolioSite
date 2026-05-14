@@ -21,14 +21,14 @@ flexCol a c = div ([ style "display" "flex", style "flex-direction" "column" ] +
 
 
 timeLine : Bool -> List (Html Msg) -> Html Msg
-timeLine b c = flexCol [style "gap" (if b then "1rem" else "2.5rem")] c
+timeLine b c = flexCol [style "gap" "21px"] c
 
 
 timeLineBox: Bool -> Bool -> String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
 timeLineBox last showTimeline role company date skills desc =
   flexRow [] (
     (
-    if showTimeline then [ div [ style "flex" "1", style "padding-right" "1rem", style "color" (getColor Overlay) ] [ svg
+    if showTimeline then [ div [ style "padding-right" "1rem", style "color" (getColor Overlay) ] [ svg
             [ width "40"
             , height "100%"
             , viewBox "0 0 100% 100%"
@@ -39,19 +39,19 @@ timeLineBox last showTimeline role company date skills desc =
             ])
             )
           ]] else []
-    ) ++ [ div [  ]
-      [ flexCol []
+    ) ++ [ flexCol ( if last then [] else [style "margin-bottom" "1.5rem"] )
         (
-        [ h3 [ style "margin" "0" ] [ text role ]
-        , div [ ] [ text company ]
-        , div [ style "margin-bottom" "1rem" ] [ text date ]
-        ] ++ (
-          if (length skills) > 0
-          then [flexRow [ style "margin-bottom" "1rem", style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)]
-          else []
-        ) ++ [ handleCS desc ]
+            [ h3 [ style "margin" "0" ] [ text role ]
+            , div [ ] [ text company ]
+            , div [] [ text date ]
+            , div [ style "margin" "0.7rem 0" ] [ handleCS desc ]
+            ] ++ (
+              if (length skills) > 0
+              then [flexRow [style "gap" "0.5rem", style "flex-wrap" "wrap" ] (map (\skill -> skillsBox skill) skills)]
+              else []
+            )
         )
-      ]
+
     ])
 
 
@@ -122,6 +122,9 @@ skillsBox skill =
                                              API -> (Flamingo, "APIs")
                                              ProgrammingLanguages -> (Flamingo,"Programming Langauges")
                                              Research -> (Pink, "Research")
+                                             HTML -> (Peach, "HTML")
+                                             CSS -> (Blue, "CSS")
+                                             ProjectManagement -> (Mauve, "Project Management")
 
   in statusSkillBox backgroundColor textContent
 

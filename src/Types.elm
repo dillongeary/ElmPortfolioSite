@@ -56,6 +56,9 @@ type Skills
   | Python
   | Django
   | Java
+  | HTML
+  | CSS
+  | ProjectManagement
   | AppDevelopment
   | Kotlin
   | UI

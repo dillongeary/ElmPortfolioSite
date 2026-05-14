@@ -3,7 +3,7 @@ module Main exposing (..)
 import Browser exposing (document)
 import Browser.Dom exposing (getViewport, Viewport, getElement, setViewport)
 
-import Html exposing (Html, div, text, h1, a, i)
+import Html exposing (Html, div, text, h1, p, a, i)
 import Html.Attributes exposing (style, id, href, class)
 import Html.Events exposing (onClick)
 
@@ -14,9 +14,9 @@ import Task exposing (perform, sequence, attempt, succeed, andThen)
 import Time exposing (every)
 
 import HtmlComponents exposing (flexRow, flexCol, timeLine, timeLineBox, projectBox)
-import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand, PageSection(..), ScreenMode(..))
+import Types exposing (Msg(..), Model, ProjectStatus(..), Skills(..), ContentShorthand(..), PageSection(..), ScreenMode(..))
 import ColorScheme exposing (getGetColor, Color(..))
-import Paragraphs exposing (ampereDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc, kingJohnDesc)
+import Paragraphs exposing (ampereDesc, plantFacedDesc, blockellDesc, sotonDesc, activePointsDesc, internshipDesc, kingJohnDesc)
 
 
 -- MAIN
@@ -106,7 +106,7 @@ getCurrentSection model =
         Just i -> i
     (projectsPosition, educationPosition) =
       case model.positions of
-        Nothing -> (100,100)
+        Nothing -> (1000,1000)
         Just i -> i
   in
   case ((currentYScroll+381) >= projectsPosition, ((currentYScroll+381) >= educationPosition)) of
@@ -120,46 +120,53 @@ getCurrentSection model =
 view : Model -> Html Msg
 view model = let currentSection = getCurrentSection model
                  getColor = getGetColor model
-                 columnPadding = [style "padding" (if (model.screen == Mobile || model.screen == BigMobile) then "5rem 1rem" else "10rem 5rem"), style "box-sizing" "border-box" ]
+                 vpadding = "max(10rem, 20vh)"
+                 columnPadding = [style "padding" (if (model.screen == Mobile || model.screen == BigMobile) then "5rem 1rem" else (vpadding ++ " 5rem")), style "box-sizing" "border-box" ]
                  pageLink = [ style "color" (getColor Overlay), style "cursor" "pointer", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
                  activePageLink = [ style "color" (getColor Flamingo), style "font-size" "3em", style "font-weight" "bold", style "font-style" "italic", style "transition" "font-size 0.5s, color 0.5s, font-weight 0.5s"]
-                 contentBox = style "minHeight" (if (model.screen == Mobile || model.screen == BigMobile) then "0" else "calc(100vh - 20rem)")
                  headingAlign = if (model.screen == Mobile || model.screen == BigMobile) then "center" else "flex-end"
                  headingBlock = if (model.screen == Mobile || model.screen == BigMobile) then "static" else "sticky"
   in
   div [style "color" (getColor Text), style "background-color" (getColor Background), style "font-family" "sans-serif"] [
   div ((if (model.screen == Mobile || model.screen == BigMobile )then [] else [ style "display" "flex", style "flex-direction" "row", style "justify-content" "center"]) ++ [style "min-height" "100vh", style "max-width" "1600px", style "margin" "auto"])
-    [ flexCol (columnPadding ++ [style "flex" "1", style "align-items" headingAlign, style "justify-content" "center", style "position" headingBlock, style "top" "0"] ++ (if model.screen == Tablet then [style "padding-right" "0"] else []) ++ (if (model.screen == Mobile || model.screen == BigMobile) then [style "padding-bottom" "0", style "gap" "3rem"] else [style "height" "100vh"]))
-      (
-        [
-         h1 [ style "font-size" (if model.screen == Desktop then "5rem" else "3.5rem"), style "text-align" "center"] [ text "Dillon Geary" ]
-        ] ++ (
-        if (model.screen == Mobile || model.screen == BigMobile)
-        then []
-        else
-          [ a
-            (
-              [ onClick (GoTo Career)
-              ] ++ if (currentSection == Career) then activePageLink else pageLink
+    [ flexCol (columnPadding ++ [style "flex" "1", style "align-items" headingAlign, style "justify-content" "flex-start", style "position" headingBlock, style "top" "0"] ++ (if model.screen == Tablet then [style "padding-right" "0"] else []) ++ (if (model.screen == Mobile || model.screen == BigMobile) then [style "padding-bottom" "0"] else [style "height" "100vh"]))
+      [flexCol [ style "gap" "0.5rem", style "align-items" "center" ]
+        (
+            [
+             h1 [ style "font-size" (if model.screen == Desktop then "5rem" else "3.5rem"), style "text-align" "center", style "margin" "0"] [ text "Dillon Geary" ]
+             , p [ style "margin" "2rem 3rem", style "text-align" "center"] [text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life."]
+            ] ++ (
+            if (model.screen == Mobile || model.screen == BigMobile)
+            then []
+            else [ flexCol [ style "gap" "0.5rem", style "min-width" "20rem"]
+              [ a
+                (
+                  [ onClick (GoTo Career)
+                  , class ("link" ++ if (currentSection == Career) then " noUnderline" else "")
+                  ] ++ if (currentSection == Career) then activePageLink else pageLink
+                )
+                [ text "Career" ]
+              , a
+                (
+                  [ onClick (GoTo Projects)
+                  , class ("link" ++ if (currentSection == Projects) then " noUnderline" else "")
+                  ] ++ if (currentSection == Projects) then activePageLink else pageLink
+                )
+                [ text "Projects" ]
+              , a
+                (
+                  [ onClick (GoTo Education)
+                  , class ("link" ++ if (currentSection == Education) then " noUnderline" else "")
+                  ] ++ if (currentSection == Education) then activePageLink else pageLink
+                )
+                [ text "Education" ]
+              ]
+              ]
             )
-            [ text "Career" ]
-          , a
-            (
-              [ onClick (GoTo Projects)
-              ] ++ if (currentSection == Projects) then activePageLink else pageLink
-            )
-            [ text "Projects" ]
-          , a
-            (
-              [ onClick (GoTo Education)
-              ] ++ if (currentSection == Education) then activePageLink else pageLink
-            )
-            [ text "Education" ]
-          ]
         )
-      )
-    , flexCol (columnPadding ++ [style "align-items" "flex-start", style "gap" "10rem"] ++ (if (model.screen == Mobile || model.screen == BigMobile) then [] else [style "width" "800px"]))
-      [ div [contentBox]
+      ]
+    , flexCol (columnPadding ++ [style "align-items" "flex-start", style "gap" vpadding] ++ (if (model.screen == Mobile || model.screen == BigMobile) then [] else [style "width" "800px"]))
+      [ div []
         [ h1 [id "HCareer"] [ text "Career" ]
         , timeLine (model.screen == Mobile || model.screen == BigMobile)
           [ timeLineBox
@@ -167,17 +174,17 @@ view model = let currentSection = getCurrentSection model
               (model.screen /= Mobile )
               "Senior Web Developer"
               "Ampere Analysis"
-              "April 2026 - Current"
+              "August 2024 - Current"
               [ WebDevelopment, React, Django, UI, Database, API]
               ampereDesc
           , timeLineBox
               False
               (model.screen /= Mobile )
-              "Web Developer"
-              "Ampere Analysis"
-              "August 2024 - April 2026"
-              []
-              ""
+              "Freelance Web Developer"
+              "Plant Faced Coffee Shop"
+              "March 2026 - Present"
+              [ WebDevelopment, HTML, CSS, UI, ProjectManagement]
+              plantFacedDesc
           , timeLineBox
               True
               (model.screen /= Mobile )
@@ -188,7 +195,7 @@ view model = let currentSection = getCurrentSection model
               internshipDesc
           ]
         ]
-      , div [contentBox]
+      , div []
         [ h1 [id "HProject"] [ text "Projects" ]
         , timeLine (model.screen == Mobile || model.screen == BigMobile)
           [ projectBox
@@ -207,7 +214,7 @@ view model = let currentSection = getCurrentSection model
               activePointsDesc
           ]
         ]
-      , div [contentBox]
+      , div [ style "min-height" ("calc(100vh - calc(2 * " ++ vpadding ++ "))")]
         [ h1 [id "HEducation"] [ text "Education" ]
         , timeLine (model.screen == Mobile || model.screen == BigMobile)
           [ timeLineBox
@@ -240,7 +247,11 @@ view model = let currentSection = getCurrentSection model
       [ i (if model.darkmode then [class "bi", class "bi-brightness-high-fill"] else [class "bi", class "bi-moon-fill"]) [] ]
     ]
     , flexRow
-      [ style "justify-content" "space-evenly"
+      [ style "position" "fixed"
+      , style "left" "0"
+      , style "right" "0"
+      , style "bottom" "0"
+      , style "justify-content" "space-evenly"
       , style "gap" "1rem"
       , style "background-color" (getColor BackgroundAccent)
       , style "padding" "0.5rem"

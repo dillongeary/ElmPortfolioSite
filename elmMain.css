@@ -6,3 +6,22 @@ body {
     padding: 0;
     margin: 0;
 }
+
+.link {
+    margin-left: 3rem;
+    position: relative;
+
+    &:hover:not(.noUnderline) {
+        text-decoration: underline;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        right: calc(100% + 1rem);
+    }
+
+    &.noUnderline::before {
+        content: ">"
+    }
+}

@@ -8,6 +8,9 @@ import Html.Attributes exposing (style)
 ampereDesc : ContentShorthand
 ampereDesc = Text_ "Working in a small, agile team, responsible for maintaining and enhancing the company website. Playing a key role in the redesign and rewrite of our client-facing platform to improve user experience and performance. Serving as a primary point of contact for the UK office, addressing bug fixes, implementing feature improvements, and incorporating colleague feedback to drive continuous enhancements to our web services."
 
+plantFacedDesc : ContentShorthand
+plantFacedDesc = Text_ "Working directly with a non-technical client to deliver a bespoke website and effective online presence. Responsible for managing the project end-to-end, from Figma wireframes through to deployment and launch, even with ever evolving requirements. Continued post-launch support, through implementing Shopify integration to support future e-commerce opportunities."
+
 internshipDesc : ContentShorthand
 internshipDesc = Text_ "Worked within a small agile team to design and develop a proof-of-concept Android application for evidential crime scene photography. Collaborated with digital forensic experts to evaluate existing evidence capture and storage methods, exploring a client-first solution within a 10-week timeframe. Contributed insights on findings, benefits, and limitations to an active academic research paper in Digital Forensics."
 

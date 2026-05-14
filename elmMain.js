@@ -5790,6 +5790,7 @@ var $author$project$Types$API = {$: 'API'};
 var $author$project$Types$AppDevelopment = {$: 'AppDevelopment'};
 var $author$project$ColorScheme$Background = {$: 'Background'};
 var $author$project$ColorScheme$BackgroundAccent = {$: 'BackgroundAccent'};
+var $author$project$Types$CSS = {$: 'CSS'};
 var $author$project$Types$Career = {$: 'Career'};
 var $author$project$Types$ChangeLightDarkMode = {$: 'ChangeLightDarkMode'};
 var $author$project$Types$Complete = {$: 'Complete'};
@@ -5800,11 +5801,13 @@ var $author$project$ColorScheme$Flamingo = {$: 'Flamingo'};
 var $author$project$Types$GoTo = function (a) {
 	return {$: 'GoTo', a: a};
 };
+var $author$project$Types$HTML = {$: 'HTML'};
 var $author$project$Types$Haskell = {$: 'Haskell'};
 var $author$project$Types$Kotlin = {$: 'Kotlin'};
 var $author$project$ColorScheme$Overlay = {$: 'Overlay'};
 var $author$project$Types$Paused = {$: 'Paused'};
 var $author$project$Types$ProgrammingLanguages = {$: 'ProgrammingLanguages'};
+var $author$project$Types$ProjectManagement = {$: 'ProjectManagement'};
 var $author$project$Types$Projects = {$: 'Projects'};
 var $author$project$Types$React = {$: 'React'};
 var $author$project$Types$Research = {$: 'Research'};
@@ -5870,7 +5873,7 @@ var $author$project$Main$getCurrentSection = function (model) {
 	var _v0 = function () {
 		var _v1 = model.positions;
 		if (_v1.$ === 'Nothing') {
-			return _Utils_Tuple2(100, 100);
+			return _Utils_Tuple2(1000, 1000);
 		} else {
 			var i = _v1.a;
 			return i;
@@ -5992,7 +5995,7 @@ var $elm$html$Html$Attributes$href = function (url) {
 };
 var $elm$html$Html$i = _VirtualDom_node('i');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
-var $author$project$Paragraphs$internshipDesc = $author$project$Types$Text_('Liased with digital forensic experts to evaluate existing case evidence capture and storage techniques, and provided a bespoke client-first solution that explored modern improvements to these techniques. Collaborated within a small agile team to produce and test solutions in a tight deadline, focusing on security and encryption on data, as well as mobile app design and development.');
+var $author$project$Paragraphs$internshipDesc = $author$project$Types$Text_('Worked within a small agile team to design and develop a proof-of-concept Android application for evidential crime scene photography. Collaborated with digital forensic experts to evaluate existing evidence capture and storage methods, exploring a client-first solution within a 10-week timeframe. Contributed insights on findings, benefits, and limitations to an active academic research paper in Digital Forensics.');
 var $author$project$Types$Html_ = function (a) {
 	return {$: 'Html_', a: a};
 };
@@ -6036,6 +6039,8 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Paragraphs$plantFacedDesc = $author$project$Types$Text_('Working directly with a non-technical client to deliver a bespoke website and effective online presence. Responsible for managing the project end-to-end, from Figma wireframes through to deployment and launch, even with ever evolving requirements. Continued post-launch support, through implementing Shopify integration to support future e-commerce opportunities.');
 var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
 var $elm$svg$Svg$circle = $elm$svg$Svg$trustedNode('circle');
 var $elm$svg$Svg$Attributes$cx = _VirtualDom_attribute('cx');
@@ -6054,6 +6059,7 @@ var $author$project$HtmlComponents$handleCS = function (cs) {
 };
 var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$svg$Svg$Attributes$r = _VirtualDom_attribute('r');
+var $author$project$ColorScheme$Blue = {$: 'Blue'};
 var $author$project$ColorScheme$Green = {$: 'Green'};
 var $author$project$ColorScheme$Lavender = {$: 'Lavender'};
 var $author$project$ColorScheme$Mauve = {$: 'Mauve'};
@@ -6117,8 +6123,14 @@ var $author$project$HtmlComponents$skillsBox = function (skill) {
 				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'APIs');
 			case 'ProgrammingLanguages':
 				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'Programming Langauges');
-			default:
+			case 'Research':
 				return _Utils_Tuple2($author$project$ColorScheme$Pink, 'Research');
+			case 'HTML':
+				return _Utils_Tuple2($author$project$ColorScheme$Peach, 'HTML');
+			case 'CSS':
+				return _Utils_Tuple2($author$project$ColorScheme$Blue, 'CSS');
+			default:
+				return _Utils_Tuple2($author$project$ColorScheme$Mauve, 'Project Management');
 		}
 	}();
 	var backgroundColor = _v0.a;
@@ -6258,10 +6270,7 @@ var $author$project$HtmlComponents$timeLine = F2(
 			$author$project$HtmlComponents$flexCol,
 			_List_fromArray(
 				[
-					A2(
-					$elm$html$Html$Attributes$style,
-					'gap',
-					b ? '1rem' : '2.5rem')
+					A2($elm$html$Html$Attributes$style, 'gap', '21px')
 				]),
 			c);
 	});
@@ -6285,7 +6294,6 @@ var $author$project$HtmlComponents$timeLineBox = F7(
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A2($elm$html$Html$Attributes$style, 'flex', '1'),
 								A2($elm$html$Html$Attributes$style, 'padding-right', '1rem'),
 								A2(
 								$elm$html$Html$Attributes$style,
@@ -6337,70 +6345,69 @@ var $author$project$HtmlComponents$timeLineBox = F7(
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
+						$author$project$HtmlComponents$flexCol,
+						last ? _List_Nil : _List_fromArray(
 							[
-								A2(
-								$author$project$HtmlComponents$flexCol,
-								_List_Nil,
-								_Utils_ap(
+								A2($elm$html$Html$Attributes$style, 'margin-bottom', '1.5rem')
+							]),
+						_Utils_ap(
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$h3,
 									_List_fromArray(
 										[
-											A2(
-											$elm$html$Html$h3,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'margin', '0')
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(role)
-												])),
-											A2(
-											$elm$html$Html$div,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text(company)
-												])),
-											A2(
-											$elm$html$Html$div,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'margin-bottom', '1rem')
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(date)
-												]))
+											A2($elm$html$Html$Attributes$style, 'margin', '0')
 										]),
-									_Utils_ap(
-										($elm$core$List$length(skills) > 0) ? _List_fromArray(
-											[
-												A2(
-												$author$project$HtmlComponents$flexRow,
-												_List_fromArray(
-													[
-														A2($elm$html$Html$Attributes$style, 'margin-bottom', '1rem'),
-														A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-														A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
-													]),
-												A2(
-													$elm$core$List$map,
-													function (skill) {
-														return $author$project$HtmlComponents$skillsBox(skill);
-													},
-													skills))
-											]) : _List_Nil,
-										_List_fromArray(
-											[
-												$author$project$HtmlComponents$handleCS(desc)
-											]))))
-							]))
+									_List_fromArray(
+										[
+											$elm$html$Html$text(role)
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(company)
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(date)
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0')
+										]),
+									_List_fromArray(
+										[
+											$author$project$HtmlComponents$handleCS(desc)
+										]))
+								]),
+							($elm$core$List$length(skills) > 0) ? _List_fromArray(
+								[
+									A2(
+									$author$project$HtmlComponents$flexRow,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+											A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
+										]),
+									A2(
+										$elm$core$List$map,
+										function (skill) {
+											return $author$project$HtmlComponents$skillsBox(skill);
+										},
+										skills))
+								]) : _List_Nil))
 					])));
 	});
 var $author$project$Main$view = function (model) {
+	var vpadding = 'max(10rem, 20vh)';
 	var headingBlock = (_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? 'static' : 'sticky';
 	var headingAlign = (_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? 'center' : 'flex-end';
 	var getColor = $author$project$ColorScheme$getGetColor(model);
@@ -6414,16 +6421,12 @@ var $author$project$Main$view = function (model) {
 			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
 		]);
 	var currentSection = $author$project$Main$getCurrentSection(model);
-	var contentBox = A2(
-		$elm$html$Html$Attributes$style,
-		'minHeight',
-		(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? '0' : 'calc(100vh - 20rem)');
 	var columnPadding = _List_fromArray(
 		[
 			A2(
 			$elm$html$Html$Attributes$style,
 			'padding',
-			(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? '5rem 1rem' : '10rem 5rem'),
+			(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? '5rem 1rem' : (vpadding + ' 5rem')),
 			A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
 		]);
 	var activePageLink = _List_fromArray(
@@ -6479,7 +6482,7 @@ var $author$project$Main$view = function (model) {
 									[
 										A2($elm$html$Html$Attributes$style, 'flex', '1'),
 										A2($elm$html$Html$Attributes$style, 'align-items', headingAlign),
-										A2($elm$html$Html$Attributes$style, 'justify-content', 'center'),
+										A2($elm$html$Html$Attributes$style, 'justify-content', 'flex-start'),
 										A2($elm$html$Html$Attributes$style, 'position', headingBlock),
 										A2($elm$html$Html$Attributes$style, 'top', '0')
 									]),
@@ -6490,72 +6493,109 @@ var $author$project$Main$view = function (model) {
 										]) : _List_Nil,
 									(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_fromArray(
 										[
-											A2($elm$html$Html$Attributes$style, 'padding-bottom', '0'),
-											A2($elm$html$Html$Attributes$style, 'gap', '3rem')
+											A2($elm$html$Html$Attributes$style, 'padding-bottom', '0')
 										]) : _List_fromArray(
 										[
 											A2($elm$html$Html$Attributes$style, 'height', '100vh')
 										])))),
-						_Utils_ap(
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$h1,
+						_List_fromArray(
+							[
+								A2(
+								$author$project$HtmlComponents$flexCol,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+										A2($elm$html$Html$Attributes$style, 'align-items', 'center')
+									]),
+								_Utils_ap(
 									_List_fromArray(
 										[
 											A2(
-											$elm$html$Html$Attributes$style,
-											'font-size',
-											_Utils_eq(model.screen, $author$project$Types$Desktop) ? '5rem' : '3.5rem'),
-											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+											$elm$html$Html$h1,
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$Attributes$style,
+													'font-size',
+													_Utils_eq(model.screen, $author$project$Types$Desktop) ? '5rem' : '3.5rem'),
+													A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
+													A2($elm$html$Html$Attributes$style, 'margin', '0')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('Dillon Geary')
+												])),
+											A2(
+											$elm$html$Html$p,
+											_List_fromArray(
+												[
+													A2($elm$html$Html$Attributes$style, 'margin', '2rem 3rem'),
+													A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life.')
+												]))
 										]),
-									_List_fromArray(
+									(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
 										[
-											$elm$html$Html$text('Dillon Geary')
-										]))
-								]),
-							(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
-								[
-									A2(
-									$elm$html$Html$a,
-									_Utils_ap(
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Types$GoTo($author$project$Types$Career))
-											]),
-										_Utils_eq(currentSection, $author$project$Types$Career) ? activePageLink : pageLink),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Career')
-										])),
-									A2(
-									$elm$html$Html$a,
-									_Utils_ap(
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Types$GoTo($author$project$Types$Projects))
-											]),
-										_Utils_eq(currentSection, $author$project$Types$Projects) ? activePageLink : pageLink),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Projects')
-										])),
-									A2(
-									$elm$html$Html$a,
-									_Utils_ap(
-										_List_fromArray(
-											[
-												$elm$html$Html$Events$onClick(
-												$author$project$Types$GoTo($author$project$Types$Education))
-											]),
-										_Utils_eq(currentSection, $author$project$Types$Education) ? activePageLink : pageLink),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Education')
-										]))
-								]))),
+											A2(
+											$author$project$HtmlComponents$flexCol,
+											_List_fromArray(
+												[
+													A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+													A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
+												]),
+											_List_fromArray(
+												[
+													A2(
+													$elm$html$Html$a,
+													_Utils_ap(
+														_List_fromArray(
+															[
+																$elm$html$Html$Events$onClick(
+																$author$project$Types$GoTo($author$project$Types$Career)),
+																$elm$html$Html$Attributes$class(
+																'link' + (_Utils_eq(currentSection, $author$project$Types$Career) ? ' noUnderline' : ''))
+															]),
+														_Utils_eq(currentSection, $author$project$Types$Career) ? activePageLink : pageLink),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('Career')
+														])),
+													A2(
+													$elm$html$Html$a,
+													_Utils_ap(
+														_List_fromArray(
+															[
+																$elm$html$Html$Events$onClick(
+																$author$project$Types$GoTo($author$project$Types$Projects)),
+																$elm$html$Html$Attributes$class(
+																'link' + (_Utils_eq(currentSection, $author$project$Types$Projects) ? ' noUnderline' : ''))
+															]),
+														_Utils_eq(currentSection, $author$project$Types$Projects) ? activePageLink : pageLink),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('Projects')
+														])),
+													A2(
+													$elm$html$Html$a,
+													_Utils_ap(
+														_List_fromArray(
+															[
+																$elm$html$Html$Events$onClick(
+																$author$project$Types$GoTo($author$project$Types$Education)),
+																$elm$html$Html$Attributes$class(
+																'link' + (_Utils_eq(currentSection, $author$project$Types$Education) ? ' noUnderline' : ''))
+															]),
+														_Utils_eq(currentSection, $author$project$Types$Education) ? activePageLink : pageLink),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('Education')
+														]))
+												]))
+										])))
+							])),
 						A2(
 						$author$project$HtmlComponents$flexCol,
 						_Utils_ap(
@@ -6564,7 +6604,7 @@ var $author$project$Main$view = function (model) {
 								_List_fromArray(
 									[
 										A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
-										A2($elm$html$Html$Attributes$style, 'gap', '10rem')
+										A2($elm$html$Html$Attributes$style, 'gap', vpadding)
 									]),
 								(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
 									[
@@ -6574,8 +6614,7 @@ var $author$project$Main$view = function (model) {
 							[
 								A2(
 								$elm$html$Html$div,
-								_List_fromArray(
-									[contentBox]),
+								_List_Nil,
 								_List_fromArray(
 									[
 										A2(
@@ -6597,19 +6636,29 @@ var $author$project$Main$view = function (model) {
 												$author$project$HtmlComponents$timeLineBox,
 												false,
 												!_Utils_eq(model.screen, $author$project$Types$Mobile),
-												'Web Developer',
+												'Senior Web Developer',
 												'Ampere Analysis',
-												'2024 - Current',
+												'August 2024 - Current',
 												_List_fromArray(
 													[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django, $author$project$Types$UI, $author$project$Types$Database, $author$project$Types$API]),
 												$author$project$Paragraphs$ampereDesc),
+												A7(
+												$author$project$HtmlComponents$timeLineBox,
+												false,
+												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												'Freelance Web Developer',
+												'Plant Faced Coffee Shop',
+												'March 2026 - Present',
+												_List_fromArray(
+													[$author$project$Types$WebDevelopment, $author$project$Types$HTML, $author$project$Types$CSS, $author$project$Types$UI, $author$project$Types$ProjectManagement]),
+												$author$project$Paragraphs$plantFacedDesc),
 												A7(
 												$author$project$HtmlComponents$timeLineBox,
 												true,
 												!_Utils_eq(model.screen, $author$project$Types$Mobile),
 												'Software Engineer - Intern',
 												'University of Southampton',
-												'2023',
+												'June 2023 - September 2023',
 												_List_fromArray(
 													[$author$project$Types$AppDevelopment, $author$project$Types$Kotlin, $author$project$Types$Research, $author$project$Types$UI]),
 												$author$project$Paragraphs$internshipDesc)
@@ -6617,8 +6666,7 @@ var $author$project$Main$view = function (model) {
 									])),
 								A2(
 								$elm$html$Html$div,
-								_List_fromArray(
-									[contentBox]),
+								_List_Nil,
 								_List_fromArray(
 									[
 										A2(
@@ -6659,7 +6707,9 @@ var $author$project$Main$view = function (model) {
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
-									[contentBox]),
+									[
+										A2($elm$html$Html$Attributes$style, 'min-height', 'calc(100vh - calc(2 * ' + (vpadding + '))'))
+									]),
 								_List_fromArray(
 									[
 										A2(
@@ -6732,6 +6782,10 @@ var $author$project$Main$view = function (model) {
 				$author$project$HtmlComponents$flexRow,
 				_List_fromArray(
 					[
+						A2($elm$html$Html$Attributes$style, 'position', 'fixed'),
+						A2($elm$html$Html$Attributes$style, 'left', '0'),
+						A2($elm$html$Html$Attributes$style, 'right', '0'),
+						A2($elm$html$Html$Attributes$style, 'bottom', '0'),
 						A2($elm$html$Html$Attributes$style, 'justify-content', 'space-evenly'),
 						A2($elm$html$Html$Attributes$style, 'gap', '1rem'),
 						A2(
