@@ -165,17 +165,25 @@ view model = let currentSection = getCurrentSection model
           [ timeLineBox
               False
               (model.screen /= Mobile )
-              "Web Developer"
+              "Senior Web Developer"
               "Ampere Analysis"
-              "2024 - Current"
+              "April 2026 - Current"
               [ WebDevelopment, React, Django, UI, Database, API]
               ampereDesc
+          , timeLineBox
+              False
+              (model.screen /= Mobile )
+              "Web Developer"
+              "Ampere Analysis"
+              "August 2024 - April 2026"
+              []
+              ""
           , timeLineBox
               True
               (model.screen /= Mobile )
               "Software Engineer - Intern"
               "University of Southampton"
-              "2023"
+              "June 2023 - September 2023"
               [ AppDevelopment, Kotlin, Research, UI]
               internshipDesc
           ]
