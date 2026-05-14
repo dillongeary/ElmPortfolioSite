@@ -6870,7 +6870,7 @@ var $author$project$Main$viewToDocument = F2(
 				[
 					v(m)
 				]),
-			title: 'Webpage'
+			title: 'Dillon Geary · Web Developer'
 		};
 	});
 var $author$project$Main$main = $elm$browser$Browser$document(
