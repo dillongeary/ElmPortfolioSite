@@ -182,53 +182,53 @@ view model =
         ]
         [ div [ class "content" ]
             [ div
-                [ class "flex-col"
-                , class "column-padding"
-                , class "left-col"
+                [ class "left-col"
                 ]
-                [ h1
-                    []
-                    [ text "Dillon Geary" ]
-                , p
-                    []
-                    [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life." ]
-                , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
-                    [ a
-                        ([ onClick (GoTo Career)
-                         , class "page-link"
-                         ]
-                            ++ (if currentSection == Career then
-                                    [ class "active" ]
+                [ div [ class "column-padding", class "flex-col" ]
+                    [ h1
+                        []
+                        [ text "Dillon Geary" ]
+                    , p
+                        []
+                        [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life." ]
+                    , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
+                        [ a
+                            ([ onClick (GoTo Career)
+                             , class "page-link"
+                             ]
+                                ++ (if currentSection == Career then
+                                        [ class "active" ]
 
-                                else
-                                    []
-                               )
-                        )
-                        [ text "Career" ]
-                    , a
-                        ([ onClick (GoTo Projects)
-                         , class "page-link"
-                         ]
-                            ++ (if currentSection == Projects then
-                                    [ class "active" ]
+                                    else
+                                        []
+                                   )
+                            )
+                            [ text "Career" ]
+                        , a
+                            ([ onClick (GoTo Projects)
+                             , class "page-link"
+                             ]
+                                ++ (if currentSection == Projects then
+                                        [ class "active" ]
 
-                                else
-                                    []
-                               )
-                        )
-                        [ text "Projects" ]
-                    , a
-                        ([ onClick (GoTo Education)
-                         , class "page-link"
-                         ]
-                            ++ (if currentSection == Education then
-                                    [ class "active" ]
+                                    else
+                                        []
+                                   )
+                            )
+                            [ text "Projects" ]
+                        , a
+                            ([ onClick (GoTo Education)
+                             , class "page-link"
+                             ]
+                                ++ (if currentSection == Education then
+                                        [ class "active" ]
 
-                                else
-                                    []
-                               )
-                        )
-                        [ text "Education" ]
+                                    else
+                                        []
+                                   )
+                            )
+                            [ text "Education" ]
+                        ]
                     ]
                 ]
             , div

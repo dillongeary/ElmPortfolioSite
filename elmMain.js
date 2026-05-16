@@ -6251,86 +6251,94 @@ var $author$project$Main$view = function (model) {
 						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								$elm$html$Html$Attributes$class('flex-col'),
-								$elm$html$Html$Attributes$class('column-padding'),
 								$elm$html$Html$Attributes$class('left-col')
 							]),
 						_List_fromArray(
 							[
 								A2(
-								$elm$html$Html$h1,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Dillon Geary')
-									])),
-								A2(
-								$elm$html$Html$p,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life.')
-									])),
-								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$class('flex-col'),
-										A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-										A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
+										$elm$html$Html$Attributes$class('column-padding'),
+										$elm$html$Html$Attributes$class('flex-col')
 									]),
 								_List_fromArray(
 									[
 										A2(
-										$elm$html$Html$a,
-										_Utils_ap(
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick(
-													$author$project$Types$GoTo($author$project$Types$Career)),
-													$elm$html$Html$Attributes$class('page-link')
-												]),
-											_Utils_eq(currentSection, $author$project$Types$Career) ? _List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('active')
-												]) : _List_Nil),
+										$elm$html$Html$h1,
+										_List_Nil,
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Career')
+												$elm$html$Html$text('Dillon Geary')
 											])),
 										A2(
-										$elm$html$Html$a,
-										_Utils_ap(
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick(
-													$author$project$Types$GoTo($author$project$Types$Projects)),
-													$elm$html$Html$Attributes$class('page-link')
-												]),
-											_Utils_eq(currentSection, $author$project$Types$Projects) ? _List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('active')
-												]) : _List_Nil),
+										$elm$html$Html$p,
+										_List_Nil,
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Projects')
+												$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life.')
 											])),
 										A2(
-										$elm$html$Html$a,
-										_Utils_ap(
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick(
-													$author$project$Types$GoTo($author$project$Types$Education)),
-													$elm$html$Html$Attributes$class('page-link')
-												]),
-											_Utils_eq(currentSection, $author$project$Types$Education) ? _List_fromArray(
-												[
-													$elm$html$Html$Attributes$class('active')
-												]) : _List_Nil),
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												$elm$html$Html$text('Education')
+												$elm$html$Html$Attributes$class('flex-col'),
+												A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
+												A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
+											]),
+										_List_fromArray(
+											[
+												A2(
+												$elm$html$Html$a,
+												_Utils_ap(
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Types$GoTo($author$project$Types$Career)),
+															$elm$html$Html$Attributes$class('page-link')
+														]),
+													_Utils_eq(currentSection, $author$project$Types$Career) ? _List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('active')
+														]) : _List_Nil),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Career')
+													])),
+												A2(
+												$elm$html$Html$a,
+												_Utils_ap(
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Types$GoTo($author$project$Types$Projects)),
+															$elm$html$Html$Attributes$class('page-link')
+														]),
+													_Utils_eq(currentSection, $author$project$Types$Projects) ? _List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('active')
+														]) : _List_Nil),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Projects')
+													])),
+												A2(
+												$elm$html$Html$a,
+												_Utils_ap(
+													_List_fromArray(
+														[
+															$elm$html$Html$Events$onClick(
+															$author$project$Types$GoTo($author$project$Types$Education)),
+															$elm$html$Html$Attributes$class('page-link')
+														]),
+													_Utils_eq(currentSection, $author$project$Types$Education) ? _List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('active')
+														]) : _List_Nil),
+												_List_fromArray(
+													[
+														$elm$html$Html$text('Education')
+													]))
 											]))
 									]))
 							])),
