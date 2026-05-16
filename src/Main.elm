@@ -190,7 +190,7 @@ view model =
                         [ text "Dillon Geary" ]
                     , p
                         []
-                        [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life." ]
+                        [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bringing cool ideas to life." ]
                     , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
                         [ a
                             ([ onClick (GoTo Career)
