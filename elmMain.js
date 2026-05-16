@@ -5205,12 +5205,11 @@ var $elm$core$Task$perform = F2(
 				A2($elm$core$Task$map, toMessage, task)));
 	});
 var $elm$browser$Browser$document = _Browser_document;
-var $author$project$Types$Desktop = {$: 'Desktop'};
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Main$init = function (_v0) {
 	return _Utils_Tuple2(
-		{darkmode: true, positions: $elm$core$Maybe$Nothing, screen: $author$project$Types$Desktop, viewport: $elm$core$Maybe$Nothing},
+		{darkmode: true, positions: $elm$core$Maybe$Nothing, viewport: $elm$core$Maybe$Nothing},
 		$elm$core$Platform$Cmd$none);
 };
 var $author$project$Types$GetPositionUpdate = {$: 'GetPositionUpdate'};
@@ -5649,16 +5648,13 @@ var $author$project$Main$subscriptions = function (_v0) {
 				})
 			]));
 };
-var $author$project$Types$BigMobile = {$: 'BigMobile'};
 var $author$project$Types$GotPositions = function (a) {
 	return {$: 'GotPositions', a: a};
 };
 var $author$project$Types$GotViewport = function (a) {
 	return {$: 'GotViewport', a: a};
 };
-var $author$project$Types$Mobile = {$: 'Mobile'};
 var $author$project$Types$NoOp = {$: 'NoOp'};
-var $author$project$Types$Tablet = {$: 'Tablet'};
 var $elm$core$Task$onError = _Scheduler_onError;
 var $elm$core$Task$attempt = F2(
 	function (resultToMessage, task) {
@@ -5692,7 +5688,6 @@ var $author$project$Main$update = F2(
 					_Utils_update(
 						model,
 						{
-							screen: (viewport.viewport.width > 1450) ? $author$project$Types$Desktop : ((viewport.viewport.width > 1300) ? $author$project$Types$Tablet : ((viewport.viewport.width > 600) ? $author$project$Types$BigMobile : $author$project$Types$Mobile)),
 							viewport: $elm$core$Maybe$Just(
 								$elm$core$Basics$round(viewport.viewport.y))
 						}),
@@ -5788,30 +5783,23 @@ var $author$project$Main$update = F2(
 	});
 var $author$project$Types$API = {$: 'API'};
 var $author$project$Types$AppDevelopment = {$: 'AppDevelopment'};
-var $author$project$ColorScheme$Background = {$: 'Background'};
-var $author$project$ColorScheme$BackgroundAccent = {$: 'BackgroundAccent'};
 var $author$project$Types$CSS = {$: 'CSS'};
 var $author$project$Types$Career = {$: 'Career'};
 var $author$project$Types$ChangeLightDarkMode = {$: 'ChangeLightDarkMode'};
-var $author$project$Types$Complete = {$: 'Complete'};
 var $author$project$Types$Database = {$: 'Database'};
 var $author$project$Types$Django = {$: 'Django'};
 var $author$project$Types$Education = {$: 'Education'};
-var $author$project$ColorScheme$Flamingo = {$: 'Flamingo'};
 var $author$project$Types$GoTo = function (a) {
 	return {$: 'GoTo', a: a};
 };
 var $author$project$Types$HTML = {$: 'HTML'};
 var $author$project$Types$Haskell = {$: 'Haskell'};
 var $author$project$Types$Kotlin = {$: 'Kotlin'};
-var $author$project$ColorScheme$Overlay = {$: 'Overlay'};
-var $author$project$Types$Paused = {$: 'Paused'};
 var $author$project$Types$ProgrammingLanguages = {$: 'ProgrammingLanguages'};
 var $author$project$Types$ProjectManagement = {$: 'ProjectManagement'};
 var $author$project$Types$Projects = {$: 'Projects'};
 var $author$project$Types$React = {$: 'React'};
 var $author$project$Types$Research = {$: 'Research'};
-var $author$project$ColorScheme$Text = {$: 'Text'};
 var $author$project$Types$UI = {$: 'UI'};
 var $author$project$Types$WebDevelopment = {$: 'WebDevelopment'};
 var $elm$html$Html$a = _VirtualDom_node('a');
@@ -5831,34 +5819,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $author$project$HtmlComponents$flexCol = F2(
-	function (a, c) {
-		return A2(
-			$elm$html$Html$div,
-			_Utils_ap(
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-						A2($elm$html$Html$Attributes$style, 'flex-direction', 'column')
-					]),
-				a),
-			c);
-	});
-var $author$project$HtmlComponents$flexRow = F2(
-	function (a, c) {
-		return A2(
-			$elm$html$Html$div,
-			_Utils_ap(
-				_List_fromArray(
-					[
-						A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-						A2($elm$html$Html$Attributes$style, 'flex-direction', 'row')
-					]),
-				a),
-			c);
-	});
 var $elm$core$Basics$ge = _Utils_ge;
 var $author$project$Main$getCurrentSection = function (model) {
 	var currentYScroll = function () {
@@ -5898,95 +5858,8 @@ var $author$project$Main$getCurrentSection = function (model) {
 		}
 	}
 };
-var $author$project$ColorScheme$getDarkmodeColor = function (name) {
-	switch (name.$) {
-		case 'RoseWater':
-			return '#f2d5cf';
-		case 'Flamingo':
-			return '#eebebe';
-		case 'Pink':
-			return '#f4b8e4';
-		case 'Mauve':
-			return '#ca9ee6';
-		case 'Red':
-			return '#e78284';
-		case 'Maroon':
-			return '#ea999c';
-		case 'Peach':
-			return '#ef9f76';
-		case 'Yellow':
-			return '#e5c890';
-		case 'Green':
-			return '#a6d189';
-		case 'Teal':
-			return '#81c8be';
-		case 'Sky':
-			return '#99d1db';
-		case 'Sapphire':
-			return '#85c1dc';
-		case 'Blue':
-			return '#8caaee';
-		case 'Lavender':
-			return '#babbf1';
-		case 'Text':
-			return '#c6d0f5';
-		case 'Overlay':
-			return '#737994';
-		case 'Background':
-			return '#303446';
-		default:
-			return '#232634';
-	}
-};
-var $author$project$ColorScheme$getLightmodeColor = function (name) {
-	switch (name.$) {
-		case 'RoseWater':
-			return '#dc8a78';
-		case 'Flamingo':
-			return '#dd7878';
-		case 'Pink':
-			return '#ea76cb';
-		case 'Mauve':
-			return '#8839ef';
-		case 'Red':
-			return '#d20f39';
-		case 'Maroon':
-			return '#e64553';
-		case 'Peach':
-			return '#fe640b';
-		case 'Yellow':
-			return '#df8e1d';
-		case 'Green':
-			return '#40a02b';
-		case 'Teal':
-			return '#179299';
-		case 'Sky':
-			return '#04a5e5';
-		case 'Sapphire':
-			return '#209fb5';
-		case 'Blue':
-			return '#1e66f5';
-		case 'Lavender':
-			return '#7287fd';
-		case 'Text':
-			return '#4c4f69';
-		case 'Overlay':
-			return '#9ca0b0';
-		case 'Background':
-			return '#eff1f5';
-		default:
-			return '#dce0e8';
-	}
-};
-var $author$project$ColorScheme$getGetColor = function (model) {
-	var _v0 = model.darkmode;
-	if (_v0) {
-		return $author$project$ColorScheme$getDarkmodeColor;
-	} else {
-		return $author$project$ColorScheme$getLightmodeColor;
-	}
-};
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -6021,7 +5894,6 @@ var $author$project$Paragraphs$kingJohnDesc = $author$project$Types$Html_(
 					$elm$html$Html$text('Activities include representing the school alongside peers in nationwide mathematics competitions for four years in a row, and assisted teaching staff and faculty members as a Prefect')
 				]))
 		]));
-var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6046,9 +5918,8 @@ var $elm$svg$Svg$circle = $elm$svg$Svg$trustedNode('circle');
 var $elm$svg$Svg$Attributes$cx = _VirtualDom_attribute('cx');
 var $elm$svg$Svg$Attributes$cy = _VirtualDom_attribute('cy');
 var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
-var $author$project$ColorScheme$getColor = $author$project$ColorScheme$getDarkmodeColor;
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
-var $author$project$HtmlComponents$handleCS = function (cs) {
+var $author$project$Components$handleCS = function (cs) {
 	if (cs.$ === 'Text_') {
 		var s = cs.a;
 		return $elm$html$Html$text(s);
@@ -6059,188 +5930,156 @@ var $author$project$HtmlComponents$handleCS = function (cs) {
 };
 var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
 var $elm$svg$Svg$Attributes$r = _VirtualDom_attribute('r');
-var $author$project$ColorScheme$Blue = {$: 'Blue'};
-var $author$project$ColorScheme$Green = {$: 'Green'};
-var $author$project$ColorScheme$Lavender = {$: 'Lavender'};
-var $author$project$ColorScheme$Mauve = {$: 'Mauve'};
-var $author$project$ColorScheme$Peach = {$: 'Peach'};
-var $author$project$ColorScheme$Pink = {$: 'Pink'};
-var $author$project$ColorScheme$Sky = {$: 'Sky'};
-var $author$project$ColorScheme$Teal = {$: 'Teal'};
-var $author$project$ColorScheme$Yellow = {$: 'Yellow'};
 var $elm$html$Html$span = _VirtualDom_node('span');
-var $author$project$HtmlComponents$statusSkillBox = F2(
-	function (backgroundColor, textContent) {
-		return A2(
-			$elm$html$Html$span,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'padding', '0.2rem 0.4rem'),
-					A2(
-					$elm$html$Html$Attributes$style,
-					'background-color',
-					$author$project$ColorScheme$getColor(backgroundColor)),
-					A2(
-					$elm$html$Html$Attributes$style,
-					'color',
-					$author$project$ColorScheme$getColor($author$project$ColorScheme$Background)),
-					A2($elm$html$Html$Attributes$style, 'font-size', '0.9rem'),
-					A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
-					A2($elm$html$Html$Attributes$style, 'border-radius', '0.2rem'),
-					A2($elm$html$Html$Attributes$style, 'box-shadow', '0 2px #00000020')
-				]),
-			_List_fromArray(
-				[
-					$elm$html$Html$text(textContent)
-				]));
-	});
-var $author$project$HtmlComponents$skillsBox = function (skill) {
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $author$project$Components$skillsBox = function (skill) {
 	var _v0 = function () {
 		switch (skill.$) {
 			case 'WebDevelopment':
-				return _Utils_Tuple2($author$project$ColorScheme$Teal, 'Web Development');
+				return _Utils_Tuple2('teal', 'Web Development');
 			case 'AppDevelopment':
-				return _Utils_Tuple2($author$project$ColorScheme$Teal, 'App Development');
+				return _Utils_Tuple2('teal', 'App Development');
 			case 'Haskell':
-				return _Utils_Tuple2($author$project$ColorScheme$Lavender, 'Haskell');
+				return _Utils_Tuple2('lavender', 'Haskell');
 			case 'JavaScript':
-				return _Utils_Tuple2($author$project$ColorScheme$Yellow, 'JavaScript');
+				return _Utils_Tuple2('yellow', 'JavaScript');
 			case 'Python':
-				return _Utils_Tuple2($author$project$ColorScheme$Yellow, 'Python');
+				return _Utils_Tuple2('yellow', 'Python');
 			case 'Java':
-				return _Utils_Tuple2($author$project$ColorScheme$Peach, 'Java');
+				return _Utils_Tuple2('peach', 'Java');
 			case 'Kotlin':
-				return _Utils_Tuple2($author$project$ColorScheme$Mauve, 'Kotlin');
+				return _Utils_Tuple2('mauve', 'Kotlin');
 			case 'React':
-				return _Utils_Tuple2($author$project$ColorScheme$Sky, 'React');
+				return _Utils_Tuple2('sky', 'React');
 			case 'Django':
-				return _Utils_Tuple2($author$project$ColorScheme$Green, 'Django');
+				return _Utils_Tuple2('green', 'Django');
 			case 'UI':
-				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'UI Design');
+				return _Utils_Tuple2('flamingo', 'UI Design');
 			case 'Database':
-				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'Databases');
+				return _Utils_Tuple2('flamingo', 'Databases');
 			case 'API':
-				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'APIs');
+				return _Utils_Tuple2('flamingo', 'APIs');
 			case 'ProgrammingLanguages':
-				return _Utils_Tuple2($author$project$ColorScheme$Flamingo, 'Programming Langauges');
+				return _Utils_Tuple2('flamingo', 'Programming Langauges');
 			case 'Research':
-				return _Utils_Tuple2($author$project$ColorScheme$Pink, 'Research');
+				return _Utils_Tuple2('pink', 'Research');
 			case 'HTML':
-				return _Utils_Tuple2($author$project$ColorScheme$Peach, 'HTML');
+				return _Utils_Tuple2('peach', 'HTML');
 			case 'CSS':
-				return _Utils_Tuple2($author$project$ColorScheme$Blue, 'CSS');
+				return _Utils_Tuple2('blue', 'CSS');
 			default:
-				return _Utils_Tuple2($author$project$ColorScheme$Mauve, 'Project Management');
+				return _Utils_Tuple2('pink', 'Project Management');
 		}
 	}();
 	var backgroundColor = _v0.a;
 	var textContent = _v0.b;
-	return A2($author$project$HtmlComponents$statusSkillBox, backgroundColor, textContent);
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('skills-box'),
+				A2($elm$html$Html$Attributes$style, 'background-color', 'var(--' + (backgroundColor + ')'))
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(textContent)
+			]));
 };
 var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
 var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
 var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
-var $author$project$HtmlComponents$projectBox = F6(
-	function (showTimeline, title, status, date, skills, desc) {
+var $author$project$Components$projectBox = F4(
+	function (title, date, skills, desc) {
 		return A2(
-			$author$project$HtmlComponents$flexRow,
-			_List_Nil,
-			_Utils_ap(
-				showTimeline ? _List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'flex', '1'),
-								A2($elm$html$Html$Attributes$style, 'padding-right', '1rem'),
-								A2(
-								$elm$html$Html$Attributes$style,
-								'color',
-								$author$project$ColorScheme$getColor($author$project$ColorScheme$Overlay))
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$svg$Svg$svg,
-								_List_fromArray(
-									[
-										$elm$svg$Svg$Attributes$width('40'),
-										$elm$svg$Svg$Attributes$height('100%'),
-										$elm$svg$Svg$Attributes$viewBox('0 0 100% 100%'),
-										$elm$svg$Svg$Attributes$fill('currentColor')
-									]),
-								_List_fromArray(
-									[
-										A2(
-										$elm$svg$Svg$circle,
-										_List_fromArray(
-											[
-												$elm$svg$Svg$Attributes$cx('50%'),
-												$elm$svg$Svg$Attributes$cy('11'),
-												$elm$svg$Svg$Attributes$r('6')
-											]),
-										_List_Nil)
-									]))
-							]))
-					]) : _List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_Nil,
-						_List_fromArray(
-							[
-								A2(
-								$author$project$HtmlComponents$flexCol,
-								_List_Nil,
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$h3,
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'margin', '0')
-											]),
-										_List_fromArray(
-											[
-												A2(
-												$author$project$HtmlComponents$flexRow,
-												_List_fromArray(
-													[
-														A2($elm$html$Html$Attributes$style, 'gap', '1em'),
-														A2($elm$html$Html$Attributes$style, 'align-items', 'center')
-													]),
-												_List_fromArray(
-													[
-														$elm$html$Html$text(title)
-													]))
-											])),
-										A2(
-										$elm$html$Html$div,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$elm$html$Html$text(date)
-											])),
-										A2(
-										$author$project$HtmlComponents$flexRow,
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0'),
-												A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-												A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
-											]),
-										A2(
-											$elm$core$List$map,
-											function (skill) {
-												return $author$project$HtmlComponents$skillsBox(skill);
-											},
-											skills)),
-										$author$project$HtmlComponents$handleCS(desc)
-									]))
-							]))
-					])));
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('flex-row')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('timeline')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$svg$Svg$svg,
+							_List_fromArray(
+								[
+									$elm$svg$Svg$Attributes$width('40'),
+									$elm$svg$Svg$Attributes$height('100%'),
+									$elm$svg$Svg$Attributes$viewBox('0 0 100% 100%'),
+									$elm$svg$Svg$Attributes$fill('currentColor')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$svg$Svg$circle,
+									_List_fromArray(
+										[
+											$elm$svg$Svg$Attributes$cx('50%'),
+											$elm$svg$Svg$Attributes$cy('11'),
+											$elm$svg$Svg$Attributes$r('6')
+										]),
+									_List_Nil)
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-col'),
+							$elm$html$Html$Attributes$class('timeline-text')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$h3,
+							_List_fromArray(
+								[
+									A2($elm$html$Html$Attributes$style, 'margin', '0')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text(title)
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text(date)
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('flex-row'),
+									$elm$html$Html$Attributes$class('skills-row')
+								]),
+							A2(
+								$elm$core$List$map,
+								function (skill) {
+									return $author$project$Components$skillsBox(skill);
+								},
+								skills)),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									A2($elm$html$Html$Attributes$style, 'margin-top', '0.7rem')
+								]),
+							_List_fromArray(
+								[
+									$author$project$Components$handleCS(desc)
+								]))
+						]))
+				]));
 	});
 var $author$project$Paragraphs$sotonDesc = $author$project$Types$Html_(
 	_List_fromArray(
@@ -6261,16 +6100,6 @@ var $author$project$Paragraphs$sotonDesc = $author$project$Types$Html_(
 					$elm$html$Html$text('Activities include President and Founder of the Programming Language Society, Marketing Officer for the Electronics and Computer Science Society, and University Ambassador and ECS Student Representative')
 				]))
 		]));
-var $author$project$HtmlComponents$timeLine = F2(
-	function (b, c) {
-		return A2(
-			$author$project$HtmlComponents$flexCol,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'gap', '21px')
-				]),
-			c);
-	});
 var $elm$svg$Svg$line = $elm$svg$Svg$trustedNode('line');
 var $elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
 var $elm$svg$Svg$Attributes$strokeLinecap = _VirtualDom_attribute('stroke-linecap');
@@ -6279,336 +6108,240 @@ var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
 var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
 var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
 var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
-var $author$project$HtmlComponents$timeLineBox = F7(
-	function (last, showTimeline, role, company, date, skills, desc) {
+var $author$project$Components$timeLineBox = F5(
+	function (role, company, date, skills, desc) {
 		return A2(
-			$author$project$HtmlComponents$flexRow,
-			_List_Nil,
-			_Utils_ap(
-				showTimeline ? _List_fromArray(
-					[
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'padding-right', '1rem'),
-								A2(
-								$elm$html$Html$Attributes$style,
-								'color',
-								$author$project$ColorScheme$getColor($author$project$ColorScheme$Overlay))
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$svg$Svg$svg,
-								_List_fromArray(
-									[
-										$elm$svg$Svg$Attributes$width('40'),
-										$elm$svg$Svg$Attributes$height('100%'),
-										$elm$svg$Svg$Attributes$viewBox('0 0 100% 100%'),
-										$elm$svg$Svg$Attributes$fill('currentColor')
-									]),
-								_Utils_ap(
-									_List_fromArray(
-										[
-											A2(
-											$elm$svg$Svg$circle,
-											_List_fromArray(
-												[
-													$elm$svg$Svg$Attributes$cx('50%'),
-													$elm$svg$Svg$Attributes$cy('11'),
-													$elm$svg$Svg$Attributes$r('6')
-												]),
-											_List_Nil)
-										]),
-									last ? _List_Nil : _List_fromArray(
-										[
-											A2(
-											$elm$svg$Svg$line,
-											_List_fromArray(
-												[
-													$elm$svg$Svg$Attributes$x1('50%'),
-													$elm$svg$Svg$Attributes$x2('50%'),
-													$elm$svg$Svg$Attributes$y1('38'),
-													$elm$svg$Svg$Attributes$y2('100%'),
-													$elm$svg$Svg$Attributes$stroke('currentColor'),
-													$elm$svg$Svg$Attributes$strokeWidth('2'),
-													$elm$svg$Svg$Attributes$strokeLinecap('round')
-												]),
-											_List_Nil)
-										])))
-							]))
-					]) : _List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$author$project$HtmlComponents$flexCol,
-						last ? _List_Nil : _List_fromArray(
-							[
-								A2($elm$html$Html$Attributes$style, 'margin-bottom', '1.5rem')
-							]),
-						_Utils_ap(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('flex-row')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('timeline')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$svg$Svg$svg,
+							_List_fromArray(
+								[
+									$elm$svg$Svg$Attributes$width('40'),
+									$elm$svg$Svg$Attributes$height('100%'),
+									$elm$svg$Svg$Attributes$viewBox('0 0 100% 100%'),
+									$elm$svg$Svg$Attributes$fill('currentColor')
+								]),
 							_List_fromArray(
 								[
 									A2(
-									$elm$html$Html$h3,
+									$elm$svg$Svg$circle,
 									_List_fromArray(
 										[
-											A2($elm$html$Html$Attributes$style, 'margin', '0')
+											$elm$svg$Svg$Attributes$cx('50%'),
+											$elm$svg$Svg$Attributes$cy('11'),
+											$elm$svg$Svg$Attributes$r('6')
+										]),
+									_List_Nil),
+									A2(
+									$elm$svg$Svg$line,
+									_List_fromArray(
+										[
+											$elm$svg$Svg$Attributes$x1('50%'),
+											$elm$svg$Svg$Attributes$x2('50%'),
+											$elm$svg$Svg$Attributes$y1('38'),
+											$elm$svg$Svg$Attributes$y2('100%'),
+											$elm$svg$Svg$Attributes$stroke('currentColor'),
+											$elm$svg$Svg$Attributes$strokeWidth('2'),
+											$elm$svg$Svg$Attributes$strokeLinecap('round')
+										]),
+									_List_Nil)
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-col'),
+							$elm$html$Html$Attributes$class('timeline-text')
+						]),
+					_Utils_ap(
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h3,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'margin', '0')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text(role)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(company)
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text(date)
+									]))
+							]),
+						_Utils_ap(
+							($elm$core$List$length(skills) > 0) ? _List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('flex-row'),
+											$elm$html$Html$Attributes$class('skills-row')
+										]),
+									A2(
+										$elm$core$List$map,
+										function (skill) {
+											return $author$project$Components$skillsBox(skill);
+										},
+										skills))
+								]) : _List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'margin-top', '0.7rem')
 										]),
 									_List_fromArray(
 										[
-											$elm$html$Html$text(role)
-										])),
-									A2(
-									$elm$html$Html$div,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(company)
-										])),
-									A2(
-									$elm$html$Html$div,
-									_List_Nil,
-									_List_fromArray(
-										[
-											$elm$html$Html$text(date)
+											$author$project$Components$handleCS(desc)
 										]))
-								]),
-							_Utils_ap(
-								($elm$core$List$length(skills) > 0) ? _List_fromArray(
-									[
-										A2(
-										$author$project$HtmlComponents$flexRow,
-										_List_fromArray(
-											[
-												A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-												A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap'),
-												A2($elm$html$Html$Attributes$style, 'margin', '0.7rem 0')
-											]),
-										A2(
-											$elm$core$List$map,
-											function (skill) {
-												return $author$project$HtmlComponents$skillsBox(skill);
-											},
-											skills))
-									]) : _List_Nil,
-								_List_fromArray(
-									[
-										A2(
-										$elm$html$Html$div,
-										_List_Nil,
-										_List_fromArray(
-											[
-												$author$project$HtmlComponents$handleCS(desc)
-											]))
-									]))))
-					])));
+								]))))
+				]));
 	});
 var $author$project$Main$view = function (model) {
-	var vpadding = 'max(10rem, 20vh)';
-	var headingBlock = (_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? 'static' : 'sticky';
-	var headingAlign = (_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? 'center' : 'flex-end';
-	var getColor = $author$project$ColorScheme$getGetColor(model);
-	var pageLink = _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$Attributes$style,
-			'color',
-			getColor($author$project$ColorScheme$Overlay)),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
-		]);
 	var currentSection = $author$project$Main$getCurrentSection(model);
-	var columnPadding = _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$Attributes$style,
-			'padding',
-			(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? '5rem 1rem' : (vpadding + ' 5rem')),
-			A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
-		]);
-	var activePageLink = _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$Attributes$style,
-			'color',
-			getColor($author$project$ColorScheme$Flamingo)),
-			A2($elm$html$Html$Attributes$style, 'font-size', '3em'),
-			A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
-			A2($elm$html$Html$Attributes$style, 'font-style', 'italic'),
-			A2($elm$html$Html$Attributes$style, 'transition', 'font-size 0.5s, color 0.5s, font-weight 0.5s')
-		]);
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$Attributes$style,
-				'color',
-				getColor($author$project$ColorScheme$Text)),
-				A2(
-				$elm$html$Html$Attributes$style,
-				'background-color',
-				getColor($author$project$ColorScheme$Background)),
-				A2($elm$html$Html$Attributes$style, 'font-family', 'sans-serif')
+				$elm$html$Html$Attributes$class(
+				'body ' + (model.darkmode ? 'dark-mode' : 'light-mode'))
 			]),
 		_List_fromArray(
 			[
 				A2(
 				$elm$html$Html$div,
-				_Utils_ap(
-					(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
-						[
-							A2($elm$html$Html$Attributes$style, 'display', 'flex'),
-							A2($elm$html$Html$Attributes$style, 'flex-direction', 'row'),
-							A2($elm$html$Html$Attributes$style, 'justify-content', 'center')
-						]),
-					_List_fromArray(
-						[
-							A2($elm$html$Html$Attributes$style, 'min-height', '100vh'),
-							A2($elm$html$Html$Attributes$style, 'max-width', '1600px'),
-							A2($elm$html$Html$Attributes$style, 'margin', 'auto')
-						])),
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('content')
+					]),
 				_List_fromArray(
 					[
 						A2(
-						$author$project$HtmlComponents$flexCol,
-						_Utils_ap(
-							columnPadding,
-							_Utils_ap(
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'flex', '1'),
-										A2($elm$html$Html$Attributes$style, 'align-items', headingAlign),
-										A2($elm$html$Html$Attributes$style, 'justify-content', 'flex-start'),
-										A2($elm$html$Html$Attributes$style, 'position', headingBlock),
-										A2($elm$html$Html$Attributes$style, 'top', '0')
-									]),
-								_Utils_ap(
-									_Utils_eq(model.screen, $author$project$Types$Tablet) ? _List_fromArray(
-										[
-											A2($elm$html$Html$Attributes$style, 'padding-right', '0')
-										]) : _List_Nil,
-									(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_fromArray(
-										[
-											A2($elm$html$Html$Attributes$style, 'padding-bottom', '0')
-										]) : _List_fromArray(
-										[
-											A2($elm$html$Html$Attributes$style, 'height', '100vh')
-										])))),
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('flex-col'),
+								$elm$html$Html$Attributes$class('column-padding'),
+								$elm$html$Html$Attributes$class('left-col')
+							]),
 						_List_fromArray(
 							[
 								A2(
-								$author$project$HtmlComponents$flexCol,
+								$elm$html$Html$h1,
+								_List_Nil,
 								_List_fromArray(
 									[
+										$elm$html$Html$text('Dillon Geary')
+									])),
+								A2(
+								$elm$html$Html$p,
+								_List_Nil,
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life.')
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('flex-col'),
 										A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-										A2($elm$html$Html$Attributes$style, 'align-items', 'center')
+										A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
 									]),
-								_Utils_ap(
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$h1,
+								_List_fromArray(
+									[
+										A2(
+										$elm$html$Html$a,
+										_Utils_ap(
 											_List_fromArray(
 												[
-													A2(
-													$elm$html$Html$Attributes$style,
-													'font-size',
-													_Utils_eq(model.screen, $author$project$Types$Desktop) ? '5rem' : '3.5rem'),
-													A2($elm$html$Html$Attributes$style, 'text-align', 'center'),
-													A2($elm$html$Html$Attributes$style, 'margin', '0')
+													$elm$html$Html$Events$onClick(
+													$author$project$Types$GoTo($author$project$Types$Career)),
+													$elm$html$Html$Attributes$class('page-link')
 												]),
+											_Utils_eq(currentSection, $author$project$Types$Career) ? _List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('active')
+												]) : _List_Nil),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Career')
+											])),
+										A2(
+										$elm$html$Html$a,
+										_Utils_ap(
 											_List_fromArray(
 												[
-													$elm$html$Html$text('Dillon Geary')
-												])),
-											A2(
-											$elm$html$Html$p,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'margin', '2rem 3rem'),
-													A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+													$elm$html$Html$Events$onClick(
+													$author$project$Types$GoTo($author$project$Types$Projects)),
+													$elm$html$Html$Attributes$class('page-link')
 												]),
+											_Utils_eq(currentSection, $author$project$Types$Projects) ? _List_fromArray(
+												[
+													$elm$html$Html$Attributes$class('active')
+												]) : _List_Nil),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Projects')
+											])),
+										A2(
+										$elm$html$Html$a,
+										_Utils_ap(
 											_List_fromArray(
 												[
-													$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bring cool ideas to life.')
-												]))
-										]),
-									(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
-										[
-											A2(
-											$author$project$HtmlComponents$flexCol,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-													A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
+													$elm$html$Html$Events$onClick(
+													$author$project$Types$GoTo($author$project$Types$Education)),
+													$elm$html$Html$Attributes$class('page-link')
 												]),
-											_List_fromArray(
+											_Utils_eq(currentSection, $author$project$Types$Education) ? _List_fromArray(
 												[
-													A2(
-													$elm$html$Html$a,
-													_Utils_ap(
-														_List_fromArray(
-															[
-																$elm$html$Html$Events$onClick(
-																$author$project$Types$GoTo($author$project$Types$Career)),
-																$elm$html$Html$Attributes$class(
-																'link' + (_Utils_eq(currentSection, $author$project$Types$Career) ? ' noUnderline' : ''))
-															]),
-														_Utils_eq(currentSection, $author$project$Types$Career) ? activePageLink : pageLink),
-													_List_fromArray(
-														[
-															$elm$html$Html$text('Career')
-														])),
-													A2(
-													$elm$html$Html$a,
-													_Utils_ap(
-														_List_fromArray(
-															[
-																$elm$html$Html$Events$onClick(
-																$author$project$Types$GoTo($author$project$Types$Projects)),
-																$elm$html$Html$Attributes$class(
-																'link' + (_Utils_eq(currentSection, $author$project$Types$Projects) ? ' noUnderline' : ''))
-															]),
-														_Utils_eq(currentSection, $author$project$Types$Projects) ? activePageLink : pageLink),
-													_List_fromArray(
-														[
-															$elm$html$Html$text('Projects')
-														])),
-													A2(
-													$elm$html$Html$a,
-													_Utils_ap(
-														_List_fromArray(
-															[
-																$elm$html$Html$Events$onClick(
-																$author$project$Types$GoTo($author$project$Types$Education)),
-																$elm$html$Html$Attributes$class(
-																'link' + (_Utils_eq(currentSection, $author$project$Types$Education) ? ' noUnderline' : ''))
-															]),
-														_Utils_eq(currentSection, $author$project$Types$Education) ? activePageLink : pageLink),
-													_List_fromArray(
-														[
-															$elm$html$Html$text('Education')
-														]))
-												]))
-										])))
+													$elm$html$Html$Attributes$class('active')
+												]) : _List_Nil),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Education')
+											]))
+									]))
 							])),
 						A2(
-						$author$project$HtmlComponents$flexCol,
-						_Utils_ap(
-							columnPadding,
-							_Utils_ap(
-								_List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'align-items', 'flex-start'),
-										A2($elm$html$Html$Attributes$style, 'gap', vpadding)
-									]),
-								(_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile)) ? _List_Nil : _List_fromArray(
-									[
-										A2($elm$html$Html$Attributes$style, 'width', '800px')
-									]))),
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('flex-col'),
+								$elm$html$Html$Attributes$class('column-padding'),
+								$elm$html$Html$Attributes$class('right-col')
+							]),
 						_List_fromArray(
 							[
 								A2(
@@ -6617,7 +6350,7 @@ var $author$project$Main$view = function (model) {
 								_List_fromArray(
 									[
 										A2(
-										$elm$html$Html$h1,
+										$elm$html$Html$h2,
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$id('HCareer')
@@ -6627,34 +6360,32 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$text('Career')
 											])),
 										A2(
-										$author$project$HtmlComponents$timeLine,
-										_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile),
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												A7(
-												$author$project$HtmlComponents$timeLineBox,
-												false,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												$elm$html$Html$Attributes$class('flex-col'),
+												$elm$html$Html$Attributes$class('timeline-box')
+											]),
+										_List_fromArray(
+											[
+												A5(
+												$author$project$Components$timeLineBox,
 												'Senior Web Developer',
 												'Ampere Analysis',
 												'August 2024 - Current',
 												_List_fromArray(
 													[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django, $author$project$Types$UI, $author$project$Types$Database, $author$project$Types$API]),
 												$author$project$Paragraphs$ampereDesc),
-												A7(
-												$author$project$HtmlComponents$timeLineBox,
-												false,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												A5(
+												$author$project$Components$timeLineBox,
 												'Freelance Web Developer',
 												'Plant Faced Coffee Shop',
 												'March 2026 - Present',
 												_List_fromArray(
 													[$author$project$Types$WebDevelopment, $author$project$Types$HTML, $author$project$Types$CSS, $author$project$Types$UI, $author$project$Types$ProjectManagement]),
 												$author$project$Paragraphs$plantFacedDesc),
-												A7(
-												$author$project$HtmlComponents$timeLineBox,
-												true,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												A5(
+												$author$project$Components$timeLineBox,
 												'Software Engineer - Intern',
 												'University of Southampton',
 												'June 2023 - September 2023',
@@ -6669,7 +6400,7 @@ var $author$project$Main$view = function (model) {
 								_List_fromArray(
 									[
 										A2(
-										$elm$html$Html$h1,
+										$elm$html$Html$h2,
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$id('HProject')
@@ -6679,24 +6410,24 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$text('Projects')
 											])),
 										A2(
-										$author$project$HtmlComponents$timeLine,
-										_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile),
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												A6(
-												$author$project$HtmlComponents$projectBox,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												$elm$html$Html$Attributes$class('flex-col'),
+												$elm$html$Html$Attributes$class('timeline-box')
+											]),
+										_List_fromArray(
+											[
+												A4(
+												$author$project$Components$projectBox,
 												'A Block-Based Visual Programming Language',
-												$author$project$Types$Paused,
 												'2022 - 2024',
 												_List_fromArray(
 													[$author$project$Types$ProgrammingLanguages, $author$project$Types$Haskell, $author$project$Types$WebDevelopment, $author$project$Types$Research]),
 												$author$project$Paragraphs$blockellDesc),
-												A6(
-												$author$project$HtmlComponents$projectBox,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
+												A4(
+												$author$project$Components$projectBox,
 												'Web-Based Medical Data Dashboard',
-												$author$project$Types$Complete,
 												'2023',
 												_List_fromArray(
 													[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$UI, $author$project$Types$API]),
@@ -6707,12 +6438,12 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'min-height', 'calc(100vh - calc(2 * ' + (vpadding + '))'))
+										A2($elm$html$Html$Attributes$style, 'min-height', 'calc(100vh - calc(2 * var(--vpadding)))')
 									]),
 								_List_fromArray(
 									[
 										A2(
-										$elm$html$Html$h1,
+										$elm$html$Html$h2,
 										_List_fromArray(
 											[
 												$elm$html$Html$Attributes$id('HEducation')
@@ -6722,78 +6453,48 @@ var $author$project$Main$view = function (model) {
 												$elm$html$Html$text('Education')
 											])),
 										A2(
-										$author$project$HtmlComponents$timeLine,
-										_Utils_eq(model.screen, $author$project$Types$Mobile) || _Utils_eq(model.screen, $author$project$Types$BigMobile),
+										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												A7(
-												$author$project$HtmlComponents$timeLineBox,
-												false,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
-												'University of Southampton',
-												'First Class MEng Computer Science',
-												'2020 - 2024',
-												_List_Nil,
-												$author$project$Paragraphs$sotonDesc),
-												A7(
-												$author$project$HtmlComponents$timeLineBox,
-												true,
-												!_Utils_eq(model.screen, $author$project$Types$Mobile),
-												'The King John School and Sixth Form',
-												'',
-												'2013 - 2020',
-												_List_Nil,
-												$author$project$Paragraphs$kingJohnDesc)
+												$elm$html$Html$Attributes$class('flex-col'),
+												$elm$html$Html$Attributes$class('timeline-box')
+											]),
+										_List_fromArray(
+											[
+												A5($author$project$Components$timeLineBox, 'University of Southampton', 'First Class MEng Computer Science', '2020 - 2024', _List_Nil, $author$project$Paragraphs$sotonDesc),
+												A5($author$project$Components$timeLineBox, 'The King John School and Sixth Form', '', '2013 - 2020', _List_Nil, $author$project$Paragraphs$kingJohnDesc)
 											]))
 									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$Attributes$style,
-								'position',
-								(_Utils_eq(model.screen, $author$project$Types$Desktop) || _Utils_eq(model.screen, $author$project$Types$Tablet)) ? 'fixed' : 'absolute'),
-								A2($elm$html$Html$Attributes$style, 'top', '0'),
-								A2($elm$html$Html$Attributes$style, 'right', '0'),
-								A2($elm$html$Html$Attributes$style, 'margin', '1.5rem 2rem'),
-								A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-								$elm$html$Html$Events$onClick($author$project$Types$ChangeLightDarkMode)
-							]),
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$i,
-								model.darkmode ? _List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('bi'),
-										$elm$html$Html$Attributes$class('bi-brightness-high-fill')
-									]) : _List_fromArray(
-									[
-										$elm$html$Html$Attributes$class('bi'),
-										$elm$html$Html$Attributes$class('bi-moon-fill')
-									]),
-								_List_Nil)
 							]))
 					])),
 				A2(
-				$author$project$HtmlComponents$flexRow,
+				$elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2($elm$html$Html$Attributes$style, 'position', 'fixed'),
-						A2($elm$html$Html$Attributes$style, 'left', '0'),
-						A2($elm$html$Html$Attributes$style, 'right', '0'),
-						A2($elm$html$Html$Attributes$style, 'bottom', '0'),
-						A2($elm$html$Html$Attributes$style, 'justify-content', 'space-evenly'),
-						A2($elm$html$Html$Attributes$style, 'gap', '1rem'),
+						$elm$html$Html$Attributes$class('colormode-button'),
+						$elm$html$Html$Events$onClick($author$project$Types$ChangeLightDarkMode)
+					]),
+				_List_fromArray(
+					[
 						A2(
-						$elm$html$Html$Attributes$style,
-						'background-color',
-						getColor($author$project$ColorScheme$BackgroundAccent)),
-						A2($elm$html$Html$Attributes$style, 'padding', '0.5rem'),
-						A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box'),
-						A2($elm$html$Html$Attributes$style, 'flex-wrap', 'wrap')
+						$elm$html$Html$i,
+						model.darkmode ? _List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('bi'),
+								$elm$html$Html$Attributes$class('bi-brightness-high-fill')
+							]) : _List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('bi'),
+								$elm$html$Html$Attributes$class('bi-moon-fill')
+							]),
+						_List_Nil)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('flex-row'),
+						$elm$html$Html$Attributes$class('footer')
 					]),
 				_List_fromArray(
 					[
@@ -6807,11 +6508,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$href('https://elm-lang.org/'),
-										A2(
-										$elm$html$Html$Attributes$style,
-										'color',
-										getColor($author$project$ColorScheme$Overlay))
+										$elm$html$Html$Attributes$href('https://elm-lang.org/')
 									]),
 								_List_fromArray(
 									[
@@ -6828,11 +6525,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$href('https://catppuccin.com/'),
-										A2(
-										$elm$html$Html$Attributes$style,
-										'color',
-										getColor($author$project$ColorScheme$Overlay))
+										$elm$html$Html$Attributes$href('https://catppuccin.com/')
 									]),
 								_List_fromArray(
 									[
@@ -6849,11 +6542,7 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$a,
 								_List_fromArray(
 									[
-										$elm$html$Html$Attributes$href('https://github.com/dillongeary/dillongeary.github.io'),
-										A2(
-										$elm$html$Html$Attributes$style,
-										'color',
-										getColor($author$project$ColorScheme$Overlay))
+										$elm$html$Html$Attributes$href('https://github.com/dillongeary/dillongeary.github.io')
 									]),
 								_List_fromArray(
 									[
