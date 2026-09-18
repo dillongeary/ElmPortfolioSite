@@ -1,68 +1,53 @@
 module Components exposing (..)
 
-import Html exposing (Attribute, Html, div, h3, span, text)
+import Html exposing (Attribute, Html, article, h3, header, li, p, text, ul)
 import Html.Attributes exposing (class, style)
 import List exposing (length, map)
-import Svg exposing (circle, line, svg)
-import Svg.Attributes exposing (cx, cy, fill, height, r, stroke, strokeLinecap, strokeWidth, viewBox, width, x1, x2, y1, y2)
 import Types exposing (ContentShorthand(..), Model, Msg, Skills(..))
 
 
-timeLineBox : String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
+timeLineBox : String -> String -> List (Html Msg) -> List Skills -> ContentShorthand -> Html Msg
 timeLineBox role company date skills desc =
-    div [ class "flex-row" ]
-        [ div [ class "timeline" ]
-            [ svg
-                [ width "40"
-                , height "100%"
-                , viewBox "0 0 100% 100%"
-                , fill "currentColor"
+    li []
+        [ article []
+            ([ header []
+                [ h3 [] [ text role ]
+                , p [] [ text company ]
+                , p [] date
                 ]
-                [ circle [ cx "50%", cy "11", r "6" ] []
-                , line [ x1 "50%", x2 "50%", y1 "38", y2 "100%", stroke "currentColor", strokeWidth "2", strokeLinecap "round" ] []
-                ]
-            ]
-        , div
-            [ class "flex-col"
-            , class "timeline-text"
-            ]
-            ([ h3 [ style "margin" "0" ] [ text role ]
-             , div [] [ text company ]
-             , div [] [ text date ]
              ]
                 ++ (if length skills > 0 then
-                        [ div
-                            [ class "flex-row", class "skills-row" ]
+                        [ ul []
                             (map (\skill -> skillsBox skill) skills)
                         ]
 
                     else
                         []
                    )
-                ++ [ div [ style "margin-top" "0.7rem" ] [ handleCS desc ]
-                   ]
+                ++ handleCS desc
             )
         ]
 
 
-projectBox : String -> String -> List Skills -> ContentShorthand -> Html Msg
+projectBox : String -> List (Html Msg) -> List Skills -> ContentShorthand -> Html Msg
 projectBox title date skills desc =
-    div [ class "flex-row" ]
-        [ div [ class "timeline" ]
-            [ svg
-                [ width "40"
-                , height "100%"
-                , viewBox "0 0 100% 100%"
-                , fill "currentColor"
+    li []
+        [ article []
+            ([ header []
+                [ h3 [] [ text title ]
+                , p [] date
                 ]
-                [ circle [ cx "50%", cy "11", r "6" ] [] ]
-            ]
-        , div [ class "flex-col", class "timeline-text" ]
-            [ h3 [ style "margin" "0" ] [ text title ]
-            , div [] [ text date ]
-            , div [ class "flex-row", class "skills-row" ] (map (\skill -> skillsBox skill) skills)
-            , div [ style "margin-top" "0.7rem" ] [ handleCS desc ]
-            ]
+             ]
+                ++ (if length skills > 0 then
+                        [ ul []
+                            (map (\skill -> skillsBox skill) skills)
+                        ]
+
+                    else
+                        []
+                   )
+                ++ handleCS desc
+            )
         ]
 
 
@@ -122,18 +107,18 @@ skillsBox skill =
                 ProjectManagement ->
                     ( "pink", "Project Management" )
     in
-    span
+    li
         [ class "skills-box"
         , style "background-color" ("var(--" ++ backgroundColor ++ ")")
         ]
         [ text textContent ]
 
 
-handleCS : ContentShorthand -> Html Msg
+handleCS : ContentShorthand -> List (Html Msg)
 handleCS cs =
     case cs of
         Text_ s ->
-            text s
+            [ p [] [ text s ] ]
 
         Html_ c ->
-            div [] c
+            c

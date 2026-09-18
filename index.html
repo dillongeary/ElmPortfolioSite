@@ -26,13 +26,17 @@
   <link rel="stylesheet" href="public/main.css"/>
 </head>
 
-<body>
-  <div id="elm-app-is-loaded-here"></div>
-  <script src="elmMain.js"></script>
-  <script>
-    const app = Elm.Main.init({
-      node: document.getElementById("elm-app-is-loaded-here")
-    });
-  </script>
+<body id="elm-app-is-loaded-here">
 </body>
+
+<script src="elmMain.js"></script>
+<script>
+  const app = Elm.Main.init({
+    node: document.getElementById("elm-app-is-loaded-here")
+  });
+
+  app.ports.setBodyClass.subscribe(className => {
+    document.body.className = className;
+  })
+</script>
 </html>

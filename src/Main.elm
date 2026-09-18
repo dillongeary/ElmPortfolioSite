@@ -1,10 +1,10 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Browser exposing (document)
 import Browser.Dom exposing (Viewport, getElement, getViewport, setViewport)
 import Components exposing (projectBox, timeLineBox)
-import Html exposing (Html, a, div, h1, h2, i, p, text)
-import Html.Attributes exposing (class, href, id, style)
+import Html exposing (Html, a, article, button, div, footer, h1, h2, header, i, li, ol, p, section, text, time, ul)
+import Html.Attributes exposing (class, datetime, href, id, style)
 import Html.Events exposing (onClick)
 import Paragraphs exposing (activePointsDesc, ampereDesc, blockellDesc, internshipDesc, kingJohnDesc, plantFacedDesc, sotonDesc)
 import Platform.Cmd exposing (none)
@@ -36,9 +36,9 @@ type alias DocumentType =
     }
 
 
-viewToDocument : (Model -> Html Msg) -> Model -> DocumentType
+viewToDocument : (Model -> List (Html Msg)) -> Model -> DocumentType
 viewToDocument v m =
-    { title = "Dillon Geary · Web Developer", body = [ v m ] }
+    { title = "Dillon Geary · Web Developer", body = v m }
 
 
 
@@ -51,7 +51,7 @@ init _ =
       , darkmode = True
       , positions = Nothing
       }
-    , none
+    , setBodyClass "dark-mode"
     )
 
 
@@ -111,10 +111,29 @@ update msg model =
             )
 
         ChangeLightDarkMode ->
-            ( { model | darkmode = not model.darkmode }, none )
+            let
+                targetMode =
+                    not model.darkmode
+            in
+            ( { model | darkmode = targetMode }
+            , setBodyClass
+                (if targetMode then
+                    "dark-mode"
+
+                 else
+                    "light-mode"
+                )
+            )
 
         NoOp ->
             ( model, none )
+
+
+
+-- PORTS
+
+
+port setBodyClass : String -> Cmd msg
 
 
 
@@ -163,155 +182,133 @@ getCurrentSection model =
             Education
 
 
-view : Model -> Html Msg
+view : Model -> List (Html Msg)
 view model =
     let
         currentSection =
             getCurrentSection model
     in
-    div
-        [ class
-            ("body "
-                ++ (if model.darkmode then
-                        "dark-mode"
+    [ section
+        []
+        [ h1
+            []
+            [ text "Dillon Geary" ]
+        , p
+            []
+            [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bringing cool ideas to life." ]
+        , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
+            [ a
+                ([ onClick (GoTo Career)
+                 , class "page-link"
+                 ]
+                    ++ (if currentSection == Career then
+                            [ class "active" ]
 
-                    else
-                        "light-mode"
-                   )
-            )
-        ]
-        [ div [ class "content" ]
-            [ div
-                [ class "left-col"
-                ]
-                [ div [ class "column-padding", class "flex-col" ]
-                    [ h1
-                        []
-                        [ text "Dillon Geary" ]
-                    , p
-                        []
-                        [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bringing cool ideas to life." ]
-                    , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
-                        [ a
-                            ([ onClick (GoTo Career)
-                             , class "page-link"
-                             ]
-                                ++ (if currentSection == Career then
-                                        [ class "active" ]
-
-                                    else
-                                        []
-                                   )
-                            )
-                            [ text "Career" ]
-                        , a
-                            ([ onClick (GoTo Projects)
-                             , class "page-link"
-                             ]
-                                ++ (if currentSection == Projects then
-                                        [ class "active" ]
-
-                                    else
-                                        []
-                                   )
-                            )
-                            [ text "Projects" ]
-                        , a
-                            ([ onClick (GoTo Education)
-                             , class "page-link"
-                             ]
-                                ++ (if currentSection == Education then
-                                        [ class "active" ]
-
-                                    else
-                                        []
-                                   )
-                            )
-                            [ text "Education" ]
-                        ]
-                    ]
-                ]
-            , div
-                [ class "flex-col"
-                , class "column-padding"
-                , class "right-col"
-                ]
-                [ div []
-                    [ h2 [ id "HCareer" ] [ text "Career" ]
-                    , div [ class "flex-col", class "timeline-box" ]
-                        [ timeLineBox
-                            "Senior Web Developer"
-                            "Ampere Analysis"
-                            "August 2024 - Current"
-                            [ WebDevelopment, React, Django, UI, Database, API ]
-                            ampereDesc
-                        , timeLineBox
-                            "Freelance Web Developer"
-                            "Plant Faced Coffee Shop"
-                            "March 2026 - Present"
-                            [ WebDevelopment, HTML, CSS, UI, ProjectManagement ]
-                            plantFacedDesc
-                        , timeLineBox
-                            "Software Engineer - Intern"
-                            "University of Southampton"
-                            "June 2023 - September 2023"
-                            [ AppDevelopment, Kotlin, Research, UI ]
-                            internshipDesc
-                        ]
-                    ]
-                , div []
-                    [ h2 [ id "HProject" ] [ text "Projects" ]
-                    , div [ class "flex-col", class "timeline-box" ]
-                        [ projectBox
-                            "A Block-Based Visual Programming Language"
-                            "2022 - 2024"
-                            [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
-                            blockellDesc
-                        , projectBox
-                            "Web-Based Medical Data Dashboard"
-                            "2023"
-                            [ WebDevelopment, React, UI, API ]
-                            activePointsDesc
-                        ]
-                    ]
-                , div [ style "min-height" "calc(100vh - calc(2 * var(--vpadding)))" ]
-                    [ h2 [ id "HEducation" ] [ text "Education" ]
-                    , div [ class "flex-col", class "timeline-box" ]
-                        [ timeLineBox
-                            "University of Southampton"
-                            "First Class MEng Computer Science"
-                            "2020 - 2024"
+                        else
                             []
-                            sotonDesc
-                        , timeLineBox
-                            "The King John School and Sixth Form"
-                            ""
-                            "2013 - 2020"
-                            []
-                            kingJohnDesc
-                        ]
-                    ]
-                ]
-            ]
-        , div
-            [ class "colormode-button"
-            , onClick ChangeLightDarkMode
-            ]
-            [ i
-                (if model.darkmode then
-                    [ class "bi", class "bi-brightness-high-fill" ]
-
-                 else
-                    [ class "bi", class "bi-moon-fill" ]
+                       )
                 )
-                []
-            ]
-        , div
-            [ class "flex-row"
-            , class "footer"
-            ]
-            [ div [] [ text "Built and powered by ", a [ href "https://elm-lang.org/" ] [ text "Elm" ] ]
-            , div [] [ text "Theme by ", a [ href "https://catppuccin.com/" ] [ text "Catppuccin" ] ]
-            , div [] [ text "Source code on ", a [ href "https://github.com/dillongeary/dillongeary.github.io" ] [ text "GitHub" ] ]
+                [ text "Career" ]
+            , a
+                ([ onClick (GoTo Projects)
+                 , class "page-link"
+                 ]
+                    ++ (if currentSection == Projects then
+                            [ class "active" ]
+
+                        else
+                            []
+                       )
+                )
+                [ text "Projects" ]
+            , a
+                ([ onClick (GoTo Education)
+                 , class "page-link"
+                 ]
+                    ++ (if currentSection == Education then
+                            [ class "active" ]
+
+                        else
+                            []
+                       )
+                )
+                [ text "Education" ]
             ]
         ]
+    , section []
+        [ h2 [ id "HCareer" ] [ text "Career" ]
+        , ol [ class "lined-list" ]
+            [ timeLineBox
+                "Senior Web Developer"
+                "Ampere Analysis"
+                [ time [ datetime "2024-08" ] [ text "August 2024" ], text " - ", text "Present" ]
+                [ WebDevelopment, React, Django, UI, Database, API ]
+                ampereDesc
+            , timeLineBox
+                "Freelance Web Developer"
+                "Plant Faced Coffee Shop"
+                [ time [ datetime "2026-03" ] [ text "March 2026" ], text " - ", text "Present" ]
+                [ WebDevelopment, HTML, CSS, UI, ProjectManagement ]
+                plantFacedDesc
+            , timeLineBox
+                "Software Engineer - Intern"
+                "University of Southampton"
+                [ time [ datetime "2023-06" ] [ text "June 2023" ], text " - ", time [ datetime "2023-09" ] [ text "September 2023" ] ]
+                [ AppDevelopment, Kotlin, Research, UI ]
+                internshipDesc
+            ]
+        ]
+    , section []
+        [ h2 [ id "HProject" ] [ text "Projects" ]
+        , ul [ class "unlined-list" ]
+            [ projectBox
+                "A Block-Based Visual Programming Language"
+                [ time [ datetime "2022" ] [ text "2022" ], text " - ", time [ datetime "2024" ] [ text "2024" ] ]
+                [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
+                blockellDesc
+            , projectBox
+                "Web-Based Medical Data Dashboard"
+                [ time [ datetime "2023" ] [ text "2023" ] ]
+                [ WebDevelopment, React, UI, API ]
+                activePointsDesc
+            ]
+        ]
+    , section []
+        [ h2 [ id "HEducation" ] [ text "Education" ]
+        , ol [ class "lined-list" ]
+            [ timeLineBox
+                "University of Southampton"
+                "First Class MEng Computer Science"
+                [ time [ datetime "2020" ] [ text "2020" ], text " - ", time [ datetime "2024" ] [ text "2024" ] ]
+                []
+                sotonDesc
+            , timeLineBox
+                "The King John School and Sixth Form"
+                ""
+                [ time [ datetime "2013" ] [ text "2013" ], text " - ", time [ datetime "2020" ] [ text "2020" ] ]
+                []
+                kingJohnDesc
+            ]
+        ]
+    , button
+        [ class "colormode-button"
+        , onClick ChangeLightDarkMode
+        ]
+        [ i
+            (if model.darkmode then
+                [ class "bi", class "bi-brightness-high-fill" ]
+
+             else
+                [ class "bi", class "bi-moon-fill" ]
+            )
+            []
+        ]
+    , footer
+        [ class "flex-row"
+        , class "footer"
+        ]
+        [ div [] [ text "Built and powered by ", a [ href "https://elm-lang.org/" ] [ text "Elm" ] ]
+        , div [] [ text "Theme by ", a [ href "https://catppuccin.com/" ] [ text "Catppuccin" ] ]
+        , div [] [ text "Source code on ", a [ href "https://github.com/dillongeary/dillongeary.github.io" ] [ text "GitHub" ] ]
+        ]
+    ]
