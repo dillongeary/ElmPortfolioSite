@@ -1,14 +1,14 @@
 module Components exposing (..)
 
-import Html exposing (Attribute, Html, div, h3, span, text)
+import Html exposing (Attribute, Html, br, div, h3, p, span, text)
 import Html.Attributes exposing (class, style)
 import List exposing (length, map)
 import Svg exposing (circle, line, svg)
 import Svg.Attributes exposing (cx, cy, fill, height, r, stroke, strokeLinecap, strokeWidth, viewBox, width, x1, x2, y1, y2)
-import Types exposing (ContentShorthand(..), Model, Msg, Skills(..))
+import Types as Skills exposing (Model, Msg, Skills(..))
 
 
-timeLineBox : String -> String -> String -> List Skills -> ContentShorthand -> Html Msg
+timeLineBox : String -> String -> String -> List Skills -> List String -> Html Msg
 timeLineBox role company date skills desc =
     div [ class "flex-row" ]
         [ div [ class "timeline" ]
@@ -39,13 +39,13 @@ timeLineBox role company date skills desc =
                     else
                         []
                    )
-                ++ [ div [ style "margin-top" "0.7rem" ] [ handleCS desc ]
+                ++ [ div [ style "margin-top" "0.7rem" ] (handleDescription desc)
                    ]
             )
         ]
 
 
-projectBox : String -> String -> List Skills -> ContentShorthand -> Html Msg
+projectBox : String -> String -> List Skills -> List String -> Html Msg
 projectBox title date skills desc =
     div [ class "flex-row" ]
         [ div [ class "timeline" ]
@@ -61,7 +61,7 @@ projectBox title date skills desc =
             [ h3 [ style "margin" "0" ] [ text title ]
             , div [] [ text date ]
             , div [ class "flex-row", class "skills-row" ] (map (\skill -> skillsBox skill) skills)
-            , div [ style "margin-top" "0.7rem" ] [ handleCS desc ]
+            , div [ style "margin-top" "0.7rem" ] (handleDescription desc)
             ]
         ]
 
@@ -121,6 +121,9 @@ skillsBox skill =
 
                 ProjectManagement ->
                     ( "pink", "Project Management" )
+
+                Skills.Nothing ->
+                    ( "background-accent", "ERROR" )
     in
     span
         [ class "skills-box"
@@ -129,11 +132,17 @@ skillsBox skill =
         [ text textContent ]
 
 
-handleCS : ContentShorthand -> Html Msg
-handleCS cs =
-    case cs of
-        Text_ s ->
-            text s
+handleDescription : List String -> List (Html Msg)
+handleDescription list =
+    case list of
+        [] ->
+            []
 
-        Html_ c ->
-            div [] c
+        [ x ] ->
+            [ p [] [ text x ] ]
+
+        x :: xs ->
+            [ p [] [ text x ]
+            , br [] []
+            ]
+                ++ handleDescription xs

@@ -6,11 +6,13 @@ import Components exposing (projectBox, timeLineBox)
 import Html exposing (Html, a, div, h1, h2, i, p, text)
 import Html.Attributes exposing (class, href, id, style)
 import Html.Events exposing (onClick)
-import Paragraphs exposing (activePointsDesc, ampereDesc, blockellDesc, internshipDesc, kingJohnDesc, plantFacedDesc, sotonDesc)
+import Http
+import JSONDecoder exposing (dataDecoder)
+import List exposing (map)
 import Platform.Cmd exposing (none)
 import Task exposing (attempt, perform, sequence)
 import Time exposing (every)
-import Types exposing (ContentShorthand(..), Model, Msg(..), PageSection(..), Skills(..))
+import Types exposing (HttpResponse(..), Model, Msg(..), PageSection(..), Skills(..), decodeSkills)
 
 
 
@@ -47,11 +49,12 @@ viewToDocument v m =
 
 init : () -> ( Model, Cmd Msg )
 init _ =
-    ( { viewport = Nothing
+    ( { viewport = Maybe.Nothing
       , darkmode = True
-      , positions = Nothing
+      , positions = Maybe.Nothing
+      , httpResponse = Loading
       }
-    , none
+    , getWebsiteData Loading
     )
 
 
@@ -77,6 +80,14 @@ update msg model =
                 _ ->
                     ( model, none )
 
+        GotWebsiteData result ->
+            case result of
+                Ok data ->
+                    ( { model | httpResponse = Success data }, none )
+
+                Err _ ->
+                    ( { model | httpResponse = Failure }, none )
+
         GetPositionUpdate ->
             ( model
             , attempt GotPositions (sequence [ getElement "HProject", getElement "HEducation" ])
@@ -87,6 +98,11 @@ update msg model =
             , perform GotViewport getViewport
             )
 
+        GetWebsiteDataUpdate ->
+            ( model
+            , getWebsiteData model.httpResponse
+            )
+
         GoTo section ->
             ( model
             , case section of
@@ -95,7 +111,7 @@ update msg model =
 
                 Projects ->
                     case model.positions of
-                        Nothing ->
+                        Maybe.Nothing ->
                             none
 
                         Just ( i, _ ) ->
@@ -103,7 +119,7 @@ update msg model =
 
                 Education ->
                     case model.positions of
-                        Nothing ->
+                        Maybe.Nothing ->
                             none
 
                         Just ( _, i ) ->
@@ -123,7 +139,12 @@ update msg model =
 
 subscriptions : Model -> Sub Msg
 subscriptions _ =
-    Sub.batch [ every 50 (\_ -> GetPositionUpdate), every 50 (\_ -> GetViewportUpdate) ]
+    Sub.batch
+        [ every 50 (\_ -> GetPositionUpdate)
+        , every 50 (\_ -> GetViewportUpdate)
+        , every 50
+            (\_ -> GetWebsiteDataUpdate)
+        ]
 
 
 
@@ -135,7 +156,7 @@ getCurrentSection model =
     let
         currentYScroll =
             case model.viewport of
-                Nothing ->
+                Maybe.Nothing ->
                     0
 
                 Just i ->
@@ -143,7 +164,7 @@ getCurrentSection model =
 
         ( projectsPosition, educationPosition ) =
             case model.positions of
-                Nothing ->
+                Maybe.Nothing ->
                     ( 1000, 1000 )
 
                 Just i ->
@@ -168,6 +189,14 @@ view model =
     let
         currentSection =
             getCurrentSection model
+
+        ( careerData, projectData, educationData ) =
+            case model.httpResponse of
+                Success data ->
+                    ( data.career, data.projects, data.education )
+
+                _ ->
+                    ( [], [], [] )
     in
     div
         [ class
@@ -239,57 +268,17 @@ view model =
                 [ div []
                     [ h2 [ id "HCareer" ] [ text "Career" ]
                     , div [ class "flex-col", class "timeline-box" ]
-                        [ timeLineBox
-                            "Senior Web Developer"
-                            "Ampere Analysis"
-                            "August 2024 - Current"
-                            [ WebDevelopment, React, Django, UI, Database, API ]
-                            ampereDesc
-                        , timeLineBox
-                            "Freelance Web Developer"
-                            "Plant Faced Coffee Shop"
-                            "March 2026 - Present"
-                            [ WebDevelopment, HTML, CSS, UI, ProjectManagement ]
-                            plantFacedDesc
-                        , timeLineBox
-                            "Software Engineer - Intern"
-                            "University of Southampton"
-                            "June 2023 - September 2023"
-                            [ AppDevelopment, Kotlin, Research, UI ]
-                            internshipDesc
-                        ]
+                        (map (\career -> timeLineBox career.role career.company career.date (map decodeSkills career.skills) career.description) careerData)
                     ]
                 , div []
                     [ h2 [ id "HProject" ] [ text "Projects" ]
                     , div [ class "flex-col", class "timeline-box" ]
-                        [ projectBox
-                            "A Block-Based Visual Programming Language"
-                            "2022 - 2024"
-                            [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
-                            blockellDesc
-                        , projectBox
-                            "Web-Based Medical Data Dashboard"
-                            "2023"
-                            [ WebDevelopment, React, UI, API ]
-                            activePointsDesc
-                        ]
+                        (map (\project -> projectBox project.role project.date (map decodeSkills project.skills) project.description) projectData)
                     ]
                 , div [ style "min-height" "calc(100vh - calc(2 * var(--vpadding)))" ]
                     [ h2 [ id "HEducation" ] [ text "Education" ]
                     , div [ class "flex-col", class "timeline-box" ]
-                        [ timeLineBox
-                            "University of Southampton"
-                            "First Class MEng Computer Science"
-                            "2020 - 2024"
-                            []
-                            sotonDesc
-                        , timeLineBox
-                            "The King John School and Sixth Form"
-                            ""
-                            "2013 - 2020"
-                            []
-                            kingJohnDesc
-                        ]
+                        (map (\education -> timeLineBox education.school education.accreditation education.date [] education.description) educationData)
                     ]
                 ]
             ]
@@ -315,3 +304,20 @@ view model =
             , div [] [ text "Source code on ", a [ href "https://github.com/dillongeary/dillongeary.github.io" ] [ text "GitHub" ] ]
             ]
         ]
+
+
+
+-- HTTP
+
+
+getWebsiteData : HttpResponse -> Cmd Msg
+getWebsiteData response =
+    case response of
+        Success _ ->
+            none
+
+        _ ->
+            Http.get
+                { url = "static/info.json"
+                , expect = Http.expectJson GotWebsiteData dataDecoder
+                }

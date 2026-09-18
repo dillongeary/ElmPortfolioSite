@@ -1,0 +1,62 @@
+{
+  "career": [
+    {
+      "role": "Senior Web Developer",
+      "company": "Ampere Analysis",
+      "date": "August 2024 - Present",
+      "skills": ["WebDevelopment", "React", "Django", "UI", "Database","API"],
+      "description": [
+        "Lead frontend development for key internal and client-facing platforms, building scalable, accessible user experiences integrated with backend APIs. Works closely with leadership and marketing to shape product direction, deliver against partner deadlines, and modernise the company’s core website. Collaborates both within a full-stack web team and with external teams and senior leadership figures.",
+        "Presents demos to senior stakeholders, incorporating feedback to improve tools used by over 400 clients and over 3,000 users. Developing reusable UI components with strong test coverage, and acting as the UK point of contact for web platform support, continuously refining systems based on user and colleague feedback."
+      ]
+    },
+    {
+      "role": "Freelance Web Developer",
+      "company": "Plant Faced Coffee Shop",
+      "date": "March 2026 - Present",
+      "skills": ["WebDevelopment", "HTML", "CSS", "UI", "ProjectManagement"],
+      "description": ["Working directly with a non-technical client to deliver a bespoke website and effective online presence. Responsible for managing the project end-to-end, from Figma wireframes through to deployment and launch, even with ever evolving requirements. Continued post-launch support, through implementing Shopify integration to support future e-commerce opportunities."]
+    },
+    {
+      "role": "Software Engineer - Intern",
+      "company": "University of Southampton",
+      "date": "July 2023 - September 2023",
+      "skills": ["AppDevelopment", "Kotlin", "Research", "UI"],
+      "description": ["Worked within a small agile team to design and develop a proof-of-concept Android application for evidential crime scene photography. Collaborated with digital forensic experts to evaluate existing evidence capture and storage methods, exploring a client-first solution within a 10-week timeframe. Contributed insights on findings, benefits, and limitations to an active academic research paper in Digital Forensics."]
+    }
+  ],
+  "projects": [
+    {
+      "name": "A Block-Based Functional Programming Language",
+      "date": "2022 - 2024",
+      "skills": ["ProgrammingLangauges", "Haskell", "WebDevelopment", "Research"],
+      "description": ["A block-based functional programming language that takes inspiration of syntax and semantics from Haskell, among other functional programming languages. This project involved the design the syntactic elements of a block-based functional programming language, as well as the development of a web-based IDE using Blockly for said language, in aim to create a tool to aid in the teaching of functional languages to novice programmers."]
+    },
+    {
+      "name": "A Web-Based Medical Data Dashboard",
+      "date": "2023",
+      "skills": ["WebDevelopment", "React", "UI", "API"],
+      "description": ["A dashboard that displays visualisations of healthcare data, collected from Garmin and FitBit smart-watch devices. Created in React, this dashboard connects to a Postgres database for real-time data updates, and a Flask REST API to receive AI-enhanced insights and predictions."]
+    }
+  ],
+  "education": [
+    {
+      "school": "University of Southampton",
+      "accreditation": "MEng Computer Science, First Class (Honors)",
+      "date": "2020 - 2024",
+      "description": [
+        "Key Modules: Software Engineering Group Project, Advanced Programming Language Concepts, Machine Learning Technologies, Advanced Databases, and Automated Software Verification.",
+        "Activities: President and Founder of the Programming Language Society, Marketing Officer for the Electronics and Computer Science Society, and University Ambassador and ECS Student Representative."
+      ]
+    },
+    {
+      "school": "The King John School and Sixth Form",
+      "accreditation": "",
+      "date": "2013 - 2020",
+      "description": [
+        "Achieved 3 A-Levels in Further Maths, Physics and Maths, with Grades of A* and A. Achieved a BTEC Level 3 National Extended Certificate in Computing, with a Grade of Distinction*",
+        "Activities: Representing the school in nationwide mathematics competitions four years in a row, assisted teaching staff and faculty members as a Prefect"
+      ]
+    }
+  ]
+}
