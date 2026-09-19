@@ -5723,8 +5723,8 @@ var $author$project$Main$update = F2(
 						$elm$core$Task$sequence(
 							_List_fromArray(
 								[
-									$elm$browser$Browser$Dom$getElement('HProject'),
-									$elm$browser$Browser$Dom$getElement('HEducation')
+									$elm$browser$Browser$Dom$getElement('projects'),
+									$elm$browser$Browser$Dom$getElement('education')
 								]))));
 			case 'GetViewportUpdate':
 				return _Utils_Tuple2(
@@ -5793,9 +5793,6 @@ var $author$project$Types$ChangeLightDarkMode = {$: 'ChangeLightDarkMode'};
 var $author$project$Types$Database = {$: 'Database'};
 var $author$project$Types$Django = {$: 'Django'};
 var $author$project$Types$Education = {$: 'Education'};
-var $author$project$Types$GoTo = function (a) {
-	return {$: 'GoTo', a: a};
-};
 var $author$project$Types$HTML = {$: 'HTML'};
 var $author$project$Types$Haskell = {$: 'Haskell'};
 var $author$project$Types$Kotlin = {$: 'Kotlin'};
@@ -5848,8 +5845,8 @@ var $author$project$Main$getCurrentSection = function (model) {
 	var projectsPosition = _v0.a;
 	var educationPosition = _v0.b;
 	var _v2 = _Utils_Tuple2(
-		_Utils_cmp(currentYScroll + 381, projectsPosition) > -1,
-		_Utils_cmp(currentYScroll + 381, educationPosition) > -1);
+		_Utils_cmp(currentYScroll + 100, projectsPosition) > -1,
+		_Utils_cmp(currentYScroll + 100, educationPosition) > -1);
 	if (!_v2.a) {
 		if (!_v2.b) {
 			return $author$project$Types$Career;
@@ -5866,6 +5863,7 @@ var $author$project$Main$getCurrentSection = function (model) {
 };
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$Attributes$href = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -5900,6 +5898,7 @@ var $author$project$Paragraphs$kingJohnDesc = $author$project$Types$Html_(
 					$elm$html$Html$text('Activities include representing the school alongside peers in nationwide mathematics competitions for four years in a row, and assisted teaching staff and faculty members as a Prefect')
 				]))
 		]));
+var $elm$html$Html$nav = _VirtualDom_node('nav');
 var $elm$html$Html$ol = _VirtualDom_node('ol');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
@@ -5940,7 +5939,6 @@ var $author$project$Components$handleCS = function (cs) {
 		return c;
 	}
 };
-var $elm$html$Html$header = _VirtualDom_node('header');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
@@ -5972,7 +5970,7 @@ var $author$project$Components$skillsBox = function (skill) {
 			case 'API':
 				return _Utils_Tuple2('flamingo', 'APIs');
 			case 'ProgrammingLanguages':
-				return _Utils_Tuple2('flamingo', 'Programming Langauges');
+				return _Utils_Tuple2('teal', 'Programming Langauges');
 			case 'Research':
 				return _Utils_Tuple2('pink', 'Research');
 			case 'HTML':
@@ -6119,7 +6117,7 @@ var $author$project$Main$view = function (model) {
 	return _List_fromArray(
 		[
 			A2(
-			$elm$html$Html$section,
+			$elm$html$Html$header,
 			_List_Nil,
 			_List_fromArray(
 				[
@@ -6138,13 +6136,8 @@ var $author$project$Main$view = function (model) {
 							$elm$html$Html$text('Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bringing cool ideas to life.')
 						])),
 					A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('flex-col'),
-							A2($elm$html$Html$Attributes$style, 'gap', '0.5rem'),
-							A2($elm$html$Html$Attributes$style, 'min-width', '20rem')
-						]),
+					$elm$html$Html$nav,
+					_List_Nil,
 					_List_fromArray(
 						[
 							A2(
@@ -6152,8 +6145,7 @@ var $author$project$Main$view = function (model) {
 							_Utils_ap(
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Types$GoTo($author$project$Types$Career)),
+										$elm$html$Html$Attributes$href('#career'),
 										$elm$html$Html$Attributes$class('page-link')
 									]),
 								_Utils_eq(currentSection, $author$project$Types$Career) ? _List_fromArray(
@@ -6169,8 +6161,7 @@ var $author$project$Main$view = function (model) {
 							_Utils_ap(
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Types$GoTo($author$project$Types$Projects)),
+										$elm$html$Html$Attributes$href('#projects'),
 										$elm$html$Html$Attributes$class('page-link')
 									]),
 								_Utils_eq(currentSection, $author$project$Types$Projects) ? _List_fromArray(
@@ -6186,8 +6177,7 @@ var $author$project$Main$view = function (model) {
 							_Utils_ap(
 								_List_fromArray(
 									[
-										$elm$html$Html$Events$onClick(
-										$author$project$Types$GoTo($author$project$Types$Education)),
+										$elm$html$Html$Attributes$href('#education'),
 										$elm$html$Html$Attributes$class('page-link')
 									]),
 								_Utils_eq(currentSection, $author$project$Types$Education) ? _List_fromArray(
@@ -6202,15 +6192,15 @@ var $author$project$Main$view = function (model) {
 				])),
 			A2(
 			$elm$html$Html$section,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('career')
+				]),
 			_List_fromArray(
 				[
 					A2(
 					$elm$html$Html$h2,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$id('HCareer')
-						]),
+					_List_Nil,
 					_List_fromArray(
 						[
 							$elm$html$Html$text('Career')
@@ -6243,7 +6233,7 @@ var $author$project$Main$view = function (model) {
 									$elm$html$Html$text('Present')
 								]),
 							_List_fromArray(
-								[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$Django, $author$project$Types$UI, $author$project$Types$Database, $author$project$Types$API]),
+								[$author$project$Types$WebDevelopment, $author$project$Types$UI, $author$project$Types$Database, $author$project$Types$API, $author$project$Types$React, $author$project$Types$Django]),
 							$author$project$Paragraphs$ampereDesc),
 							A5(
 							$author$project$Components$timeLineBox,
@@ -6265,7 +6255,7 @@ var $author$project$Main$view = function (model) {
 									$elm$html$Html$text('Present')
 								]),
 							_List_fromArray(
-								[$author$project$Types$WebDevelopment, $author$project$Types$HTML, $author$project$Types$CSS, $author$project$Types$UI, $author$project$Types$ProjectManagement]),
+								[$author$project$Types$WebDevelopment, $author$project$Types$UI, $author$project$Types$HTML, $author$project$Types$CSS, $author$project$Types$ProjectManagement]),
 							$author$project$Paragraphs$plantFacedDesc),
 							A5(
 							$author$project$Components$timeLineBox,
@@ -6296,21 +6286,21 @@ var $author$project$Main$view = function (model) {
 										]))
 								]),
 							_List_fromArray(
-								[$author$project$Types$AppDevelopment, $author$project$Types$Kotlin, $author$project$Types$Research, $author$project$Types$UI]),
+								[$author$project$Types$AppDevelopment, $author$project$Types$UI, $author$project$Types$Kotlin, $author$project$Types$Research]),
 							$author$project$Paragraphs$internshipDesc)
 						]))
 				])),
 			A2(
 			$elm$html$Html$section,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('projects')
+				]),
 			_List_fromArray(
 				[
 					A2(
 					$elm$html$Html$h2,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$id('HProject')
-						]),
+					_List_Nil,
 					_List_fromArray(
 						[
 							$elm$html$Html$text('Projects')
@@ -6351,7 +6341,7 @@ var $author$project$Main$view = function (model) {
 										]))
 								]),
 							_List_fromArray(
-								[$author$project$Types$ProgrammingLanguages, $author$project$Types$Haskell, $author$project$Types$WebDevelopment, $author$project$Types$Research]),
+								[$author$project$Types$ProgrammingLanguages, $author$project$Types$WebDevelopment, $author$project$Types$Haskell, $author$project$Types$Research]),
 							$author$project$Paragraphs$blockellDesc),
 							A4(
 							$author$project$Components$projectBox,
@@ -6370,21 +6360,21 @@ var $author$project$Main$view = function (model) {
 										]))
 								]),
 							_List_fromArray(
-								[$author$project$Types$WebDevelopment, $author$project$Types$React, $author$project$Types$UI, $author$project$Types$API]),
+								[$author$project$Types$WebDevelopment, $author$project$Types$UI, $author$project$Types$API, $author$project$Types$React]),
 							$author$project$Paragraphs$activePointsDesc)
 						]))
 				])),
 			A2(
 			$elm$html$Html$section,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$id('education')
+				]),
 			_List_fromArray(
 				[
 					A2(
 					$elm$html$Html$h2,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$id('HEducation')
-						]),
+					_List_Nil,
 					_List_fromArray(
 						[
 							$elm$html$Html$text('Education')
@@ -6485,7 +6475,6 @@ var $author$project$Main$view = function (model) {
 			$elm$html$Html$footer,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('flex-row'),
 					$elm$html$Html$Attributes$class('footer')
 				]),
 			_List_fromArray(

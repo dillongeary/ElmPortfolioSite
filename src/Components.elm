@@ -93,7 +93,7 @@ skillsBox skill =
                     ( "flamingo", "APIs" )
 
                 ProgrammingLanguages ->
-                    ( "flamingo", "Programming Langauges" )
+                    ( "teal", "Programming Langauges" )
 
                 Research ->
                     ( "pink", "Research" )

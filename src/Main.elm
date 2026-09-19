@@ -3,8 +3,8 @@ port module Main exposing (..)
 import Browser exposing (document)
 import Browser.Dom exposing (Viewport, getElement, getViewport, setViewport)
 import Components exposing (projectBox, timeLineBox)
-import Html exposing (Html, a, article, button, div, footer, h1, h2, header, i, li, ol, p, section, text, time, ul)
-import Html.Attributes exposing (class, datetime, href, id, style)
+import Html exposing (Html, a, button, div, footer, h1, h2, header, i, nav, ol, p, section, text, time, ul)
+import Html.Attributes exposing (class, datetime, href, id)
 import Html.Events exposing (onClick)
 import Paragraphs exposing (activePointsDesc, ampereDesc, blockellDesc, internshipDesc, kingJohnDesc, plantFacedDesc, sotonDesc)
 import Platform.Cmd exposing (none)
@@ -79,7 +79,7 @@ update msg model =
 
         GetPositionUpdate ->
             ( model
-            , attempt GotPositions (sequence [ getElement "HProject", getElement "HEducation" ])
+            , attempt GotPositions (sequence [ getElement "projects", getElement "education" ])
             )
 
         GetViewportUpdate ->
@@ -168,7 +168,7 @@ getCurrentSection model =
                 Just i ->
                     i
     in
-    case ( (currentYScroll + 381) >= projectsPosition, (currentYScroll + 381) >= educationPosition ) of
+    case ( (currentYScroll + 100) >= projectsPosition, (currentYScroll + 100) >= educationPosition ) of
         ( False, False ) ->
             Career
 
@@ -188,7 +188,7 @@ view model =
         currentSection =
             getCurrentSection model
     in
-    [ section
+    [ header
         []
         [ h1
             []
@@ -196,9 +196,9 @@ view model =
         , p
             []
             [ text "Hi, I’m Dillon! A Brighton-based web developer who loves building clean, creative, and user-friendly applications. Whether it’s large-scale platforms, niche websites, or weird programming languages, I’m happiest when solving tricky problems and bringing cool ideas to life." ]
-        , div [ class "flex-col", style "gap" "0.5rem", style "min-width" "20rem" ]
+        , nav []
             [ a
-                ([ onClick (GoTo Career)
+                ([ href "#career"
                  , class "page-link"
                  ]
                     ++ (if currentSection == Career then
@@ -210,7 +210,7 @@ view model =
                 )
                 [ text "Career" ]
             , a
-                ([ onClick (GoTo Projects)
+                ([ href "#projects"
                  , class "page-link"
                  ]
                     ++ (if currentSection == Projects then
@@ -222,7 +222,7 @@ view model =
                 )
                 [ text "Projects" ]
             , a
-                ([ onClick (GoTo Education)
+                ([ href "#education"
                  , class "page-link"
                  ]
                     ++ (if currentSection == Education then
@@ -235,46 +235,46 @@ view model =
                 [ text "Education" ]
             ]
         ]
-    , section []
-        [ h2 [ id "HCareer" ] [ text "Career" ]
+    , section [ id "career" ]
+        [ h2 [] [ text "Career" ]
         , ol [ class "lined-list" ]
             [ timeLineBox
                 "Senior Web Developer"
                 "Ampere Analysis"
                 [ time [ datetime "2024-08" ] [ text "August 2024" ], text " - ", text "Present" ]
-                [ WebDevelopment, React, Django, UI, Database, API ]
+                [ WebDevelopment, UI, Database, API, React, Django ]
                 ampereDesc
             , timeLineBox
                 "Freelance Web Developer"
                 "Plant Faced Coffee Shop"
                 [ time [ datetime "2026-03" ] [ text "March 2026" ], text " - ", text "Present" ]
-                [ WebDevelopment, HTML, CSS, UI, ProjectManagement ]
+                [ WebDevelopment, UI, HTML, CSS, ProjectManagement ]
                 plantFacedDesc
             , timeLineBox
                 "Software Engineer - Intern"
                 "University of Southampton"
                 [ time [ datetime "2023-06" ] [ text "June 2023" ], text " - ", time [ datetime "2023-09" ] [ text "September 2023" ] ]
-                [ AppDevelopment, Kotlin, Research, UI ]
+                [ AppDevelopment, UI, Kotlin, Research ]
                 internshipDesc
             ]
         ]
-    , section []
-        [ h2 [ id "HProject" ] [ text "Projects" ]
+    , section [ id "projects" ]
+        [ h2 [] [ text "Projects" ]
         , ul [ class "unlined-list" ]
             [ projectBox
                 "A Block-Based Visual Programming Language"
                 [ time [ datetime "2022" ] [ text "2022" ], text " - ", time [ datetime "2024" ] [ text "2024" ] ]
-                [ ProgrammingLanguages, Haskell, WebDevelopment, Research ]
+                [ ProgrammingLanguages, WebDevelopment, Haskell, Research ]
                 blockellDesc
             , projectBox
                 "Web-Based Medical Data Dashboard"
                 [ time [ datetime "2023" ] [ text "2023" ] ]
-                [ WebDevelopment, React, UI, API ]
+                [ WebDevelopment, UI, API, React ]
                 activePointsDesc
             ]
         ]
-    , section []
-        [ h2 [ id "HEducation" ] [ text "Education" ]
+    , section [ id "education" ]
+        [ h2 [] [ text "Education" ]
         , ol [ class "lined-list" ]
             [ timeLineBox
                 "University of Southampton"
@@ -304,8 +304,7 @@ view model =
             []
         ]
     , footer
-        [ class "flex-row"
-        , class "footer"
+        [ class "footer"
         ]
         [ div [] [ text "Built and powered by ", a [ href "https://elm-lang.org/" ] [ text "Elm" ] ]
         , div [] [ text "Theme by ", a [ href "https://catppuccin.com/" ] [ text "Catppuccin" ] ]
