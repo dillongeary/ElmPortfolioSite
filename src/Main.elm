@@ -3,8 +3,8 @@ port module Main exposing (..)
 import Browser exposing (document)
 import Browser.Dom exposing (Viewport, getElement, getViewport, setViewport)
 import Components exposing (projectBox, timeLineBox)
-import Html exposing (Html, a, button, footer, h1, h2, header, i, nav, ol, p, section, text, time, ul)
-import Html.Attributes exposing (class, datetime, href, id)
+import Html exposing (Html, a, button, footer, h1, h2, header, i, label, nav, ol, p, section, text, time, ul)
+import Html.Attributes exposing (alt, attribute, class, datetime, href, id)
 import Html.Events exposing (onClick)
 import Paragraphs exposing (activePointsDesc, ampereDesc, blockellDesc, internshipDesc, kingJohnDesc, plantFacedDesc, sotonDesc)
 import Platform.Cmd exposing (none)
@@ -293,6 +293,7 @@ view model =
     , button
         [ class "colormode-button"
         , onClick ChangeLightDarkMode
+        , attribute "ara-label" "dark mode toggle"
         ]
         [ i
             (if model.darkmode then

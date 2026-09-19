@@ -5809,6 +5809,14 @@ var $author$project$Types$Text_ = function (a) {
 };
 var $author$project$Paragraphs$activePointsDesc = $author$project$Types$Text_('A dashboard that displays visualisations of healthcare data, collected from Garmin and FitBit smart-watch devices. Created in React, this dashboard connects to a Postgres database for real-time data updates and to a Python ML script for AI-enhanced features.');
 var $author$project$Paragraphs$ampereDesc = $author$project$Types$Text_('Working in a small, agile team, responsible for maintaining and enhancing the company website. Playing a key role in the redesign and rewrite of our client-facing platform to improve user experience and performance. Serving as a primary point of contact for the UK office, addressing bug fixes, implementing feature improvements, and incorporating colleague feedback to drive continuous enhancements to our web services.');
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
 var $author$project$Paragraphs$blockellDesc = $author$project$Types$Text_('A block-based visual programming language that takes inspiration for syntax and semantics from Haskell and other functional programming languages. This project involved the design of a block-based functional programming language and the development of a web-based IDE created in Blockly, to create a tool which aids the teaching of functional languages in education.');
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -6454,7 +6462,8 @@ var $author$project$Main$view = function (model) {
 			_List_fromArray(
 				[
 					$elm$html$Html$Attributes$class('colormode-button'),
-					$elm$html$Html$Events$onClick($author$project$Types$ChangeLightDarkMode)
+					$elm$html$Html$Events$onClick($author$project$Types$ChangeLightDarkMode),
+					A2($elm$html$Html$Attributes$attribute, 'ara-label', 'dark mode toggle')
 				]),
 			_List_fromArray(
 				[
