@@ -5820,7 +5820,6 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$Attributes$datetime = _VirtualDom_attribute('datetime');
-var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$footer = _VirtualDom_node('footer');
 var $elm$core$Basics$ge = _Utils_ge;
 var $author$project$Main$getCurrentSection = function (model) {
@@ -5877,6 +5876,7 @@ var $author$project$Types$Html_ = function (a) {
 	return {$: 'Html_', a: a};
 };
 var $elm$html$Html$br = _VirtualDom_node('br');
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Paragraphs$kingJohnDesc = $author$project$Types$Html_(
@@ -6480,7 +6480,7 @@ var $author$project$Main$view = function (model) {
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$div,
+					$elm$html$Html$p,
 					_List_Nil,
 					_List_fromArray(
 						[
@@ -6497,7 +6497,7 @@ var $author$project$Main$view = function (model) {
 								]))
 						])),
 					A2(
-					$elm$html$Html$div,
+					$elm$html$Html$p,
 					_List_Nil,
 					_List_fromArray(
 						[
@@ -6514,7 +6514,7 @@ var $author$project$Main$view = function (model) {
 								]))
 						])),
 					A2(
-					$elm$html$Html$div,
+					$elm$html$Html$p,
 					_List_Nil,
 					_List_fromArray(
 						[

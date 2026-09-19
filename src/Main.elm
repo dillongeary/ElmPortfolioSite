@@ -3,7 +3,7 @@ port module Main exposing (..)
 import Browser exposing (document)
 import Browser.Dom exposing (Viewport, getElement, getViewport, setViewport)
 import Components exposing (projectBox, timeLineBox)
-import Html exposing (Html, a, button, div, footer, h1, h2, header, i, nav, ol, p, section, text, time, ul)
+import Html exposing (Html, a, button, footer, h1, h2, header, i, nav, ol, p, section, text, time, ul)
 import Html.Attributes exposing (class, datetime, href, id)
 import Html.Events exposing (onClick)
 import Paragraphs exposing (activePointsDesc, ampereDesc, blockellDesc, internshipDesc, kingJohnDesc, plantFacedDesc, sotonDesc)
@@ -306,8 +306,8 @@ view model =
     , footer
         [ class "footer"
         ]
-        [ div [] [ text "Built and powered by ", a [ href "https://elm-lang.org/" ] [ text "Elm" ] ]
-        , div [] [ text "Theme by ", a [ href "https://catppuccin.com/" ] [ text "Catppuccin" ] ]
-        , div [] [ text "Source code on ", a [ href "https://github.com/dillongeary/dillongeary.github.io" ] [ text "GitHub" ] ]
+        [ p [] [ text "Built and powered by ", a [ href "https://elm-lang.org/" ] [ text "Elm" ] ]
+        , p [] [ text "Theme by ", a [ href "https://catppuccin.com/" ] [ text "Catppuccin" ] ]
+        , p [] [ text "Source code on ", a [ href "https://github.com/dillongeary/dillongeary.github.io" ] [ text "GitHub" ] ]
         ]
     ]
